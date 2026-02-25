@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+.luxury-filter {
+  @apply
+    bg-white
+    border border-[#E6D3A3]
+    rounded-full
+    px-4 py-3
+    text-sm
+    focus:outline-none
+    focus:ring-2 focus:ring-[#C9A24D];
+}
+
+.filter-select {
+  border: 1px solid #e5e5e5;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  background: white;
+  white-space: nowrap;
+}
+
+.dark .filter-select {
+  background: #111827;
+  border-color: #374151;
+  color: white;
+}
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+
+/* ===== MARQUEE ANIMATION ===== */
+
+.marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: marquee 25s linear infinite;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+
+html, body {
+  height: auto;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.marquee-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.filter-select {
+  appearance: none;
+  border: 1px solid #e5e5e5;
+  padding: 12px 18px;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 14px;
+  min-width: 140px;
+  transition: all 0.2s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+}
+
+/* ===== DARK MODE ===== */
+
+.dark .filter-select {
+  background: #1f2937;
+  border-color: #374151;
+  color: #ffffff;
+}
+
+.dark .filter-select:focus {
+  border-color: #D4AF37;
+}
+.input-style {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 2px solid #C9A227;
+  padding: 0.75rem 1rem;
+  outline: none;
+  background-color: white;
+  transition: 0.2s ease;
+}
+
+.input-style:focus {
+  box-shadow: 0 0 0 2px #C9A227;
+}

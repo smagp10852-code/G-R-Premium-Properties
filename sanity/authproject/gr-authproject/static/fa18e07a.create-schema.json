@@ -1,0 +1,1934 @@
+[
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Hindi",
+              "value": "hi"
+            },
+            {
+              "title": "Arabic",
+              "value": "ar"
+            },
+            {
+              "title": "Russian",
+              "value": "ru"
+            }
+          ]
+        },
+        "description": "Select which languages this content supports. English is always included.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "supportedLanguages",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string",
+                "title": "Title (English)"
+              },
+              {
+                "name": "subtitle",
+                "type": "string",
+                "title": "Subtitle (English)"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "image",
+                "type": "image",
+                "title": "Background Image"
+              },
+              {
+                "initialValue": true,
+                "name": "active",
+                "type": "boolean",
+                "title": "Active Slide"
+              },
+              {
+                "to": [
+                  {
+                    "type": "property"
+                  }
+                ],
+                "name": "linkedProperty",
+                "type": "reference"
+              },
+              {
+                "name": "title_hi",
+                "type": "string",
+                "title": "Title (Hindi)"
+              },
+              {
+                "name": "subtitle_hi",
+                "type": "string",
+                "title": "Subtitle (Hindi)"
+              },
+              {
+                "name": "title_ar",
+                "type": "string",
+                "title": "Title (Arabic)"
+              },
+              {
+                "name": "subtitle_ar",
+                "type": "string",
+                "title": "Subtitle (Arabic)"
+              },
+              {
+                "name": "title_ru",
+                "type": "string",
+                "title": "Title (Russian)"
+              },
+              {
+                "name": "subtitle_ru",
+                "type": "string",
+                "title": "Subtitle (Russian)"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "heroSlides",
+        "type": "array"
+      },
+      {
+        "initialValue": "Explore Properties",
+        "name": "heroCTA",
+        "type": "string",
+        "title": "Hero CTA Text (English)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "heroCTA_hi",
+        "type": "string",
+        "title": "Hero CTA Text (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "heroCTA_ar",
+        "type": "string",
+        "title": "Hero CTA Text (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "heroCTA_ru",
+        "type": "string",
+        "title": "Hero CTA Text (Russian)"
+      }
+    ],
+    "name": "homepage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Hindi",
+              "value": "hi"
+            },
+            {
+              "title": "Arabic",
+              "value": "ar"
+            },
+            {
+              "title": "Russian",
+              "value": "ru"
+            }
+          ]
+        },
+        "description": "Select which languages this content supports. English is always included.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "supportedLanguages",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Title (English)"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "title": "Subtitle (English)"
+      },
+      {
+        "rows": 3,
+        "name": "excerpt",
+        "type": "text",
+        "title": "Short Description (English)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "content",
+        "type": "array",
+        "title": "Blog Content (English)"
+      },
+      {
+        "initialValue": false,
+        "description": "Check this if you want this blog to appear on the Home page.",
+        "name": "showOnHome",
+        "type": "boolean",
+        "title": "Show on Home Page"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_hi",
+        "type": "string",
+        "title": "Title (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "subtitle_hi",
+        "type": "string",
+        "title": "Subtitle (Hindi)"
+      },
+      {
+        "rows": 3,
+        "hidden": "conditional",
+        "name": "excerpt_hi",
+        "type": "text",
+        "title": "Short Description (Hindi)"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "content_hi",
+        "type": "array",
+        "title": "Blog Content (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_ar",
+        "type": "string",
+        "title": "Title (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "subtitle_ar",
+        "type": "string",
+        "title": "Subtitle (Arabic)"
+      },
+      {
+        "rows": 3,
+        "hidden": "conditional",
+        "name": "excerpt_ar",
+        "type": "text",
+        "title": "Short Description (Arabic)"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "content_ar",
+        "type": "array",
+        "title": "Blog Content (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_ru",
+        "type": "string",
+        "title": "Title (Russian)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "subtitle_ru",
+        "type": "string",
+        "title": "Subtitle (Russian)"
+      },
+      {
+        "rows": 3,
+        "hidden": "conditional",
+        "name": "excerpt_ru",
+        "type": "text",
+        "title": "Short Description (Russian)"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "content_ru",
+        "type": "array",
+        "title": "Blog Content (Russian)"
+      }
+    ],
+    "name": "blog",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Hindi",
+              "value": "hi"
+            },
+            {
+              "title": "Arabic",
+              "value": "ar"
+            },
+            {
+              "title": "Russian",
+              "value": "ru"
+            }
+          ]
+        },
+        "description": "Select which languages this content supports. English is always included.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "supportedLanguages",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Developer Name"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "logo",
+        "type": "image",
+        "title": "Developer Logo"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Large image for developer hero section",
+        "name": "heroImage",
+        "type": "image",
+        "title": "Hero Background Image"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "This short text will appear on developer cards",
+        "name": "shortDescription",
+        "type": "text",
+        "title": "Short Description (English)"
+      },
+      {
+        "rows": 5,
+        "name": "about",
+        "type": "text",
+        "title": "About Developer (English)"
+      },
+      {
+        "fields": [
+          {
+            "description": "e.g. 40+",
+            "name": "experience",
+            "type": "string",
+            "title": "Years Experience"
+          },
+          {
+            "description": "e.g. 120+",
+            "name": "projects",
+            "type": "string",
+            "title": "Projects Delivered"
+          },
+          {
+            "description": "e.g. 50K+",
+            "name": "homes",
+            "type": "string",
+            "title": "Homes Sold"
+          },
+          {
+            "description": "e.g. Dubai",
+            "name": "locations",
+            "type": "string",
+            "title": "Prime Locations"
+          }
+        ],
+        "name": "stats",
+        "type": "object",
+        "title": "Developer Stats"
+      },
+      {
+        "initialValue": false,
+        "description": "Check this if you want this developer to appear on the Home page.",
+        "name": "showOnHomePage",
+        "type": "boolean",
+        "title": "Show on Home Page"
+      },
+      {
+        "rows": 3,
+        "hidden": "conditional",
+        "name": "shortDescription_hi",
+        "type": "text",
+        "title": "Short Description (Hindi)"
+      },
+      {
+        "rows": 5,
+        "hidden": "conditional",
+        "name": "about_hi",
+        "type": "text",
+        "title": "About Developer (Hindi)"
+      },
+      {
+        "rows": 3,
+        "hidden": "conditional",
+        "name": "shortDescription_ar",
+        "type": "text",
+        "title": "Short Description (Arabic)"
+      },
+      {
+        "rows": 5,
+        "hidden": "conditional",
+        "name": "about_ar",
+        "type": "text",
+        "title": "About Developer (Arabic)"
+      },
+      {
+        "rows": 3,
+        "hidden": "conditional",
+        "name": "shortDescription_ru",
+        "type": "text",
+        "title": "Short Description (Russian)"
+      },
+      {
+        "rows": 5,
+        "hidden": "conditional",
+        "name": "about_ru",
+        "type": "text",
+        "title": "About Developer (Russian)"
+      }
+    ],
+    "name": "developer",
+    "type": "document",
+    "title": "Developers"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Hindi",
+              "value": "hi"
+            },
+            {
+              "title": "Arabic",
+              "value": "ar"
+            },
+            {
+              "title": "Russian",
+              "value": "ru"
+            }
+          ]
+        },
+        "description": "Select which languages this content supports. English is always included.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "supportedLanguages",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Project Name"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "developer"
+          }
+        ],
+        "name": "developer",
+        "type": "reference"
+      },
+      {
+        "name": "location",
+        "type": "string"
+      },
+      {
+        "name": "price",
+        "type": "string",
+        "title": "Starting Price"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Current",
+              "value": "current"
+            },
+            {
+              "title": "Upcoming",
+              "value": "upcoming"
+            },
+            {
+              "title": "Completed",
+              "value": "completed"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "status",
+        "type": "string",
+        "title": "Project Status"
+      },
+      {
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "gallery",
+        "type": "array",
+        "title": "Project Images"
+      },
+      {
+        "name": "whatsapp",
+        "type": "string",
+        "title": "WhatsApp Number"
+      },
+      {
+        "name": "call",
+        "type": "string",
+        "title": "Call Number"
+      },
+      {
+        "initialValue": false,
+        "name": "featured",
+        "type": "boolean",
+        "title": "Featured Project"
+      },
+      {
+        "hidden": "conditional",
+        "name": "name_hi",
+        "type": "string",
+        "title": "Project Name (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "location_hi",
+        "type": "string",
+        "title": "Location (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "name_ar",
+        "type": "string",
+        "title": "Project Name (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "location_ar",
+        "type": "string",
+        "title": "Location (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "name_ru",
+        "type": "string",
+        "title": "Project Name (Russian)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "location_ru",
+        "type": "string",
+        "title": "Location (Russian)"
+      }
+    ],
+    "name": "project",
+    "type": "document",
+    "title": "Projects"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Hindi",
+              "value": "hi"
+            },
+            {
+              "title": "Arabic",
+              "value": "ar"
+            },
+            {
+              "title": "Russian",
+              "value": "ru"
+            }
+          ]
+        },
+        "description": "Select which languages this content supports. English is always included.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "supportedLanguages",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Location"
+      },
+      {
+        "name": "area",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "hidden": "conditional",
+        "name": "name_hi",
+        "type": "string",
+        "title": "Location (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "area_hi",
+        "type": "string",
+        "title": "Area (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "name_ar",
+        "type": "string",
+        "title": "Location (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "area_ar",
+        "type": "string",
+        "title": "Area (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "name_ru",
+        "type": "string",
+        "title": "Location (Russian)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "area_ru",
+        "type": "string",
+        "title": "Area (Russian)"
+      }
+    ],
+    "name": "community",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Hindi",
+              "value": "hi"
+            },
+            {
+              "title": "Arabic",
+              "value": "ar"
+            },
+            {
+              "title": "Russian",
+              "value": "ru"
+            }
+          ]
+        },
+        "description": "Select which languages this content supports. English is always included.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "supportedLanguages",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Property Title"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "developer"
+          }
+        ],
+        "name": "developer",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "community"
+          }
+        ],
+        "name": "location",
+        "type": "reference",
+        "title": "Community"
+      },
+      {
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "images",
+        "type": "array",
+        "title": "Property Images"
+      },
+      {
+        "options": {
+          "accept": ".pdf"
+        },
+        "description": "Upload property brochure PDF here",
+        "name": "brochure",
+        "type": "file",
+        "title": "Brochure PDF"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "beds",
+                "type": "string",
+                "title": "Bedrooms"
+              },
+              {
+                "name": "size",
+                "type": "string",
+                "title": "Size (Sq Ft)"
+              },
+              {
+                "name": "price",
+                "type": "string",
+                "title": "Starting Price"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "units",
+        "type": "array",
+        "title": "Available Units"
+      },
+      {
+        "description": "Example: September 2029",
+        "name": "handover",
+        "type": "string",
+        "title": "Handover Date"
+      },
+      {
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "min",
+                    "constraint": 0
+                  },
+                  {
+                    "flag": "max",
+                    "constraint": 100
+                  }
+                ],
+                "level": "warning",
+                "message": "Enter value between 0-100"
+              }
+            ],
+            "name": "booking",
+            "type": "number",
+            "title": "Booking (%)"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "min",
+                    "constraint": 0
+                  },
+                  {
+                    "flag": "max",
+                    "constraint": 100
+                  }
+                ],
+                "level": "warning",
+                "message": "Enter value between 0-100"
+              }
+            ],
+            "name": "construction",
+            "type": "number",
+            "title": "During Construction (%)"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "min",
+                    "constraint": 0
+                  },
+                  {
+                    "flag": "max",
+                    "constraint": 100
+                  }
+                ],
+                "level": "warning",
+                "message": "Enter value between 0-100"
+              }
+            ],
+            "name": "handover",
+            "type": "number",
+            "title": "On Handover (%)"
+          }
+        ],
+        "name": "paymentPlan",
+        "type": "object"
+      },
+      {
+        "initialValue": false,
+        "description": "Check this if you want to display this property on the Home page.",
+        "name": "showOnHomePage",
+        "type": "boolean",
+        "title": "Show on Home Page"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_hi",
+        "type": "string",
+        "title": "Property Title (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_ar",
+        "type": "string",
+        "title": "Property Title (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_ru",
+        "type": "string",
+        "title": "Property Title (Russian)"
+      }
+    ],
+    "name": "property",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Hindi",
+              "value": "hi"
+            },
+            {
+              "title": "Arabic",
+              "value": "ar"
+            },
+            {
+              "title": "Russian",
+              "value": "ru"
+            }
+          ]
+        },
+        "description": "Select which languages this content supports. English is always included.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "supportedLanguages",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Image",
+              "value": "image"
+            },
+            {
+              "title": "YouTube Video",
+              "value": "youtube"
+            }
+          ],
+          "layout": "radio"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "image",
+                  "youtube"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "mediaType",
+        "type": "string"
+      },
+      {
+        "options": {
+          "layout": "grid"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "max",
+                "constraint": 4
+              }
+            ],
+            "level": "error",
+            "message": "Please upload between 1 and 4 images"
+          }
+        ],
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "images",
+        "type": "array",
+        "title": "Images (Upload 2–4)"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Use standard YouTube link (e.g. https://www.youtube.com/watch?v=VIDEO_ID)",
+        "hidden": "conditional",
+        "name": "youtubeUrl",
+        "type": "url",
+        "title": "YouTube Video URL"
+      },
+      {
+        "hidden": "conditional",
+        "name": "location",
+        "type": "string",
+        "title": "Location / Address"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_hi",
+        "type": "string",
+        "title": "Title (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_ar",
+        "type": "string",
+        "title": "Title (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_ru",
+        "type": "string",
+        "title": "Title (Russian)"
+      }
+    ],
+    "name": "media",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Hindi",
+              "value": "hi"
+            },
+            {
+              "title": "Arabic",
+              "value": "ar"
+            },
+            {
+              "title": "Russian",
+              "value": "ru"
+            }
+          ]
+        },
+        "description": "Select which languages this content supports. English is always included.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "supportedLanguages",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Title (English)"
+      },
+      {
+        "name": "eventDate",
+        "type": "date"
+      },
+      {
+        "name": "city",
+        "type": "string",
+        "title": "City (English)"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "points",
+        "type": "array",
+        "title": "Bullet Points (English)"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "title": "Description (English)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_hi",
+        "type": "string",
+        "title": "Title (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "city_hi",
+        "type": "string",
+        "title": "City (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "description_hi",
+        "type": "text",
+        "title": "Description (Hindi)"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "points_hi",
+        "type": "array",
+        "title": "Bullet Points (Hindi)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_ar",
+        "type": "string",
+        "title": "Title (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "city_ar",
+        "type": "string",
+        "title": "City (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "description_ar",
+        "type": "text",
+        "title": "Description (Arabic)"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "points_ar",
+        "type": "array",
+        "title": "Bullet Points (Arabic)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "title_ru",
+        "type": "string",
+        "title": "Title (Russian)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "city_ru",
+        "type": "string",
+        "title": "City (Russian)"
+      },
+      {
+        "hidden": "conditional",
+        "name": "description_ru",
+        "type": "text",
+        "title": "Description (Russian)"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "points_ru",
+        "type": "array",
+        "title": "Bullet Points (Russian)"
+      }
+    ],
+    "name": "announcement",
+    "type": "document",
+    "title": "Top Announcement"
+  }
+]
