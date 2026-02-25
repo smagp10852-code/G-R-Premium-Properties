@@ -95,7 +95,7 @@ export default function RootLayout({
 
             <FloatingButtons />
             <AutoPopupEnquiry />
-            <Footer />
+           
 
             {/* ================= STRUCTURED DATA ================= */}
             <script

@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import EnquiryModal from "@/components/ui/EnquiryModal";
 import { useTranslation } from "@/lib/language-context";
+import { SiWhatsapp } from "react-icons/si";
 
 const goldenColor = "#D4A843";
 
@@ -56,117 +57,155 @@ export default function Footer() {
                 />
                 <div>
                   <h3 className="text-white text-sm font-bold leading-tight">
-                    {t("footer.grPremium")}
+                    G R Premium
                   </h3>
                   <p className="text-[10px] tracking-[0.15em] uppercase text-gray-500">
-                    {t("footer.propertiesLlc")}
+                    Properties LLC
                   </p>
                 </div>
               </div>
 
               <p className="text-sm text-gray-400 leading-relaxed mb-6">
-                {t("footer.description")}
+                Your trusted partner in Dubai real estate. We specialize in
+                premium apartments, villas, and investment properties.
               </p>
 
               {/* Social Icons */}
               <div className="flex items-center gap-3">
-                {[SiFacebook, SiInstagram, SiGoogle, SiLinkedin].map((Icon, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    className="w-9 h-9 rounded-full flex items-center justify-center
-                               border border-gray-600
-                               hover:border-[#D4A843]
-                               hover:text-white
-                               transition-all duration-300"
-                  >
-                    <Icon className="w-4 h-4" />
-                  </a>
-                ))}
+                <a
+                  href="https://www.facebook.com/GRpremiumPropertiesLLC/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full flex items-center justify-center
+                             border border-gray-600 hover:border-[#D4A843]
+                             hover:text-white transition-all duration-300"
+                >
+                  <SiFacebook className="w-4 h-4" />
+                </a>
+
+                <a
+                  href="https://www.instagram.com/grpp_dxb/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full flex items-center justify-center
+                             border border-gray-600 hover:border-[#D4A843]
+                             hover:text-white transition-all duration-300"
+                >
+                  <SiInstagram className="w-4 h-4" />
+                </a>
+
+                <a
+                  href="https://share.google/XpeZGjkEe0ZlTFw0G"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full flex items-center justify-center
+                             border border-gray-600 hover:border-[#D4A843]
+                             hover:text-white transition-all duration-300"
+                >
+                  <SiGoogle className="w-4 h-4" />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full flex items-center justify-center
+                             border border-gray-600 hover:border-[#D4A843]
+                             hover:text-white transition-all duration-300"
+                >
+                  <SiLinkedin className="w-4 h-4" />
+                </a>
               </div>
             </div>
 
             {/* ================= QUICK LINKS ================= */}
             <div>
               <h4 className="text-white text-sm font-bold uppercase mb-6 tracking-wide">
-                {t("footer.quickLinks")}
+                Quick Links
               </h4>
               <ul className="space-y-3">
-                {[
-                  { name: t("nav.home"), path: "/" },
-                  { name: t("nav.aboutUs"), path: "/about" },
-                  { name: t("nav.properties"), path: "/properties" },
-                  { name: t("nav.blog"), path: "/blog" },
-                  { name: t("nav.contactUs"), path: "/contact" },
-                ].map((link) => (
-                  <li key={link.path}>
-                    <Link
-                      href={link.path}
-                      className="text-sm hover:text-white transition-colors duration-300"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
+                <li><Link href="/" className="text-sm hover:text-white">Home</Link></li>
+                <li><Link href="/about" className="text-sm hover:text-white">About Us</Link></li>
+                <li><Link href="/properties" className="text-sm hover:text-white">Properties</Link></li>
+                <li><Link href="/blog" className="text-sm hover:text-white">Blog</Link></li>
+                <li><Link href="/contact" className="text-sm hover:text-white">Contact</Link></li>
               </ul>
             </div>
 
             {/* ================= PROPERTIES ================= */}
             <div>
               <h4 className="text-white text-sm font-bold uppercase mb-6 tracking-wide">
-                {t("footer.properties")}
+                Properties
               </h4>
               <ul className="space-y-3">
-                {[t("footer.apartments"), t("footer.villas"), t("footer.penthouses"), t("footer.townhouses")].map(
-                  (item, i) => (
-                    <li key={i}>
-                      <Link
-                        href="/properties"
-                        className="text-sm hover:text-white transition-colors duration-300"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  )
-                )}
+                <li><Link href="/properties" className="text-sm hover:text-white">Apartments</Link></li>
+                <li><Link href="/properties" className="text-sm hover:text-white">Villas</Link></li>
+                <li><Link href="/properties" className="text-sm hover:text-white">Penthouses</Link></li>
+                <li><Link href="/properties" className="text-sm hover:text-white">Townhouses</Link></li>
               </ul>
             </div>
 
             {/* ================= CONTACT ================= */}
             <div>
               <h4 className="text-white text-sm font-bold uppercase mb-6 tracking-wide">
-                {t("footer.contactInfo")}
+                Contact Info
               </h4>
 
-              <ul className="space-y-4 text-sm">
+              <ul className="space-y-4 text-sm text-gray-400">
+
                 <li className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 mt-0.5 text-[#D4A843]" />
-                  Business Bay, Dubai, UAE
+                  <MapPin className="w-4 h-4 mt-1 text-[#D4A843]" />
+                  <span>
+                    401C Aspin Commercial Tower,<br />
+                    Near Financial Center Metro,<br />
+                    Sheikh Zayed Road,<br />
+                    Dubai, UAE
+                  </span>
                 </li>
 
-                <li className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-[#D4A843]" />
-                  <a href="tel:+919330230426" className="hover:text-white transition-colors duration-300">
-                    +91 - 9330230426
-                  </a>
+                <li className="flex items-start gap-3">
+
+                  <div className="flex flex-col space-y-2">
+
+                    {/* WhatsApp */}
+                    <a
+                      href="https://wa.me/971543087712"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 hover:text-green-400 transition-colors duration-300"
+                    >
+                      <SiWhatsapp className="w-4 h-4 text-green-500" />
+                      +971 543087712
+                    </a>
+
+                    {/* Direct Call */}
+                    <a
+                      href="tel:+9717604007170"
+                      className="flex items-center gap-2 hover:text-white transition-colors duration-300"
+                    >
+                      <Phone className="w-4 h-4 text-[#D4A843]" />
+                      +971 7604007170
+                    </a>
+
+                  </div>
                 </li>
 
                 <li className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-[#D4A843]" />
-                  <a href="mailto:sales@grpremium.com" className="hover:text-white transition-colors duration-300">
+                  <a href="mailto:sales@grpremium.com" className="hover:text-white">
                     sales@grpremium.com
                   </a>
                 </li>
+
               </ul>
 
-              {/* Enquiry Button */}
               <button
                 onClick={() => setOpen(true)}
                 className="mt-8 w-full px-6 py-3 font-semibold text-black text-sm rounded-md
-                           transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+                           transition-all duration-300 hover:scale-[1.03]"
                 style={{ backgroundColor: goldenColor }}
               >
-                {t("footer.enquireNow")}
+                Enquire Now
               </button>
             </div>
 
@@ -177,13 +216,13 @@ export default function Footer() {
         <div className="border-t border-[#2a3a4a] py-5">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-gray-500">
-              &copy; Copyright 2026 G R Premium Properties LLC. Designed By Asiatech Inc. All Rights Reserved.
+              © {new Date().getFullYear()} G R Premium Properties LLC. All Rights Reserved.
             </p>
             <div className="flex items-center gap-6 text-xs text-gray-500">
-              <Link href="/privacy-policy" className="hover:text-white transition-colors duration-300">
+              <Link href="/privacy-policy" className="hover:text-white">
                 Privacy Policy
               </Link>
-              <Link href="/terms-conditions" className="hover:text-white transition-colors duration-300">
+              <Link href="/terms-conditions" className="hover:text-white">
                 Terms & Conditions
               </Link>
             </div>
@@ -191,12 +230,7 @@ export default function Footer() {
         </div>
       </footer>
 
-      
-      {/* GLOBAL ENQUIRY MODAL */}
-      <EnquiryModal
-        open={open}
-        onClose={() => setOpen(false)}
-      />
+      <EnquiryModal open={open} onClose={() => setOpen(false)} />
     </>
   );
 }
