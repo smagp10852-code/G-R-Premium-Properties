@@ -10,6 +10,7 @@ import searchsuggestion from "./sanity/authproject/schemas/community";
 import property from "./sanity/authproject/schemas/property";
 import media from "./sanity/authproject/schemas/media";
 import announcement from "./sanity/authproject/schemas/announcement";
+import teamMember from "./sanity/authproject/schemas/teamMember"; // ✅ ADD THIS
 
 export default defineConfig({
   name: "default",
@@ -32,6 +33,7 @@ export default defineConfig({
       property,
       media,
       announcement,
+      teamMember, // ✅ ADD THIS
     ] as any[],
   },
 });

@@ -6,6 +6,7 @@ import community from "./community";
 import property from "./property";
 import media from "./media";
 import announcement from "./announcement";
+import teamMember from "./teamMember";
 
 export const schemaTypes = [
   homepage,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   property,
   media,
   announcement,
+  teamMember,
 ];

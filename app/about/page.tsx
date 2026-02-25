@@ -5,6 +5,9 @@ import { Building2, Users, Award, ShieldCheck } from "lucide-react";
 import { Target, Eye, Heart, Globe } from "lucide-react";
 import CTA from "@/components/sections/CTA";
 import T from "@/components/ui/T";
+import { sanityClient } from "@/lib/sanity.client";
+import { leadershipQuery, teamQuery } from "@/lib/teamQueries";
+import { urlFor } from "@/lib/sanity.image";
 
 const goldenColor = "#C9A227";
 
@@ -37,7 +40,9 @@ const stats = [
 
 /* ================= PAGE ================= */
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const leadership = await sanityClient.fetch(leadershipQuery);
+  const team = await sanityClient.fetch(teamQuery);
   return (
     <>
       <Navbar />
@@ -161,7 +166,7 @@ export default function AboutPage() {
               title: "aboutPage.ourMission",
               desc: "aboutPage.missionDescription",
               icon: Target,
-            },{
+            }, {
               title: "aboutPage.ourVision",
               desc: "aboutPage.visionDescription",
               icon: Eye,
@@ -237,149 +242,100 @@ export default function AboutPage() {
           </div>
         </section>
 
-{/* ================= TEAM ================= */}
-<section className="py-24 px-6 md:px-24 bg-[#E5E7EB] dark:bg-[#111827] transition-colors duration-300">
+        {/* ================= TEAM ================= */}
+        <section className="py-24 px-6 md:px-24 bg-[#E5E7EB] dark:bg-[#111827] transition-colors duration-300">
 
-  {/* ===== Heading ===== */}
-  <div className="text-center max-w-2xl mx-auto">
-    <p
-      className="text-sm tracking-widest uppercase"
-      style={{ color: goldenColor }}
-    >
-      <T k="aboutPage.ourPeople" />
-    </p>
+          <div className="text-center max-w-2xl mx-auto">
+            <p className="text-sm tracking-widest uppercase" style={{ color: goldenColor }}>
+              <T k="aboutPage.ourPeople" />
+            </p>
 
-    <h2 className="text-3xl md:text-4xl font-serif mt-2 text-gray-900 dark:text-white">
-      <T k="aboutPage.meetOurTeam" />
-    </h2>
+            <h2 className="text-3xl md:text-4xl font-serif mt-2 text-gray-900 dark:text-white">
+              <T k="aboutPage.meetOurTeam" />
+            </h2>
 
-    <p className="mt-4 text-gray-600 dark:text-gray-400 text-sm md:text-base">
-      <T k="aboutPage.teamDescription" />
-    </p>
-  </div>
+            <p className="mt-4 text-gray-600 dark:text-gray-400 text-sm md:text-base">
+              <T k="aboutPage.teamDescription" />
+            </p>
+          </div>
 
-  {/* ================= LEADERSHIP ================= */}
-  <div className="mt-20">
-    <h3 className="text-center text-xl font-serif mb-12 text-gray-900 dark:text-white">
-      <T k="aboutPage.leadership" />
-    </h3>
+          {/* ================= LEADERSHIP ================= */}
+          <div className="mt-20">
+            <h3 className="text-center text-xl font-serif mb-12 text-gray-900 dark:text-white">
+              <T k="aboutPage.leadership" />
+            </h3>
 
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-12 max-w-5xl mx-auto place-items-center">
-      {[
-        {
-          name: "Ahmed Al Rashid",
-          role: "aboutPage.founderCeo",
-          image: "/assets/about1.png",
-        },
-        {
-          name: "Sarah Johnson",
-          role: "aboutPage.managingDirector",
-          image: "/assets/about1.png",
-        },
-        {
-          name: "Michael Chen",
-          role: "aboutPage.investmentDirector",
-          image: "/assets/about1.png",
-        },
-      ].map((person) => (
-        <div
-          key={person.name}
-          className="w-full max-w-[300px] 
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-12 max-w-5xl mx-auto place-items-center">
+              {leadership.map((person: any) => (
+                <div
+                  key={person._id}
+                  className="w-full max-w-[300px] 
                      bg-white dark:bg-[#1E293B] 
                      rounded-2xl p-8 text-center 
                      shadow-md hover:shadow-xl 
                      transition-all duration-300"
-        >
-          <img
-            src={person.image}
-            alt={person.name}
-            className="w-32 h-32 mx-auto rounded-full object-cover mb-6"
-          />
+                >
+                  <img
+                    src={
+                      person.image
+                        ? urlFor(person.image).width(300).url()
+                        : "/assets/about1.png"
+                    }
+                    alt={person.name}
+                    className="w-32 h-32 mx-auto rounded-full object-cover mb-6"
+                  />
 
-          <h4 className="font-serif text-lg text-gray-900 dark:text-white">
-            {person.name}
-          </h4>
+                  <h4 className="font-serif text-lg text-gray-900 dark:text-white">
+                    {person.name}
+                  </h4>
 
-          <p
-            className="text-sm mt-1"
-            style={{ color: goldenColor }}
-          >
-            <T k={person.role} />
-          </p>
-        </div>
-      ))}
-    </div>
-  </div>
+                  <p className="text-sm mt-1" style={{ color: goldenColor }}>
+                    {person.position}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-  {/* ================= TEAM MEMBERS ================= */}
-  <div className="mt-28">
-    <h3 className="text-center text-xl font-serif mb-12 text-gray-900 dark:text-white">
-      <T k="aboutPage.ourTeam" />
-    </h3>
+          {/* ================= TEAM MEMBERS ================= */}
+          <div className="mt-28">
+            <h3 className="text-center text-xl font-serif mb-12 text-gray-900 dark:text-white">
+              <T k="aboutPage.ourTeam" />
+            </h3>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto place-items-center">
-      {[
-        {
-          name: "Priya Sharma",
-          role: "aboutPage.clientRelationsManager",
-          image: "/assets/about1.png",
-        },
-        {
-          name: "Omar Khalid",
-          role: "aboutPage.propertyConsultant",
-          image: "/assets/about1.png",
-        },
-        {
-          name: "Emily Brown",
-          role: "aboutPage.salesExecutive",
-          image: "/assets/about1.png",
-        },
-        {
-          name: "Arjun Mehta",
-          role: "aboutPage.marketAnalyst",
-          image: "/assets/about1.png",
-        },
-        {
-          name: "Fatima Noor",
-          role: "aboutPage.customerSupport",
-          image: "/assets/about1.png",
-        },
-        {
-          name: "Daniel Wong",
-          role: "aboutPage.operationsManager",
-          image: "/assets/about1.png",
-        },
-      ].map((member) => (
-        <div
-          key={member.name}
-          className="w-full max-w-[260px] 
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto place-items-center">
+              {team.map((member: any) => (
+                <div
+                  key={member._id}
+                  className="w-full max-w-[260px] 
                      bg-white dark:bg-[#1E293B] 
                      rounded-xl p-6 text-center 
                      shadow-sm hover:shadow-lg 
                      hover:-translate-y-1 
                      transition-all duration-300"
-        >
-          <img
-            src={member.image}
-            alt={member.name}
-            className="w-24 h-24 mx-auto rounded-full object-cover mb-4"
-          />
+                >
+                  <img
+                    src={
+                      member.image
+                        ? urlFor(member.image).width(300).url()
+                        : "/assets/about1.png"
+                    }
+                    alt={member.name}
+                    className="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+                  />
 
-          <h4 className="font-medium text-gray-900 dark:text-white">
-            {member.name}
-          </h4>
+                  <h4 className="font-medium text-gray-900 dark:text-white">
+                    {member.name}
+                  </h4>
 
-          <p
-            className="text-sm mt-1"
-            style={{ color: goldenColor }}
-          >
-            <T k={member.role} />
-          </p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+                  <p className="text-sm mt-1" style={{ color: goldenColor }}>
+                    {member.position}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
 
         <CTA />
