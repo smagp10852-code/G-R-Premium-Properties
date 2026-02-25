@@ -1,7 +1,6 @@
 "use client";
 
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
-import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import Footer from "@/components/layout/Footer";
 import CTA from "@/components/sections/CTA";
@@ -13,28 +12,45 @@ export default function ContactPage() {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    setLoading(true);
-    setSuccess("");
-    setError("");
+ const handleSubmit = async (e: any) => {
+  e.preventDefault();
+  setLoading(true);
+  setSuccess("");
+  setError("");
 
-    emailjs
-      .sendForm(
-        "service_uyrhwx8",
-        "template_yimkgyn",
-        e.target,
-        "lVPUd6uuppl88FX8U"
-      )
-      .then(() => {
-        setSuccess(t("form.successMessage"));
-        e.target.reset();
-      })
-      .catch(() => {
-        setError(t("form.errorMessage"));
-      })
-      .finally(() => setLoading(false));
+  const formData = new FormData(e.target);
+
+  const data = {
+    name: formData.get("name"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    country: formData.get("country"),
+    interested_property: formData.get("interested_property"),
   };
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      setSuccess(t("form.successMessage"));
+      e.target.reset();
+    } else {
+      setError(t("form.errorMessage"));
+    }
+  } catch (err) {
+    setError(t("form.errorMessage"));
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="w-full overflow-hidden bg-[#FBF6E9] dark:bg-[#0f172a] transition-colors duration-300">

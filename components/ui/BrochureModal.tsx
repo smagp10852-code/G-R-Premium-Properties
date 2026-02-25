@@ -36,24 +36,30 @@ export default function BrochureModal({
     setLoading(true);
 
     try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbwO1xCr58CcO12NzHilvsmLGr9W_zvTTQfsHmJ93lySxl5am4u5nafx_qioeHxACjZOZA/exec",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            ...form,
-            property: propertyName,
-          }),
+      const res = await fetch("/api/brochure", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          property: propertyName,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        // PDF Open After Successful Lead Capture
+        if (pdfUrl) {
+          window.open(pdfUrl, "_blank");
         }
-      );
 
-      // PDF Open
-      if (pdfUrl) {
-        window.open(pdfUrl, "_blank");
+        onClose();
+        setForm({ name: "", email: "", phone: "", country: "" });
+      } else {
+        alert(t("brochure.error"));
       }
-
-      onClose();
-      setForm({ name: "", email: "", phone: "", country: "" });
     } catch (error) {
       alert(t("brochure.error"));
     } finally {
@@ -131,7 +137,9 @@ export default function BrochureModal({
                 className="w-full py-3 rounded-xl font-semibold text-black transition-all duration-300"
                 style={{ backgroundColor: goldenColor }}
               >
-                {loading ? t("brochure.submitting") : t("brochure.submitDownload")}
+                {loading
+                  ? t("brochure.submitting")
+                  : t("brochure.submitDownload")}
               </button>
             </form>
 

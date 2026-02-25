@@ -2,7 +2,6 @@
 
 import { Send, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import emailjs from "@emailjs/browser";
 import { useTranslation } from "@/lib/language-context";
 
 /* ---------------- OPTIONS ---------------- */
@@ -82,31 +81,52 @@ useEffect(() => {
   }, [defaultProperty]);
 
   /* ================= SUBMIT ================= */
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    setLoading(true);
-    setSuccess("");
-    setError("");
+  const handleSubmit = async (e: any) => {
+  e.preventDefault();
+  setLoading(true);
+  setSuccess("");
+  setError("");
 
-    emailjs
-      .sendForm(
-        "service_uyrhwx8",
-        "template_66qrmxf",
-        e.target,
-        "lVPUd6uuppl88FX8U"
-      )
-      .then(() => {
-  console.log("Email sent, closing modal");
-  e.target.reset();
-  onClose?.();
-})
+  const formData = new FormData(e.target);
 
-
-      .catch(() => {
-        setError(t("form.errorMessage"));
-      })
-      .finally(() => setLoading(false));
+  const data = {
+    name: formData.get("name"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    country: formData.get("country"),
+    interested_property:
+      selectedProperty === "Other"
+        ? otherProperty
+        : selectedProperty,
+    consent_status: "Yes",
   };
+
+  try {
+    const res = await fetch("/api/enquiry", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      e.target.reset();
+      setSelectedProperty("");
+      setOtherProperty("");
+      setSuccess("Enquiry sent successfully!");
+      onClose?.();
+    } else {
+      setError("Something went wrong. Please try again.");
+    }
+  } catch (err) {
+    setError("Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div
