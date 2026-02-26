@@ -18,12 +18,10 @@ export const homepageHeroQuery = groq`
     image{
       asset->{ url }
     },
-
     linkedProperty->{
       _id,
       title,
       "slug": slug.current,
-
       developer->{
         name,
         "slug": slug.current
@@ -33,11 +31,10 @@ export const homepageHeroQuery = groq`
 }
 `;
 
-
-
 /* ======================================================
-   FEATURED PROPERTIES (HOME – TOP 4)
+   FEATURED PROPERTIES
 ====================================================== */
+
 export const featuredPropertiesQuery = groq`
 *[
   _type == "property" &&
@@ -71,18 +68,18 @@ export const featuredPropertiesQuery = groq`
   },
 
   units[]{
-    beds,
-    size,
-    price
-  },
+  unitType,
+  bedroomCount,
+  customLabel,
+  size,
+  price
+},
 
   brochure{
     asset->{ url }
   }
 }
 `;
-
-
 
 /* ======================================================
    ALL PROPERTIES (FILTER PAGE)
@@ -98,7 +95,12 @@ export const propertiesQuery = groq`
   ) &&
   (!defined($purpose) || purpose == $purpose) &&
   (!defined($type) || type == $type) &&
-  (!defined($bed) || count(units[beds == $bed]) > 0) &&
+  (!defined($bed) || 
+    count(units[
+      unitType == "bedroom" && 
+      bedroomCount == $bed
+    ]) > 0
+  ) &&
   (!defined($min) || count(units[price >= $min]) > 0) &&
   (!defined($max) || count(units[price <= $max]) > 0)
 ]
@@ -131,17 +133,18 @@ export const propertiesQuery = groq`
   },
 
   units[]{
-    beds,
-    size,
-    price
-  },
+  unitType,
+  bedroomCount,
+  customLabel,
+  size,
+  price
+},
 
   brochure{
     asset->{ url }
   }
 }
 `;
-
 
 /* ======================================================
    SINGLE PROPERTY
@@ -182,10 +185,12 @@ export const propertyBySlugQuery = groq`
   },
 
   units[]{
-    beds,
-    size,
-    price
-  },
+  unitType,
+  bedroomCount,
+  customLabel,
+  size,
+  price
+},
 
   brochure{
     asset->{ url }
@@ -193,9 +198,8 @@ export const propertyBySlugQuery = groq`
 }
 `;
 
-
 /* ======================================================
-   ✅ PROPERTIES BY DEVELOPER
+   PROPERTIES BY DEVELOPER
 ====================================================== */
 
 export const propertiesByDeveloperQuery = groq`
@@ -236,10 +240,12 @@ export const propertiesByDeveloperQuery = groq`
   },
 
   units[]{
-    beds,
-    size,
-    price
-  },
+  unitType,
+  bedroomCount,
+  customLabel,
+  size,
+  price
+},
 
   brochure{
     asset->{ url }

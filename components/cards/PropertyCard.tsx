@@ -30,7 +30,6 @@ export default function PropertyCard({
     property?.images?.map((img: any) => img?.asset?.url).filter(Boolean) || [];
 
   const brochureUrl = property?.brochure?.asset?.url;
-
   const paymentPlan = property?.paymentPlan;
 
   const [index, setIndex] = useState(0);
@@ -118,18 +117,32 @@ export default function PropertyCard({
 
           {/* UNITS */}
           <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 mb-4">
-            {property?.units?.map((unit: any, i: number) => (
-              <div key={i} className="flex items-start gap-2">
-                <BedDouble size={16} />
-                <span>
-                  <strong>{unit?.beds}</strong> {t("property.bed")} •{" "}
-                  {unit?.size} {t("property.sqFt")} •{" "}
-                  <strong>
-                    {t("property.aed")} {unit?.price}
-                  </strong>
-                </span>
-              </div>
-            ))}
+            {property?.units?.map((unit: any, i: number) => {
+              let unitLabel = "";
+
+              if (unit?.unitType === "studio") {
+                unitLabel = "Studio";
+              } else if (unit?.unitType === "bedroom") {
+                unitLabel = `${unit?.bedroomCount} ${t("property.bed")}`;
+              } else if (unit?.unitType === "office") {
+                unitLabel = "Office";
+              } else if (unit?.unitType === "other") {
+                unitLabel = unit?.customLabel || "";
+              }
+
+              return (
+                <div key={i} className="flex items-start gap-2">
+                  <BedDouble size={16} />
+                  <span>
+                    <strong>{unitLabel}</strong> •{" "}
+                    {unit?.size} {t("property.sqFt")} •{" "}
+                    <strong>
+                      {t("property.aed")} {unit?.price}
+                    </strong>
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
           {/* PAYMENT PLAN */}

@@ -17,7 +17,10 @@ export default defineType({
   ],
 
   fields: [
-    // ✅ Supported Languages
+    // ================================
+    // BASIC INFO
+    // ================================
+
     defineField({
       name: "supportedLanguages",
       title: "Supported Languages",
@@ -34,7 +37,6 @@ export default defineType({
       group: "content",
     }),
 
-    // ✅ Title
     defineField({
       name: "title",
       title: "Property Title",
@@ -43,7 +45,6 @@ export default defineType({
       group: "content",
     }),
 
-    // ✅ Slug
     defineField({
       name: "slug",
       title: "Slug",
@@ -56,7 +57,6 @@ export default defineType({
       group: "content",
     }),
 
-    // ✅ Developer Reference
     defineField({
       name: "developer",
       title: "Developer",
@@ -66,7 +66,6 @@ export default defineType({
       group: "content",
     }),
 
-    // ✅ Community Reference
     defineField({
       name: "location",
       title: "Community",
@@ -76,116 +75,131 @@ export default defineType({
       group: "content",
     }),
 
-    // ✅ Images
     defineField({
       name: "images",
       title: "Property Images",
       type: "array",
-      of: [
-        {
-          type: "image",
-          options: { hotspot: true },
-        },
-      ],
+      of: [{ type: "image", options: { hotspot: true } }],
       group: "content",
     }),
 
-    // ✅ Brochure
     defineField({
       name: "brochure",
       title: "Brochure PDF",
       type: "file",
-      options: {
-        accept: ".pdf",
-      },
-      description: "Upload property brochure PDF here",
+      options: { accept: ".pdf" },
       group: "content",
     }),
 
-    // ✅ Units
-defineField({
+    // ================================
+    // ✅ IMPROVED UNITS STRUCTURE
+    // ================================
+
+   defineField({
   name: "units",
   title: "Available Units",
   type: "array",
+  group: "content",
   of: [
     {
       type: "object",
       fields: [
+        // 🔹 Unit Type
         {
-          name: "label",
-          title: "Unit Label",
+          name: "unitType",
+          title: "Unit Type",
           type: "string",
-          description: "Example: Office, Studio, 1 BR, Executive Office",
+          options: {
+            list: [
+              { title: "Studio", value: "studio" },
+              { title: "Bedroom", value: "bedroom" },
+              { title: "Office", value: "office" },
+              { title: "Other (Villa, Penthouse, Retail, etc)", value: "other" },
+            ],
+            layout: "radio",
+          },
+          validation: (Rule) => Rule.required(),
         },
+
+        // 🔹 Bedroom Count (Only for Bedroom)
+        {
+          name: "bedroomCount",
+          title: "Number of Bedrooms",
+          type: "number",
+          hidden: ({ parent }) => parent?.unitType !== "bedroom",
+          validation: (Rule) =>
+            Rule.custom((value, context) => {
+              if (
+                context.parent?.unitType === "bedroom" &&
+                !value
+              ) {
+                return "Bedroom count required";
+              }
+              return true;
+            }),
+        },
+
+        // 🔹 Custom Label (Only for Other)
+        {
+          name: "customLabel",
+          title: "Custom Label (Example: Villa, Penthouse)",
+          type: "string",
+          hidden: ({ parent }) => parent?.unitType !== "other",
+        },
+
         {
           name: "size",
           title: "Size (Sq Ft)",
           type: "string",
+          validation: (Rule) => Rule.required(),
         },
+
         {
           name: "price",
           title: "Starting Price",
           type: "string",
+          validation: (Rule) => Rule.required(),
         },
       ],
     },
   ],
-  group: "content",
 }),
 
+    // ================================
+    // Handover
+    // ================================
 
-    // ✅ Handover
     defineField({
       name: "handover",
       title: "Handover Date",
       type: "string",
-      description: "Example: September 2029",
       group: "content",
     }),
 
-    // ✅ NEW PAYMENT PLAN FIELD
     defineField({
       name: "paymentPlan",
       title: "Payment Plan",
       type: "object",
       group: "content",
       fields: [
-        {
-          name: "booking",
-          title: "Booking (%)",
-          type: "number",
-          validation: (Rule) =>
-            Rule.min(0).max(100).warning("Enter value between 0-100"),
-        },
-        {
-          name: "construction",
-          title: "During Construction (%)",
-          type: "number",
-          validation: (Rule) =>
-            Rule.min(0).max(100).warning("Enter value between 0-100"),
-        },
-        {
-          name: "handover",
-          title: "On Handover (%)",
-          type: "number",
-          validation: (Rule) =>
-            Rule.min(0).max(100).warning("Enter value between 0-100"),
-        },
+        { name: "booking", title: "Booking (%)", type: "number" },
+        { name: "construction", title: "Construction (%)", type: "number" },
+        { name: "handover", title: "Handover (%)", type: "number" },
       ],
     }),
 
-    // ✅ Show on Home Page
     defineField({
       name: "showOnHomePage",
       title: "Show on Home Page",
       type: "boolean",
       initialValue: false,
-      description:
-        "Check this if you want to display this property on the Home page.",
       group: "content",
     }),
 
-    // ✅ TRANSLATIONS
+    // ================================
+    // TRANSLATIONS
+    // ================================
+
     ...LANGUAGES.flatMap((lang) => [
       defineField({
         name: `title_${lang.id}`,
