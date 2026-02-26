@@ -95,75 +95,75 @@ export default defineType({
     // ✅ IMPROVED UNITS STRUCTURE
     // ================================
 
-   defineField({
-  name: "units",
-  title: "Available Units",
-  type: "array",
-  group: "content",
-  of: [
-    {
-      type: "object",
-      fields: [
-        // 🔹 Unit Type
+    defineField({
+      name: "units",
+      title: "Available Units",
+      type: "array",
+      group: "content",
+      of: [
         {
-          name: "unitType",
-          title: "Unit Type",
-          type: "string",
-          options: {
-            list: [
-              { title: "Studio", value: "studio" },
-              { title: "Bedroom", value: "bedroom" },
-              { title: "Office", value: "office" },
-              { title: "Other (Villa, Penthouse, Retail, etc)", value: "other" },
-            ],
-            layout: "radio",
-          },
-          validation: (Rule) => Rule.required(),
-        },
+          type: "object",
+          fields: [
+            // 🔹 Unit Type
+            {
+              name: "unitType",
+              title: "Unit Type",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Studio", value: "studio" },
+                  { title: "Bedroom", value: "bedroom" },
+                  { title: "Office", value: "office" },
+                  { title: "Other (Villa, Penthouse, Retail, etc)", value: "other" },
+                ],
+                layout: "radio",
+              },
+              validation: (Rule) => Rule.required(),
+            },
 
-        // 🔹 Bedroom Count (Only for Bedroom)
-        {
-          name: "bedroomCount",
-          title: "Number of Bedrooms",
-          type: "number",
-          hidden: ({ parent }) => parent?.unitType !== "bedroom",
-          validation: (Rule) =>
-            Rule.custom((value, context) => {
-              if (
-                context.parent?.unitType === "bedroom" &&
-                !value
-              ) {
-                return "Bedroom count required";
-              }
-              return true;
-            }),
-        },
+            // 🔹 Bedroom Count (Only for Bedroom)
+            {
+              name: "bedroomCount",
+              title: "Number of Bedrooms",
+              type: "number",
+              hidden: ({ parent }) => parent?.unitType !== "bedroom",
+              validation: (Rule) =>
+                Rule.custom((value, context) => {
+                  const parent = context.parent as { unitType?: string };
 
-        // 🔹 Custom Label (Only for Other)
-        {
-          name: "customLabel",
-          title: "Custom Label (Example: Villa, Penthouse)",
-          type: "string",
-          hidden: ({ parent }) => parent?.unitType !== "other",
-        },
+                  if (parent?.unitType === "bedroom" && !value) {
+                    return "Bedroom count required";
+                  }
 
-        {
-          name: "size",
-          title: "Size (Sq Ft)",
-          type: "string",
-          validation: (Rule) => Rule.required(),
-        },
+                  return true;
+                }),
+            },
 
-        {
-          name: "price",
-          title: "Starting Price",
-          type: "string",
-          validation: (Rule) => Rule.required(),
+            // 🔹 Custom Label (Only for Other)
+            {
+              name: "customLabel",
+              title: "Custom Label (Example: Villa, Penthouse)",
+              type: "string",
+              hidden: ({ parent }) => parent?.unitType !== "other",
+            },
+
+            {
+              name: "size",
+              title: "Size (Sq Ft)",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
+
+            {
+              name: "price",
+              title: "Starting Price",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
+          ],
         },
       ],
-    },
-  ],
-}),
+    }),
 
     // ================================
     // Handover
