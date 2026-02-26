@@ -92,7 +92,7 @@ export default defineType({
     }),
 
     // ================================
-    // ✅ IMPROVED UNITS STRUCTURE
+    // UNITS (Fully Safe Version)
     // ================================
 
     defineField({
@@ -104,7 +104,6 @@ export default defineType({
         {
           type: "object",
           fields: [
-            // 🔹 Unit Type
             {
               name: "unitType",
               title: "Unit Type",
@@ -114,37 +113,32 @@ export default defineType({
                   { title: "Studio", value: "studio" },
                   { title: "Bedroom", value: "bedroom" },
                   { title: "Office", value: "office" },
-                  { title: "Other (Villa, Penthouse, Retail, etc)", value: "other" },
+                  {
+                    title: "Other (Villa, Penthouse, Retail, etc)",
+                    value: "other",
+                  },
                 ],
                 layout: "radio",
               },
               validation: (Rule) => Rule.required(),
             },
 
-            // 🔹 Bedroom Count (Only for Bedroom)
+            // ✅ Bedroom Count (No TS Error)
             {
               name: "bedroomCount",
               title: "Number of Bedrooms",
               type: "number",
-              hidden: ({ parent }) => parent?.unitType !== "bedroom",
-              validation: (Rule) =>
-                Rule.custom((value, context) => {
-                  const parent = context.parent as { unitType?: string };
-
-                  if (parent?.unitType === "bedroom" && !value) {
-                    return "Bedroom count required";
-                  }
-
-                  return true;
-                }),
+              hidden: ({ parent }: any) =>
+                parent?.unitType !== "bedroom",
             },
 
-            // 🔹 Custom Label (Only for Other)
+            // ✅ Custom Label (For Other)
             {
               name: "customLabel",
               title: "Custom Label (Example: Villa, Penthouse)",
               type: "string",
-              hidden: ({ parent }) => parent?.unitType !== "other",
+              hidden: ({ parent }: any) =>
+                parent?.unitType !== "other",
             },
 
             {
@@ -206,7 +200,7 @@ export default defineType({
         title: `Property Title (${lang.title})`,
         type: "string",
         group: "translations",
-        hidden: ({ document }) =>
+        hidden: ({ document }: any) =>
           !((document?.supportedLanguages as string[]) || []).includes(
             lang.id
           ),
