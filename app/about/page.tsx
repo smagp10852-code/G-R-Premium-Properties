@@ -11,6 +11,8 @@ import { urlFor } from "@/lib/sanity.image";
 
 const goldenColor = "#C9A227";
 
+export const revalidate = 0; // 🔥 IMPORTANT LINE
+
 /* ================= DATA ================= */
 
 const values = [
