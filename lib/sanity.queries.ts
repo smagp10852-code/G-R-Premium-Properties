@@ -420,15 +420,21 @@ export const featuredBlogsQuery = groq`
 ====================================================== */
 
 export const mediaQuery = groq`
-*[_type == "media"] 
+*[_type == "media"]
 | order(_createdAt desc){
   _id,
   title,
-  title_hi, title_ar, title_ru,
+  title_hi,
+  title_ar,
+  title_ru,
   supportedLanguages,
   mediaType,
   location,
-  images[]{ asset->{ url } },
+  images[]{
+    asset->{
+      url
+    }
+  },
   youtubeUrl
 }
 `;
