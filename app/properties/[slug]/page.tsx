@@ -1,14 +1,19 @@
 import { sanityClient } from "@/lib/sanity.client";
 import { propertiesByDeveloperQuery } from "@/lib/sanity.queries";
-import DeveloperPropertiesClient from "@/components/DeveloperPropertiesClient";
+import PropertyCard from "@/components/cards/PropertyCard";
+import { notFound } from "next/navigation";
+
+// ✅ Recommended for Sanity
+export const dynamic = "force-dynamic";
 
 export default async function DeveloperPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  // ✅ Next 16 fix
-  const { slug } = await params;
+  const slug = params.slug;
+
+  if (!slug) return notFound();
 
   const properties = await sanityClient.fetch(
     propertiesByDeveloperQuery,
@@ -26,12 +31,19 @@ export default async function DeveloperPage({
         </h1>
 
         {/* ================= CONTENT ================= */}
-        {properties?.length === 0 ? (
+        {!properties || properties.length === 0 ? (
           <p className="text-gray-600 dark:text-gray-400">
             No properties found.
           </p>
         ) : (
-          <DeveloperPropertiesClient properties={properties} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            {properties.map((property: any) => (
+              <PropertyCard
+                key={property._id}
+                property={property}
+              />
+            ))}
+          </div>
         )}
 
       </div>
