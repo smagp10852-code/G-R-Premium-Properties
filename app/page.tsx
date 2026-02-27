@@ -1,3 +1,6 @@
+// ✅ Tell Next.js this page is dynamic
+export const dynamic = "force-dynamic";
+
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Property from "@/components/sections/Property";
@@ -27,10 +30,10 @@ export default async function Home() {
       communities,
       featuredProperties,
     ] = await Promise.all([
-      sanityClient.fetch<HomepageData>(homepageHeroQuery, {}, { cache: "no-store" }),
-      sanityClient.fetch(featuredDevelopersQuery, {}, { cache: "no-store" }),
-      sanityClient.fetch(communitiesQuery, {}, { cache: "no-store" }),
-      sanityClient.fetch(featuredPropertiesQuery, {}, { cache: "no-store" }),
+      sanityClient.fetch<HomepageData>(homepageHeroQuery),
+      sanityClient.fetch(featuredDevelopersQuery),
+      sanityClient.fetch(communitiesQuery),
+      sanityClient.fetch(featuredPropertiesQuery),
     ]);
 
     /* ================= SAFE HERO SLIDES ================= */
@@ -63,6 +66,10 @@ export default async function Home() {
     );
   } catch (error) {
     console.error("Homepage Load Error:", error);
-    return <div>Something went wrong loading homepage.</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-red-500">
+        Something went wrong loading homepage.
+      </div>
+    );
   }
 }
