@@ -70,49 +70,20 @@ export default function Footer() {
                 premium apartments, villas, and investment properties.
               </p>
 
-              {/* Social Icons */}
               <div className="flex items-center gap-3">
-                <a
-                  href="https://www.facebook.com/GRpremiumPropertiesLLC/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full flex items-center justify-center
-                             border border-gray-600 hover:border-[#D4A843]
-                             hover:text-white transition-all duration-300"
-                >
+                <a href="https://www.facebook.com/GRpremiumPropertiesLLC/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-600 hover:border-[#D4A843] hover:text-white transition-all duration-300">
                   <SiFacebook className="w-4 h-4" />
                 </a>
 
-                <a
-                  href="https://www.instagram.com/grpp_dxb/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full flex items-center justify-center
-                             border border-gray-600 hover:border-[#D4A843]
-                             hover:text-white transition-all duration-300"
-                >
+                <a href="https://www.instagram.com/grpp_dxb/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-600 hover:border-[#D4A843] hover:text-white transition-all duration-300">
                   <SiInstagram className="w-4 h-4" />
                 </a>
 
-                <a
-                  href="https://share.google/XpeZGjkEe0ZlTFw0G"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full flex items-center justify-center
-                             border border-gray-600 hover:border-[#D4A843]
-                             hover:text-white transition-all duration-300"
-                >
+                <a href="https://share.google/XpeZGjkEe0ZlTFw0G" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-600 hover:border-[#D4A843] hover:text-white transition-all duration-300">
                   <SiGoogle className="w-4 h-4" />
                 </a>
 
-                <a
-                  href="https://www.linkedin.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full flex items-center justify-center
-                             border border-gray-600 hover:border-[#D4A843]
-                             hover:text-white transition-all duration-300"
-                >
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-600 hover:border-[#D4A843] hover:text-white transition-all duration-300">
                   <SiLinkedin className="w-4 h-4" />
                 </a>
               </div>
@@ -129,6 +100,13 @@ export default function Footer() {
                 <li><Link href="/properties" className="text-sm hover:text-white">Properties</Link></li>
                 <li><Link href="/blog" className="text-sm hover:text-white">Blog</Link></li>
                 <li><Link href="/contact" className="text-sm hover:text-white">Contact</Link></li>
+
+                {/* ✅ Added Sitemap */}
+                <li>
+                  <Link href="/sitemap" className="text-sm hover:text-white">
+                    Sitemap
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -152,7 +130,6 @@ export default function Footer() {
               </h4>
 
               <ul className="space-y-4 text-sm text-gray-400">
-
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 mt-1 text-[#D4A843]" />
                   <span>
@@ -164,29 +141,16 @@ export default function Footer() {
                 </li>
 
                 <li className="flex items-start gap-3">
-
                   <div className="flex flex-col space-y-2">
-
-                    {/* WhatsApp */}
-                    <a
-                      href="https://wa.me/971543087712"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 hover:text-green-400 transition-colors duration-300"
-                    >
+                    <a href="https://wa.me/971543087712" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-green-400 transition-colors duration-300">
                       <SiWhatsapp className="w-4 h-4 text-green-500" />
                       +971 543087712
                     </a>
 
-                    {/* Direct Call */}
-                    <a
-                      href="tel:+9717604007170"
-                      className="flex items-center gap-2 hover:text-white transition-colors duration-300"
-                    >
+                    <a href="tel:+9717604007170" className="flex items-center gap-2 hover:text-white transition-colors duration-300">
                       <Phone className="w-4 h-4 text-[#D4A843]" />
                       +971 7604007170
                     </a>
-
                   </div>
                 </li>
 
@@ -196,13 +160,11 @@ export default function Footer() {
                     sales@grpremium.com
                   </a>
                 </li>
-
               </ul>
 
               <button
                 onClick={() => setOpen(true)}
-                className="mt-8 w-full px-6 py-3 font-semibold text-black text-sm rounded-md
-                           transition-all duration-300 hover:scale-[1.03]"
+                className="mt-8 w-full px-6 py-3 font-semibold text-black text-sm rounded-md transition-all duration-300 hover:scale-[1.03]"
                 style={{ backgroundColor: goldenColor }}
               >
                 Enquire Now
@@ -212,7 +174,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-[#2a3a4a] py-5">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-gray-500">

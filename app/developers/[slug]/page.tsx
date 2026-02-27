@@ -2,10 +2,11 @@ import CTA from "@/components/sections/CTA";
 import { sanityClient } from "@/lib/sanity.client";
 import { notFound } from "next/navigation";
 import { urlFor } from "@/lib/sanity.image";
-import DeveloperProjectsClient from "@/components/sections/DeveloperProjectsClient";
+import PropertiesClient from "@/components/sections/PropertiesClient"; // ✅ USE SAME CLIENT
 import DeveloperAboutClient from "@/components/sections/DeveloperAboutClient";
 import T from "@/components/ui/T";
 import Footer from "@/components/layout/Footer";
+import ScrollToHash from "@/components/ScrollToHash";
 
 /* ================= SANITY QUERY ================= */
 const developerWithProjectsQuery = `
@@ -25,9 +26,10 @@ const developerWithProjectsQuery = `
     title,
     title_hi, title_ar, title_ru,
     supportedLanguages,
-    slug,
-    location,
+    "slug": slug.current,
     handover,
+    purpose,
+    type,
 
     paymentPlan{
       booking,
@@ -35,14 +37,25 @@ const developerWithProjectsQuery = `
       handover
     },
 
+    location->{
+      name,
+      name_hi, name_ar, name_ru,
+      supportedLanguages,
+      "slug": slug.current
+    },
+
     images[]{
       asset->{url}
     },
+
     units[]{
-      beds,
+      unitType,
+      bedroomCount,
+      customLabel,
       size,
       price
     },
+
     brochure{
       asset->{url}
     }
@@ -50,13 +63,11 @@ const developerWithProjectsQuery = `
 }
 `;
 
-
 export default async function DeveloperPage({
   params,
 }: {
   params: { slug: string } | Promise<{ slug: string }>;
 }) {
-  // ✅ SAFEST WAY (THIS FIXES THE ERROR)
   const resolvedParams = await Promise.resolve(params);
   const slug = resolvedParams.slug;
 
@@ -71,6 +82,8 @@ export default async function DeveloperPage({
 
   return (
     <main>
+      <ScrollToHash />
+
       {/* ================= HERO ================= */}
       <section className="relative h-[85vh] w-full">
         {developer.heroImage && (
@@ -176,23 +189,25 @@ export default async function DeveloperPage({
       <DeveloperAboutClient developer={developer} />
 
       {/* ================= PROJECTS ================= */}
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-black transition-colors duration-300">
+      <section
+        id="projects"
+        className="py-20 bg-gray-50 dark:bg-black transition-colors duration-300"
+      >
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold mb-12">
-            <><T k="developerDetail.projectsBy" /> {developer.name}</>
+            <T k="developerDetail.projectsBy" /> {developer.name}
           </h2>
 
           {developer.properties?.length === 0 ? (
-            <p className="text-gray-500"><T k="developerDetail.noProjectsYet" /></p>
+            <p className="text-gray-500">
+              <T k="developerDetail.noProjectsYet" />
+            </p>
           ) : (
-            <DeveloperProjectsClient
-              properties={developer.properties}
-            />
+            <PropertiesClient properties={developer.properties} />
           )}
         </div>
       </section>
 
-      {/* ================= CTA ================= */}
       <CTA />
       <Footer />
     </main>

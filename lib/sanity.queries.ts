@@ -88,20 +88,30 @@ export const featuredPropertiesQuery = groq`
 export const propertiesQuery = groq`
 *[
   _type == "property" &&
+
   (!defined($community) || location->slug.current == $community) &&
+
   (!defined($search) || 
     title match $search + "*" ||
     location->name match $search + "*"
   ) &&
+
   (!defined($purpose) || purpose == $purpose) &&
+
   (!defined($type) || type == $type) &&
+
   (!defined($bed) || 
     count(units[
       unitType == "bedroom" && 
-      bedroomCount == $bed
+      (
+        bedroomCount == $bed ||
+        ($bed == "studio" && bedroomCount == 0)
+      )
     ]) > 0
   ) &&
+
   (!defined($min) || count(units[price >= $min]) > 0) &&
+
   (!defined($max) || count(units[price <= $max]) > 0)
 ]
 | order(_createdAt desc){
@@ -133,12 +143,12 @@ export const propertiesQuery = groq`
   },
 
   units[]{
-  unitType,
-  bedroomCount,
-  customLabel,
-  size,
-  price
-},
+    unitType,
+    bedroomCount,
+    customLabel,
+    size,
+    price
+  },
 
   brochure{
     asset->{ url }
