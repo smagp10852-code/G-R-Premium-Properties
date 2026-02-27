@@ -3,7 +3,7 @@ import { propertiesByDeveloperQuery } from "@/lib/sanity.queries";
 import PropertyCard from "@/components/cards/PropertyCard";
 import { notFound } from "next/navigation";
 
-// ✅ Recommended for Sanity
+// ✅ Sanity dynamic rendering safe for Vercel
 export const dynamic = "force-dynamic";
 
 export default async function DeveloperPage({
@@ -21,12 +21,14 @@ export default async function DeveloperPage({
   );
 
   return (
-    <main className="py-24 bg-white dark:bg-[#0F172A] transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6">
+    <main className="py-16 bg-white dark:bg-[#0F172A] transition-colors duration-300">
+      <div className="w-full px-4 sm:px-6 lg:px-8 lg:max-w-7xl lg:mx-auto">
 
         {/* ================= HEADING ================= */}
-        <h1 className="text-3xl md:text-4xl font-bold mb-14 capitalize 
-                       text-gray-900 dark:text-white">
+        <h1
+          className="text-3xl md:text-4xl font-bold mb-12 capitalize 
+                     text-gray-900 dark:text-white"
+        >
           Projects by {slug.replace(/-/g, " ")}
         </h1>
 
@@ -36,12 +38,11 @@ export default async function DeveloperPage({
             No properties found.
           </p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-stretch">
             {properties.map((property: any) => (
-              <PropertyCard
-                key={property._id}
-                property={property}
-              />
+              <div key={property._id} className="w-full">
+                <PropertyCard property={property} />
+              </div>
             ))}
           </div>
         )}

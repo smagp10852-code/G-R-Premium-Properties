@@ -10,7 +10,10 @@ import CTA from "@/components/sections/CTA";
 import Footer from "@/components/layout/Footer";
 import T from "@/components/ui/T";
 
-type SearchParams = Promise<{
+// Optional: safer for Sanity
+export const dynamic = "force-dynamic";
+
+type SearchParams = {
   community?: string;
   search?: string;
   type?: string;
@@ -18,7 +21,7 @@ type SearchParams = Promise<{
   max?: string;
   purpose?: string;
   bed?: string;
-}>;
+};
 
 export default async function PropertiesPage({
   searchParams,
@@ -26,7 +29,7 @@ export default async function PropertiesPage({
   searchParams: SearchParams;
 }) {
 
-  const params = await searchParams;
+  const params = searchParams || {};
 
   const communities = await sanityClient.fetch(communitiesQuery);
 
@@ -44,19 +47,21 @@ export default async function PropertiesPage({
     <main className="bg-white dark:bg-[#0F172A] transition-colors duration-300">
 
       {/* ================= HERO ================= */}
-      <section className="relative h-[70vh] w-full overflow-hidden">
+      <section className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden">
         <img
           src="/assets/hero-1.jpg"
           alt="Luxury Properties Dubai"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 h-full flex items-center justify-center text-center px-6">
+
+        <div className="relative z-10 h-full flex items-center justify-center text-center px-4 sm:px-6">
           <div>
-            <h1 className="text-white text-4xl md:text-6xl font-bold">
+            <h1 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold">
               <T k="properties.findDreamProperty" />
             </h1>
-            <p className="text-gray-200 mt-4 text-lg">
+
+            <p className="text-gray-200 mt-4 text-base md:text-lg">
               <T k="properties.heroDescription" />
             </p>
           </div>
@@ -67,10 +72,10 @@ export default async function PropertiesPage({
       <PropertyFilter communities={communities || []} />
 
       {/* ================= RESULTS ================= */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-16 lg:max-w-7xl lg:mx-auto">
 
         {properties.length === 0 ? (
-          <div className="text-center py-28">
+          <div className="text-center py-24">
             <div className="text-6xl mb-6">🔍</div>
 
             <h2 className="text-2xl md:text-3xl font-semibold 

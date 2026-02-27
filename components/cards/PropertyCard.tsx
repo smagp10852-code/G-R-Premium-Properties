@@ -55,14 +55,17 @@ export default function PropertyCard({
       <motion.div
         whileHover={{ y: -8 }}
         transition={{ duration: 0.3 }}
-        className="flex flex-col h-full bg-white dark:bg-[#101827] text-black dark:text-white rounded-3xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300"
+        className="w-full flex flex-col h-full bg-white dark:bg-[#101827] 
+                   text-black dark:text-white rounded-3xl shadow-lg 
+                   hover:shadow-2xl overflow-hidden transition-all duration-300"
       >
         {/* IMAGE SECTION */}
-        <div className="relative h-[240px] w-full group">
+        <div className="relative w-full h-[260px] sm:h-[280px] md:h-[240px] group">
           <Image
             src={images[index] || PLACEHOLDER}
             alt={property?.title || "Property"}
             fill
+            sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover"
           />
 

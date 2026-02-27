@@ -2,7 +2,7 @@ import CTA from "@/components/sections/CTA";
 import { sanityClient } from "@/lib/sanity.client";
 import { notFound } from "next/navigation";
 import { urlFor } from "@/lib/sanity.image";
-import PropertiesClient from "@/components/sections/PropertiesClient"; // ✅ USE SAME CLIENT
+import PropertiesClient from "@/components/sections/PropertiesClient";
 import DeveloperAboutClient from "@/components/sections/DeveloperAboutClient";
 import T from "@/components/ui/T";
 import Footer from "@/components/layout/Footer";
@@ -111,6 +111,7 @@ export default async function DeveloperPage({
               {developer.name}
             </h1>
 
+            {/* ✅ FIXED HERO TEXT COLOR */}
             <p className="text-gray-200 mt-6 text-lg">
               <T k="developerDetail.heroDescription" />
             </p>
@@ -136,14 +137,15 @@ export default async function DeveloperPage({
 
       {/* ================= STATS ================= */}
       {developer.stats && (
-        <section className="py-12 bg-[#FAF9F7] dark:bg-black transition-colors duration-300">
+        <section className="py-14 bg-[#0F172A]">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center">
+
             {developer.stats.experience && (
               <div>
-                <p className="text-3xl font-semibold text-[#C9A227]">
+                <p className="text-4xl font-bold text-[#C9A227]">
                   {developer.stats.experience}
                 </p>
-                <p className="text-sm uppercase tracking-widest text-gray-500 mt-2">
+                <p className="text-sm uppercase tracking-widest text-gray-300 mt-2">
                   <T k="developerDetail.yearsExperience" />
                 </p>
               </div>
@@ -151,10 +153,10 @@ export default async function DeveloperPage({
 
             {developer.stats.projects && (
               <div>
-                <p className="text-3xl font-semibold text-[#C9A227]">
+                <p className="text-4xl font-bold text-[#C9A227]">
                   {developer.stats.projects}
                 </p>
-                <p className="text-sm uppercase tracking-widest text-gray-500 mt-2">
+                <p className="text-sm uppercase tracking-widest text-gray-300 mt-2">
                   <T k="developerDetail.projectsDelivered" />
                 </p>
               </div>
@@ -162,10 +164,10 @@ export default async function DeveloperPage({
 
             {developer.stats.homes && (
               <div>
-                <p className="text-3xl font-semibold text-[#C9A227]">
+                <p className="text-4xl font-bold text-[#C9A227]">
                   {developer.stats.homes}
                 </p>
-                <p className="text-sm uppercase tracking-widest text-gray-500 mt-2">
+                <p className="text-sm uppercase tracking-widest text-gray-300 mt-2">
                   <T k="developerDetail.homesSold" />
                 </p>
               </div>
@@ -173,14 +175,15 @@ export default async function DeveloperPage({
 
             {developer.stats.locations && (
               <div>
-                <p className="text-sm text-gray-700">
+                <p className="text-gray-300">
                   {developer.stats.locations}
                 </p>
-                <p className="text-sm uppercase tracking-widest text-gray-500 mt-2">
+                <p className="text-sm uppercase tracking-widest text-gray-400 mt-2">
                   <T k="developerDetail.primeLocations" />
                 </p>
               </div>
             )}
+
           </div>
         </section>
       )}
@@ -191,15 +194,15 @@ export default async function DeveloperPage({
       {/* ================= PROJECTS ================= */}
       <section
         id="projects"
-        className="py-20 bg-gray-50 dark:bg-black transition-colors duration-300"
+        className="py-20 bg-white dark:bg-[#0F172A]"
       >
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12">
+          <h2 className="text-3xl font-bold mb-12 text-gray-900 dark:text-white">
             <T k="developerDetail.projectsBy" /> {developer.name}
           </h2>
 
           {developer.properties?.length === 0 ? (
-            <p className="text-gray-500">
+            <p className="text-gray-500 dark:text-gray-400">
               <T k="developerDetail.noProjectsYet" />
             </p>
           ) : (

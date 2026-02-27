@@ -15,15 +15,19 @@ export default function DeveloperAboutClient({
   };
 
   return (
-    <section className="py-20 bg-white dark:bg-black transition-colors duration-300">
+    <section className="py-20 bg-white dark:bg-[#0F172A] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-6">
+
+        {/* HEADING */}
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
           {t("developerDetail.about")} {developer.name}
         </h2>
 
-        <p className="text-gray-600 leading-relaxed max-w-4xl">
+        {/* DESCRIPTION */}
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed max-w-4xl text-base md:text-lg">
           {getLocalized(developer, "about")}
         </p>
+
       </div>
     </section>
   );
