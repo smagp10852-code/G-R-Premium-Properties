@@ -136,48 +136,36 @@ body {
   }
 }
 
-/* ================= PREMIUM SWIPER ARROWS ================= */
-/* ================= PREMIUM SWIPER ARROWS ================= */
+
+/* ================= CLEAN SWIPER ARROWS ================= */
 
 .swiper-button-prev,
 .swiper-button-next {
-  width: 50px;
-  height: 50px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: auto !important;
+  height: auto !important;
+}
 
-  border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid #C9A227;
-
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-
+/* Arrow icon */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 28px;
+  font-weight: bold;
+  color: #D08700;
   transition: all 0.3s ease;
 }
 
-/* Arrow icon styling */
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  font-size: 18px;
-  font-weight: bold;
-  color: #C9A227;
-}
-
 /* Hover effect */
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background: #C9A227;
-  transform: scale(1.1);
-}
-
 .swiper-button-prev:hover::after,
 .swiper-button-next:hover::after {
-  color: #ffffff;
+  transform: scale(1.2);
+  color: #b36f00;
 }
 
-/* Proper positioning */
+/* Position adjust */
 .swiper-button-prev {
   left: -25px;
 }
@@ -187,19 +175,13 @@ body {
 }
 
 /* Dark mode */
-.dark .swiper-button-prev,
-.dark .swiper-button-next {
-  background: #111827;
-  border-color: #C9A227;
-}
-
 .dark .swiper-button-prev::after,
 .dark .swiper-button-next::after {
-  color: #C9A227;
+  color: #D08700;
 }
 
-/* Disabled state */
+/* Disabled */
 .swiper-button-disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   pointer-events: none;
 }
