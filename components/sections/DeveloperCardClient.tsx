@@ -8,8 +8,11 @@ interface Developer {
   _id: string;
   name: string;
   shortDescription?: string;
-  slug: string;
-  logo?: any;
+  shortDescription_hi?: string;
+  shortDescription_ar?: string;
+  shortDescription_ru?: string;
+  slug: any; // string or { current: string }
+  logo?: string;
   [key: string]: any;
 }
 
@@ -22,45 +25,60 @@ export default function DeveloperCardClient({
 }) {
   const { t, lang } = useTranslation();
 
+  /* ================= LOCALIZED TEXT ================= */
   const getLocalized = (item: any, field: string) => {
     if (lang === "en") return item[field];
     return item[`${field}_${lang}`] || item[field];
   };
 
+  /* ================= SAFE SLUG ================= */
+  const slugValue =
+    typeof developer.slug === "string"
+      ? developer.slug
+      : developer.slug?.current;
+
   return (
-    <div className="group rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-2xl transition duration-300">
-      <div className="relative h-56 w-full bg-gray-100 overflow-hidden">
+    <div className="group rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-full">
+
+      {/* ================= IMAGE SECTION ================= */}
+      <div className="w-full h-56 bg-gray-100 flex items-center justify-center p-6">
         {logoUrl ? (
           <Image
             src={logoUrl}
             alt={developer.name}
-            fill
-            className="object-cover group-hover:scale-105 transition duration-500"
+            width={500}
+            height={300}
+            className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-gray-400">
+          <div className="flex h-full items-center justify-center text-gray-400 text-sm">
             {t("developersPage.noImage")}
           </div>
         )}
       </div>
 
-      <div className="p-6">
+      {/* ================= CONTENT ================= */}
+      <div className="p-6 flex flex-col flex-1">
+
         <h3 className="text-xl font-semibold text-gray-900">
           {developer.name}
         </h3>
 
         {getLocalized(developer, "shortDescription") && (
-          <p className="text-sm text-gray-700 mt-3 line-clamp-3">
+          <p className="text-sm text-gray-700 mt-3 line-clamp-3 flex-1">
             {getLocalized(developer, "shortDescription")}
           </p>
         )}
 
-        <Link
-          href={`/developers/${developer.slug}`}
-          className="inline-flex items-center mt-5 text-[#C9A227] font-medium hover:underline"
-        >
-          {t("developersPage.viewProjects")}
-        </Link>
+        {slugValue && (
+          <Link
+            href={`/developers/${slugValue}`}
+            className="mt-5 inline-flex items-center text-[#C9A227] font-medium hover:underline"
+          >
+            {t("developersPage.viewProjects")} 
+          </Link>
+        )}
+
       </div>
     </div>
   );

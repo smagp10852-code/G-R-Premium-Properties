@@ -270,58 +270,89 @@ export const propertiesByDeveloperQuery = groq`
 ====================================================== */
 
 export const featuredDevelopersQuery = groq`
-*[
-  _type == "developer" &&
-  showOnHomePage == true
-]
+*[_type == "developer"]
 | order(_createdAt desc)
-[0...3]{
+{
   _id,
   name,
   "slug": slug.current,
+
   shortDescription,
-  shortDescription_hi, shortDescription_ar, shortDescription_ru,
+  shortDescription_hi,
+  shortDescription_ar,
+  shortDescription_ru,
+
   about,
-  about_hi, about_ar, about_ru,
+  about_hi,
+  about_ar,
+  about_ru,
+
   supportedLanguages,
+
   "logo": logo.asset->url,
   "heroImage": heroImage.asset->url
 }
 `;
 
+
+/* ======================================================
+   ALL DEVELOPERS
+====================================================== */
 
 export const allDevelopersQuery = groq`
 *[_type == "developer"]
-| order(name asc){
+| order(name asc)
+{
   _id,
   name,
   "slug": slug.current,
+
   shortDescription,
-  shortDescription_hi, shortDescription_ar, shortDescription_ru,
+  shortDescription_hi,
+  shortDescription_ar,
+  shortDescription_ru,
+
   about,
-  about_hi, about_ar, about_ru,
+  about_hi,
+  about_ar,
+  about_ru,
+
   supportedLanguages,
+
   "logo": logo.asset->url,
   "heroImage": heroImage.asset->url
 }
 `;
+
 
 /* ======================================================
    SINGLE DEVELOPER
 ====================================================== */
 
 export const developerBySlugQuery = groq`
-*[_type == "developer" && slug.current == $slug][0]{
+*[
+  _type == "developer" &&
+  slug.current == $slug
+][0]{
   _id,
   name,
   "slug": slug.current,
+
   shortDescription,
-  shortDescription_hi, shortDescription_ar, shortDescription_ru,
+  shortDescription_hi,
+  shortDescription_ar,
+  shortDescription_ru,
+
   about,
-  about_hi, about_ar, about_ru,
+  about_hi,
+  about_ar,
+  about_ru,
+
   supportedLanguages,
+
   "logo": logo.asset->url,
   "heroImage": heroImage.asset->url,
+
   stats
 }
 `;

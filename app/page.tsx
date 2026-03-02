@@ -1,10 +1,10 @@
-// ✅ Tell Next.js this page is dynamic
+// ✅ Force dynamic rendering (Sanity live data)
 export const dynamic = "force-dynamic";
 
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Property from "@/components/sections/Property";
-import Developer from "@/components/sections/developer";
+import DeveloperSection from "@/components/sections/developer";
 import Blog from "@/components/sections/FeaturedBlogs";
 import Terminology from "@/components/sections/Terminology";
 import CTA from "@/components/sections/CTA";
@@ -22,7 +22,7 @@ import { HomepageData } from "@/types/homepage";
 
 export default async function Home() {
   try {
-    /* ================= FETCH DATA ================= */
+    /* ================= FETCH ALL DATA IN PARALLEL ================= */
 
     const [
       homepage,
@@ -39,7 +39,9 @@ export default async function Home() {
     /* ================= SAFE HERO SLIDES ================= */
 
     const heroSlides =
-      homepage?.heroSlides?.filter((slide) => slide?.image?.asset?.url) || [];
+      homepage?.heroSlides?.filter(
+        (slide: any) => slide?.image?.asset?.url
+      ) || [];
 
     return (
       <>
@@ -56,7 +58,8 @@ export default async function Home() {
 
         <Property properties={featuredProperties || []} />
 
-        <Developer developers={developers || []} />
+        {/* 🔥 Developers Section (Server Fetched Data Pass) */}
+        <DeveloperSection developers={developers || []} />
 
         <Blog />
         <Terminology />
@@ -66,8 +69,9 @@ export default async function Home() {
     );
   } catch (error) {
     console.error("Homepage Load Error:", error);
+
     return (
-      <div className="min-h-screen flex items-center justify-center text-red-500">
+      <div className="min-h-screen flex items-center justify-center text-red-500 text-lg">
         Something went wrong loading homepage.
       </div>
     );
