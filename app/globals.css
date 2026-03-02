@@ -136,8 +136,7 @@ body {
   }
 }
 
-
-/* ================= CLEAN SWIPER ARROWS ================= */
+/* ================= LUXURY CLEAN SWIPER ARROWS ================= */
 
 .swiper-button-prev,
 .swiper-button-next {
@@ -147,37 +146,38 @@ body {
 
   width: auto !important;
   height: auto !important;
-}
 
-/* Arrow icon */
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  font-size: 28px;
-  font-weight: bold;
-  color: #D08700;
   transition: all 0.3s ease;
 }
 
-/* Hover effect */
-.swiper-button-prev:hover::after,
+/* Arrow icon style */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 30px;
+  font-weight: bold;
+  color: #D08700;
+  transition: all 0.35s ease;
+}
+
+/* LEFT arrow hover animation */
+.swiper-button-prev:hover::after {
+  transform: translateX(-6px) scale(1.2);
+  text-shadow: 0 0 12px rgba(208, 135, 0, 0.5);
+}
+
+/* RIGHT arrow hover animation */
 .swiper-button-next:hover::after {
-  transform: scale(1.2);
-  color: #b36f00;
+  transform: translateX(6px) scale(1.2);
+  text-shadow: 0 0 12px rgba(208, 135, 0, 0.5);
 }
 
 /* Position adjust */
 .swiper-button-prev {
-  left: -25px;
+  left: -30px;
 }
 
 .swiper-button-next {
-  right: -25px;
-}
-
-/* Dark mode */
-.dark .swiper-button-prev::after,
-.dark .swiper-button-next::after {
-  color: #D08700;
+  right: -30px;
 }
 
 /* Disabled */
