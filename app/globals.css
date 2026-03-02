@@ -137,51 +137,69 @@ body {
 }
 
 /* ================= PREMIUM SWIPER ARROWS ================= */
+/* ================= PREMIUM SWIPER ARROWS ================= */
 
 .swiper-button-prev,
 .swiper-button-next {
   width: 50px;
   height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border-radius: 50%;
   background: #ffffff;
   border: 2px solid #C9A227;
-  color: #C9A227 !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
   transition: all 0.3s ease;
 }
 
+/* Arrow icon styling */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 18px;
+  font-weight: bold;
+  color: #C9A227;
+}
+
+/* Hover effect */
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
   background: #C9A227;
-  color: #ffffff !important;
-  transform: scale(1.12);
+  transform: scale(1.1);
 }
 
-/* Arrow Icon Size */
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  font-size: 16px;
-  font-weight: bold;
+.swiper-button-prev:hover::after,
+.swiper-button-next:hover::after {
+  color: #ffffff;
 }
 
-/* Position adjust */
+/* Proper positioning */
 .swiper-button-prev {
-  left: -20px;
+  left: -25px;
 }
 
 .swiper-button-next {
-  right: -20px;
+  right: -25px;
 }
 
-/* Dark Mode Arrow */
+/* Dark mode */
 .dark .swiper-button-prev,
 .dark .swiper-button-next {
   background: #111827;
   border-color: #C9A227;
 }
 
+.dark .swiper-button-prev::after,
+.dark .swiper-button-next::after {
+  color: #C9A227;
+}
+
 /* Disabled state */
 .swiper-button-disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   pointer-events: none;
 }
