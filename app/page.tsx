@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
-import Property from "@/components/sections/Property";
+import PropertySlider from "@/components/sections/PropertySlider";
 import DeveloperSection from "@/components/sections/developer";
 import Blog from "@/components/sections/FeaturedBlogs";
 import Terminology from "@/components/sections/Terminology";
@@ -22,6 +22,7 @@ import { HomepageData } from "@/types/homepage";
 
 export default async function Home() {
   try {
+
     /* ================= FETCH ALL DATA IN PARALLEL ================= */
 
     const [
@@ -56,9 +57,10 @@ export default async function Home() {
 
         <About />
 
-        <Property properties={featuredProperties || []} />
+        {/* 🔥 PROPERTY SLIDER */}
+        <PropertySlider properties={featuredProperties || []} />
 
-        {/* 🔥 Developers Section (Server Fetched Data Pass) */}
+        {/* 🔥 DEVELOPERS SLIDER */}
         <DeveloperSection developers={developers || []} />
 
         <Blog />
@@ -67,6 +69,7 @@ export default async function Home() {
         <Footer />
       </>
     );
+
   } catch (error) {
     console.error("Homepage Load Error:", error);
 

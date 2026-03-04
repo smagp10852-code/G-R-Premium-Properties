@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Percent,
 } from "lucide-react";
+
 import BrochureModal from "@/components/ui/BrochureModal";
 import { useTranslation } from "@/lib/language-context";
 
@@ -55,17 +56,24 @@ export default function PropertyCard({
       <motion.div
         whileHover={{ y: -8 }}
         transition={{ duration: 0.3 }}
-        className="w-full flex flex-col h-full bg-white dark:bg-[#101827] 
-                   text-black dark:text-white rounded-3xl shadow-lg 
-                   hover:shadow-2xl overflow-hidden transition-all duration-300"
+        className="
+        w-full
+        h-full
+        flex flex-col
+        bg-white dark:bg-[#101827]
+        rounded-3xl
+        shadow-lg hover:shadow-2xl
+        overflow-hidden
+        transition-all duration-300
+        "
       >
-        {/* IMAGE SECTION */}
-        <div className="relative w-full h-[260px] sm:h-[280px] md:h-[240px] group">
+        {/* IMAGE */}
+        <div className="relative w-full h-[220px] sm:h-[240px] md:h-[240px] group flex-shrink-0">
           <Image
             src={images[index] || PLACEHOLDER}
             alt={property?.title || "Property"}
             fill
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 33vw"
             className="object-cover"
           />
 
@@ -91,6 +99,7 @@ export default function PropertyCard({
                 <ChevronRight size={18} />
               </button>
 
+              {/* DOTS */}
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                 {images.map((_: string, i: number) => (
                   <button
@@ -98,8 +107,8 @@ export default function PropertyCard({
                     onClick={() => setIndex(i)}
                     className={
                       i === index
-                        ? "h-2.5 w-6 bg-white rounded-full transition-all duration-300"
-                        : "h-2.5 w-2.5 bg-white/50 hover:bg-white rounded-full transition-all duration-300"
+                        ? "h-2.5 w-6 bg-white rounded-full transition"
+                        : "h-2.5 w-2.5 bg-white/50 rounded-full transition"
                     }
                   />
                 ))}
@@ -108,19 +117,24 @@ export default function PropertyCard({
           )}
         </div>
 
-        {/* CONTENT SECTION */}
+        {/* CONTENT */}
         <div className="p-6 flex flex-col flex-1">
-          <h3 className="text-xl font-bold mb-1">{property?.title}</h3>
 
+          {/* TITLE */}
+          <h3 className="text-lg sm:text-xl font-bold mb-1 line-clamp-1">
+            {property?.title}
+          </h3>
+
+          {/* LOCATION */}
           {locationText && (
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               {locationText}
             </p>
           )}
 
           {/* UNITS */}
-          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 mb-4">
-            {property?.units?.map((unit: any, i: number) => {
+          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 mb-5 min-h-[140px]">
+            {property?.units?.slice(0, 5).map((unit: any, i: number) => {
               let unitLabel = "";
 
               if (unit?.unitType === "studio") {
@@ -137,8 +151,8 @@ export default function PropertyCard({
                 <div key={i} className="flex items-start gap-2">
                   <BedDouble size={16} />
                   <span>
-                    <strong>{unitLabel}</strong> •{" "}
-                    {unit?.size} {t("property.sqFt")} •{" "}
+                    <strong>{unitLabel}</strong> • {unit?.size}{" "}
+                    {t("property.sqFt")} •{" "}
                     <strong>
                       {t("property.aed")} {unit?.price}
                     </strong>
@@ -149,47 +163,58 @@ export default function PropertyCard({
           </div>
 
           {/* PAYMENT PLAN */}
-          {paymentPlan &&
-            (paymentPlan.booking ||
-              paymentPlan.construction ||
-              paymentPlan.handover) && (
-              <div className="mb-4 bg-gray-100 dark:bg-[#1c2536] p-4 rounded-xl">
-                <div className="flex items-center gap-2 mb-2">
-                  <Percent size={16} />
-                  <span className="text-sm font-semibold">
-                    {t("Payment Plan") || "Payment Plan"}
-                  </span>
-                </div>
+          <div className="mb-5 min-h-[110px]">
+            {paymentPlan &&
+              (paymentPlan.booking ||
+                paymentPlan.construction ||
+                paymentPlan.handover) && (
+                <div className="bg-gray-100 dark:bg-[#1c2536] p-4 rounded-xl">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Percent size={16} />
+                    <span className="text-sm font-semibold">
+                      {t("Payment Plan") || "Payment Plan"}
+                    </span>
+                  </div>
 
-                <div className="flex justify-between text-sm font-medium">
-                  <span>{paymentPlan.booking || 0}%</span>
-                  <span>{paymentPlan.construction || 0}%</span>
-                  <span>{paymentPlan.handover || 0}%</span>
-                </div>
+                  <div className="flex justify-between text-sm font-medium">
+                    <span>{paymentPlan.booking || 0}%</span>
+                    <span>{paymentPlan.construction || 0}%</span>
+                    <span>{paymentPlan.handover || 0}%</span>
+                  </div>
 
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
-                  <span>Booking</span>
-                  <span>Construction</span>
-                  <span>Handover</span>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Booking</span>
+                    <span>Construction</span>
+                    <span>Handover</span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+          </div>
 
           {/* HANDOVER */}
-          {property?.handover && (
-            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
-              <CalendarDays size={16} />
-              <span>
-                {t("property.handover")}: {property.handover}
-              </span>
-            </div>
-          )}
+          <div className="min-h-[30px] mb-6">
+            {property?.handover && (
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <CalendarDays size={16} />
+                <span>
+                  {t("property.handover")}: {property.handover}
+                </span>
+              </div>
+            )}
+          </div>
 
           {/* BUTTONS */}
           <div className="flex gap-3 mt-auto">
             <button
               onClick={() => setOpenBrochure(true)}
-              className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#C9A227] text-[#C9A227] hover:bg-[#C9A227] hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
+              className="
+              flex-1 py-2.5 rounded-xl text-sm font-medium
+              border border-[#C9A227]
+              text-[#C9A227]
+              hover:bg-[#C9A227] hover:text-black
+              transition-all duration-300
+              flex items-center justify-center gap-2
+              "
             >
               <Download size={16} />
               {t("property.brochure")}
@@ -197,15 +222,20 @@ export default function PropertyCard({
 
             <button
               onClick={() => onEnquire?.(property)}
-              className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-black transition-all duration-300 hover:opacity-90"
+              className="
+              flex-1 py-2.5 rounded-xl text-sm font-semibold
+              text-black transition-all duration-300 hover:opacity-90
+              "
               style={{ backgroundColor: goldenColor }}
             >
               {t("property.enquire")}
             </button>
           </div>
+
         </div>
       </motion.div>
 
+      {/* BROCHURE MODAL */}
       <BrochureModal
         open={openBrochure}
         onClose={() => setOpenBrochure(false)}

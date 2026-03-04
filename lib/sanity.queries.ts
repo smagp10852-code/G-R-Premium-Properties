@@ -41,7 +41,7 @@ export const featuredPropertiesQuery = groq`
   showOnHomePage == true
 ]
 | order(_createdAt desc)
-[0...3]{
+[0...10]{
   _id,
   title,
   title_hi, title_ar, title_ru,
