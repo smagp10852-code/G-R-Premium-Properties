@@ -185,3 +185,33 @@ body {
   opacity: 0.3;
   pointer-events: none;
 }
+
+
+/* BLOG SLIDER */
+
+.blog-swiper {
+  overflow: hidden;
+}
+
+.blog-swiper .swiper-button-prev,
+.blog-swiper .swiper-button-next {
+  background: transparent !important;
+  border: none !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.blog-swiper .swiper-button-prev::after,
+.blog-swiper .swiper-button-next::after {
+  font-size: 30px;
+  font-weight: bold;
+  color: #D08700;
+}
+
+.blog-swiper .swiper-button-prev:hover::after {
+  transform: translateX(-6px) scale(1.2);
+}
+
+.blog-swiper .swiper-button-next:hover::after {
+  transform: translateX(6px) scale(1.2);
+}

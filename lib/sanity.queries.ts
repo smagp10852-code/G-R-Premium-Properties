@@ -386,64 +386,7 @@ export const searchSuggestionQuery = groq`
 }
 `;
 
-/* ======================================================
-   BLOGS
-====================================================== */
 
-export const allBlogsQuery = groq`
-*[_type == "blog"]{
-  _id,
-  title,
-  title_hi, title_ar, title_ru,
-  subtitle,
-  subtitle_hi, subtitle_ar, subtitle_ru,
-  excerpt,
-  excerpt_hi, excerpt_ar, excerpt_ru,
-  supportedLanguages,
-  "slug": slug.current,
-  mainImage{
-    asset->{ url }
-  }
-}
-`;
-
-export const getSingleBlogQuery = groq`
-*[_type == "blog" && slug.current == $slug][0]{
-  _id,
-  title,
-  title_hi, title_ar, title_ru,
-  subtitle,
-  subtitle_hi, subtitle_ar, subtitle_ru,
-  content,
-  content_hi, content_ar, content_ru,
-  supportedLanguages,
-  mainImage{
-    asset->{ url }
-  }
-}
-`;
-
-export const featuredBlogsQuery = groq`
-*[
-  _type == "blog" &&
-  showOnHomePage == true
-]
-| order(_createdAt desc)
-[0...3]{
-  _id,
-  title,
-  title_hi, title_ar, title_ru,
-  subtitle,
-  subtitle_hi, subtitle_ar, subtitle_ru,
-  excerpt,
-  excerpt_hi, excerpt_ar, excerpt_ru,
-  supportedLanguages,
-  "slug": slug.current,
-  mainImage{
-    asset->{ url }
-  }
-}
-`;
 
 
 /* ======================================================
@@ -522,3 +465,138 @@ export const singleAnnouncementQuery = groq`
   }
 `;
 
+
+/* ======================================================
+   BLOGS
+====================================================== */
+
+export const allBlogsQuery = groq`
+*[_type == "blog"]
+| order(_createdAt desc){
+  _id,
+  title,
+  title_hi,
+  title_ar,
+  title_ru,
+
+  subtitle,
+  subtitle_hi,
+  subtitle_ar,
+  subtitle_ru,
+
+  excerpt,
+  excerpt_hi,
+  excerpt_ar,
+  excerpt_ru,
+
+  supportedLanguages,
+
+  "slug": slug.current,
+
+  mainImage{
+    asset->{
+      url
+    }
+  }
+}
+`;
+
+export const getSingleBlogQuery = groq`
+*[_type == "blog" && slug.current == $slug][0]{
+  _id,
+  title,
+  title_hi,
+  title_ar,
+  title_ru,
+
+  subtitle,
+  subtitle_hi,
+  subtitle_ar,
+  subtitle_ru,
+
+  content,
+  content_hi,
+  content_ar,
+  content_ru,
+
+  supportedLanguages,
+
+  mainImage{
+    asset->{
+      url
+    }
+  }
+}
+`;
+
+export const featuredBlogsQuery = groq`
+*[
+  _type == "blog" &&
+  showOnHomePage == true
+]
+| order(_createdAt desc)
+[0...3]{
+  _id,
+  title,
+  title_hi,
+  title_ar,
+  title_ru,
+
+  subtitle,
+  subtitle_hi,
+  subtitle_ar,
+  subtitle_ru,
+
+  excerpt,
+  excerpt_hi,
+  excerpt_ar,
+  excerpt_ru,
+
+  supportedLanguages,
+
+  "slug": slug.current,
+
+  mainImage{
+    asset->{
+      url
+    }
+  }
+}
+`;
+
+/* ======================================================
+   LATEST BLOGS (HOME SLIDER)
+====================================================== */
+
+export const latestBlogsQuery = groq`
+*[_type == "blog"]
+| order(_createdAt desc)
+[0...5]{
+  _id,
+
+  title,
+  title_hi,
+  title_ar,
+  title_ru,
+
+  subtitle,
+  subtitle_hi,
+  subtitle_ar,
+  subtitle_ru,
+
+  excerpt,
+  excerpt_hi,
+  excerpt_ar,
+  excerpt_ru,
+
+  supportedLanguages,
+
+  "slug": slug.current,
+
+  mainImage{
+    asset->{
+      url
+    }
+  }
+}
+`;

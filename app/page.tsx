@@ -5,7 +5,7 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import PropertySlider from "@/components/sections/PropertySlider";
 import DeveloperSection from "@/components/sections/developer";
-import Blog from "@/components/sections/FeaturedBlogs";
+import FeaturedBlogs from "@/components/sections/FeaturedBlogs";
 import Terminology from "@/components/sections/Terminology";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/layout/Footer";
@@ -16,6 +16,7 @@ import {
   communitiesQuery,
   featuredDevelopersQuery,
   featuredPropertiesQuery,
+  latestBlogsQuery,
 } from "@/lib/sanity.queries";
 
 import { HomepageData } from "@/types/homepage";
@@ -23,21 +24,19 @@ import { HomepageData } from "@/types/homepage";
 export default async function Home() {
   try {
 
-    /* ================= FETCH ALL DATA IN PARALLEL ================= */
-
     const [
       homepage,
       developers,
       communities,
       featuredProperties,
+      blogs,
     ] = await Promise.all([
       sanityClient.fetch<HomepageData>(homepageHeroQuery),
       sanityClient.fetch(featuredDevelopersQuery),
       sanityClient.fetch(communitiesQuery),
       sanityClient.fetch(featuredPropertiesQuery),
+      sanityClient.fetch(latestBlogsQuery),
     ]);
-
-    /* ================= SAFE HERO SLIDES ================= */
 
     const heroSlides =
       homepage?.heroSlides?.filter(
@@ -57,15 +56,17 @@ export default async function Home() {
 
         <About />
 
-        {/* 🔥 PROPERTY SLIDER */}
         <PropertySlider properties={featuredProperties || []} />
 
-        {/* 🔥 DEVELOPERS SLIDER */}
         <DeveloperSection developers={developers || []} />
 
-        <Blog />
+        {/* BLOGS */}
+        <FeaturedBlogs blogs={blogs || []} />
+
         <Terminology />
+
         <CTA />
+
         <Footer />
       </>
     );
