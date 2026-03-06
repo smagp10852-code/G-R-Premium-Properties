@@ -10,7 +10,6 @@ import CTA from "@/components/sections/CTA";
 import Footer from "@/components/layout/Footer";
 import T from "@/components/ui/T";
 
-// Optional: safer for Sanity
 export const dynamic = "force-dynamic";
 
 type SearchParams = {
@@ -26,10 +25,11 @@ type SearchParams = {
 export default async function PropertiesPage({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }) {
 
-  const params = searchParams || {};
+  // ✅ Next.js 16 fix
+  const params = (await searchParams) || {};
 
   const communities = await sanityClient.fetch(communitiesQuery);
 
@@ -46,13 +46,14 @@ export default async function PropertiesPage({
   return (
     <main className="bg-white dark:bg-[#0F172A] transition-colors duration-300">
 
-      {/* ================= HERO ================= */}
+      {/* HERO */}
       <section className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden">
         <img
           src="/assets/hero-1.jpg"
           alt="Luxury Properties Dubai"
           className="absolute inset-0 w-full h-full object-cover"
         />
+
         <div className="absolute inset-0 bg-black/60" />
 
         <div className="relative z-10 h-full flex items-center justify-center text-center px-4 sm:px-6">
@@ -68,10 +69,10 @@ export default async function PropertiesPage({
         </div>
       </section>
 
-      {/* ================= FILTER ================= */}
+      {/* FILTER */}
       <PropertyFilter communities={communities || []} />
 
-      {/* ================= RESULTS ================= */}
+      {/* RESULTS */}
       <section className="w-full px-4 sm:px-6 lg:px-8 py-16 lg:max-w-7xl lg:mx-auto">
 
         {properties.length === 0 ? (

@@ -53,9 +53,8 @@ export default function FeaturedBlogs({ blogs = [] }: { blogs: any[] }) {
             className="blog-swiper"
             modules={[Navigation, Autoplay]}
             spaceBetween={30}
-            slidesPerView={3}
             navigation
-            loop={true}
+            loop
             autoplay={{
               delay: 3500,
               disableOnInteraction: false,
@@ -68,8 +67,13 @@ export default function FeaturedBlogs({ blogs = [] }: { blogs: any[] }) {
             }}
           >
             {sliderData.map((blog, index) => (
-              <SwiperSlide key={`${blog._id}-${index}`}>
-                <BlogCard blog={blog} />
+              <SwiperSlide
+                key={`${blog._id}-${index}`}
+                className="h-auto flex"
+              >
+                <div className="w-full flex">
+                  <BlogCard blog={blog} />
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -81,17 +85,17 @@ export default function FeaturedBlogs({ blogs = [] }: { blogs: any[] }) {
           <Link
             href="/blog"
             className="
-              inline-flex items-center gap-2
-              px-10 py-4
-              border-2 border-[#C9A227]
-              text-[#C9A227]
-              rounded-full
-              hover:bg-[#C9A227]
-              hover:text-black
-              transition-all duration-300
+            inline-flex items-center gap-2
+            px-10 py-4
+            border-2 border-[#C9A227]
+            text-[#C9A227]
+            rounded-full
+            hover:bg-[#C9A227]
+            hover:text-black
+            transition-all duration-300
             "
           >
-            <T k="blog.viewAllBlogs" /> →
+            <T k="blog.viewAllBlogs" /> 
           </Link>
         </div>
 

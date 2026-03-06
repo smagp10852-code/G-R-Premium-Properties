@@ -56,19 +56,10 @@ export default function PropertyCard({
       <motion.div
         whileHover={{ y: -8 }}
         transition={{ duration: 0.3 }}
-        className="
-        w-full
-        h-full
-        flex flex-col
-        bg-white dark:bg-[#101827]
-        rounded-3xl
-        shadow-lg hover:shadow-2xl
-        overflow-hidden
-        transition-all duration-300
-        "
+        className="w-full h-full flex flex-col bg-white dark:bg-[#101827] rounded-3xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300"
       >
         {/* IMAGE */}
-        <div className="relative w-full h-[220px] sm:h-[240px] md:h-[240px] group flex-shrink-0">
+        <div className="relative w-full h-[230px] flex-shrink-0 group">
           <Image
             src={images[index] || PLACEHOLDER}
             alt={property?.title || "Property"}
@@ -99,7 +90,6 @@ export default function PropertyCard({
                 <ChevronRight size={18} />
               </button>
 
-              {/* DOTS */}
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                 {images.map((_: string, i: number) => (
                   <button
@@ -118,7 +108,7 @@ export default function PropertyCard({
         </div>
 
         {/* CONTENT */}
-        <div className="p-6 flex flex-col flex-1">
+        <div className="p-6 flex flex-col flex-grow">
 
           {/* TITLE */}
           <h3 className="text-lg sm:text-xl font-bold mb-1 line-clamp-1">
@@ -126,69 +116,74 @@ export default function PropertyCard({
           </h3>
 
           {/* LOCATION */}
-          {locationText && (
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              {locationText}
-            </p>
-          )}
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 min-h-[20px]">
+            {locationText}
+          </p>
 
           {/* UNITS */}
-          <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 mb-5 min-h-[140px]">
-            {property?.units?.slice(0, 5).map((unit: any, i: number) => {
-              let unitLabel = "";
+<div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 min-h-[160px] mb-5">
 
-              if (unit?.unitType === "studio") {
-                unitLabel = "Studio";
-              } else if (unit?.unitType === "bedroom") {
-                unitLabel = `${unit?.bedroomCount} ${t("property.bed")}`;
-              } else if (unit?.unitType === "office") {
-                unitLabel = "Office";
-              } else if (unit?.unitType === "other") {
-                unitLabel = unit?.customLabel || "";
-              }
+  {property?.units?.slice(0, 6).map((unit: any, i: number) => {
 
-              return (
-                <div key={i} className="flex items-start gap-2">
-                  <BedDouble size={16} />
-                  <span>
-                    <strong>{unitLabel}</strong> • {unit?.size}{" "}
-                    {t("property.sqFt")} •{" "}
-                    <strong>
-                      {t("property.aed")} {unit?.price}
-                    </strong>
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+    let unitLabel = "";
+
+    if (unit?.unitType === "studio") {
+      unitLabel = "Studio";
+    } 
+    else if (unit?.unitType === "bedroom") {
+      unitLabel = `${unit?.bedroomCount} ${t("property.bed")}`;
+    } 
+    else if (unit?.unitType === "office") {
+      unitLabel = "Office";
+    } 
+    else if (unit?.unitType === "other") {
+      unitLabel = unit?.customLabel || "";
+    }
+
+    return (
+      <div key={i} className="flex items-start gap-2">
+        <BedDouble size={16} />
+
+        <span>
+          <strong>{unitLabel}</strong> • {unit?.size}{" "}
+          {t("property.sqFt")} •{" "}
+          <strong>
+            {t("property.aed")} {unit?.price}
+          </strong>
+        </span>
+      </div>
+    );
+
+  })}
+
+</div>
 
           {/* PAYMENT PLAN */}
-          <div className="mb-5 min-h-[110px]">
-            {paymentPlan &&
-              (paymentPlan.booking ||
-                paymentPlan.construction ||
-                paymentPlan.handover) && (
-                <div className="bg-gray-100 dark:bg-[#1c2536] p-4 rounded-xl">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Percent size={16} />
-                    <span className="text-sm font-semibold">
-                      {t("Payment Plan") || "Payment Plan"}
-                    </span>
-                  </div>
+          <div className="min-h-[110px] mb-5">
+            {paymentPlan && (
+              <div className="bg-gray-100 dark:bg-[#1c2536] p-4 rounded-xl">
 
-                  <div className="flex justify-between text-sm font-medium">
-                    <span>{paymentPlan.booking || 0}%</span>
-                    <span>{paymentPlan.construction || 0}%</span>
-                    <span>{paymentPlan.handover || 0}%</span>
-                  </div>
-
-                  <div className="flex justify-between text-xs text-gray-500 mt-1">
-                    <span>Booking</span>
-                    <span>Construction</span>
-                    <span>Handover</span>
-                  </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Percent size={16} />
+                  <span className="text-sm font-semibold">
+                    Payment Plan
+                  </span>
                 </div>
-              )}
+
+                <div className="flex justify-between text-sm font-medium">
+                  <span>{paymentPlan.booking || 0}%</span>
+                  <span>{paymentPlan.construction || 0}%</span>
+                  <span>{paymentPlan.handover || 0}%</span>
+                </div>
+
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>Booking</span>
+                  <span>Construction</span>
+                  <span>Handover</span>
+                </div>
+
+              </div>
+            )}
           </div>
 
           {/* HANDOVER */}
@@ -205,16 +200,10 @@ export default function PropertyCard({
 
           {/* BUTTONS */}
           <div className="flex gap-3 mt-auto">
+
             <button
               onClick={() => setOpenBrochure(true)}
-              className="
-              flex-1 py-2.5 rounded-xl text-sm font-medium
-              border border-[#C9A227]
-              text-[#C9A227]
-              hover:bg-[#C9A227] hover:text-black
-              transition-all duration-300
-              flex items-center justify-center gap-2
-              "
+              className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#C9A227] text-[#C9A227] hover:bg-[#C9A227] hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Download size={16} />
               {t("property.brochure")}
@@ -222,20 +211,17 @@ export default function PropertyCard({
 
             <button
               onClick={() => onEnquire?.(property)}
-              className="
-              flex-1 py-2.5 rounded-xl text-sm font-semibold
-              text-black transition-all duration-300 hover:opacity-90
-              "
+              className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-black transition-all duration-300 hover:opacity-90"
               style={{ backgroundColor: goldenColor }}
             >
               {t("property.enquire")}
             </button>
+
           </div>
 
         </div>
       </motion.div>
 
-      {/* BROCHURE MODAL */}
       <BrochureModal
         open={openBrochure}
         onClose={() => setOpenBrochure(false)}

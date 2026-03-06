@@ -20,30 +20,28 @@ export default function PropertiesClient({
 
   return (
     <>
-      {/* ================= PROPERTIES GRID ================= */}
-      <section
-        className="py-24 
-                   bg-white dark:bg-[#0F172A] 
-                   transition-colors duration-300"
-      >
+      <section className="py-24 bg-white dark:bg-[#0F172A] transition-colors duration-300">
         <div className="w-full px-6">
           <div className="max-w-7xl mx-auto">
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+            {/* RESPONSIVE GRID */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 items-stretch">
+
               {properties.map((property: any) => (
-                <PropertyCard
-                  key={property._id}
-                  property={property}
-                  onEnquire={handleEnquire}
-                />
+                <div key={property._id} className="h-full flex">
+                  <PropertyCard
+                    property={property}
+                    onEnquire={handleEnquire}
+                  />
+                </div>
               ))}
+
             </div>
 
           </div>
         </div>
       </section>
 
-      {/* ================= ENQUIRY MODAL ================= */}
       <EnquiryModal
         open={openEnquiry}
         onClose={() => setOpenEnquiry(false)}
