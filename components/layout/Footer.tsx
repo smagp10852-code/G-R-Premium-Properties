@@ -50,42 +50,78 @@ export default function Footer() {
               <div className="flex items-center gap-3 mb-6">
                 <Image
                   src="/assets/logo.png"
-                  alt="GR Premium Logo"
-                  width={48}
-                  height={48}
+                  alt="GR Premium Properties LLC"
+                  width={52}
+                  height={52}
                   className="object-contain"
                 />
+
                 <div>
-                  <h3 className="text-white text-sm font-bold leading-tight">
+                  <h3 className="text-white text-lg font-bold tracking-wide">
                     G R Premium
                   </h3>
-                  <p className="text-[10px] tracking-[0.15em] uppercase text-gray-500">
+                  <p className="text-[11px] uppercase tracking-[0.25em] text-gray-500">
                     Properties LLC
                   </p>
                 </div>
               </div>
 
-              <p className="text-sm text-gray-400 leading-relaxed mb-6">
-                Your trusted partner in Dubai real estate. We specialize in
-                premium apartments, villas, and investment properties.
-              </p>
+              <div className="space-y-5">
+                <p className="text-sm text-gray-400 leading-7">
+                  Dubai’s Most Trusted Real Estate Experts - 
+                  <span className="text-white font-medium">
+                    {" "}GR Premium Properties LLC
+                  </span>.
+                  Off-Plan, Luxury & Investment Properties.
+                </p>
 
-              <div className="flex items-center gap-3">
-                <a href="https://www.facebook.com/GRpremiumPropertiesLLC/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-600 hover:border-[#D4A843] hover:text-white transition-all duration-300">
-                  <SiFacebook className="w-4 h-4" />
-                </a>
+                <div className="inline-flex items-center rounded-full border border-[#D4A843]/40 bg-[#D4A843]/10 px-4 py-2">
+                  <span className="text-xs uppercase tracking-widest text-[#D4A843] font-semibold">
+                    RERA Registered
+                  </span>
 
-                <a href="https://www.instagram.com/grpp_dxb/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-600 hover:border-[#D4A843] hover:text-white transition-all duration-300">
-                  <SiInstagram className="w-4 h-4" />
-                </a>
+                  <span className="mx-3 h-4 w-px bg-[#D4A843]/40" />
 
-                <a href="https://share.google/XpeZGjkEe0ZlTFw0G" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-600 hover:border-[#D4A843] hover:text-white transition-all duration-300">
-                  <SiGoogle className="w-4 h-4" />
-                </a>
+                  <span className="text-sm text-white font-medium">
+                    No. 49939
+                  </span>
+                </div>
+              </div>
 
-                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-600 hover:border-[#D4A843] hover:text-white transition-all duration-300">
-                  <SiLinkedin className="w-4 h-4" />
-                </a>
+              <div className="flex items-center gap-3 mt-6">
+                {[
+                  {
+                    href: "https://www.facebook.com/GRpremiumPropertiesLLC/",
+                    icon: SiFacebook,
+                    label: "Facebook",
+                  },
+                  {
+                    href: "https://www.instagram.com/grpp_dxb/",
+                    icon: SiInstagram,
+                    label: "Instagram",
+                  },
+                  {
+                    href: "https://share.google/XpeZGjkEe0ZlTFw0G",
+                    icon: SiGoogle,
+                    label: "Google Reviews",
+                  },
+                  {
+                    href: "https://www.linkedin.com/company/gr-premium-properties-llc/",
+                    icon: SiLinkedin,
+                    label: "LinkedIn",
+                  },
+                ].map(({ href, icon: Icon, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="group flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 transition-all duration-300 hover:border-[#D4A843] hover:bg-[#D4A843]"
+                  >
+                    <Icon className="h-4 w-4 text-gray-300 transition-colors duration-300 group-hover:text-black" />
+                  </a>
+                ))}
               </div>
             </div>
 
@@ -133,31 +169,31 @@ export default function Footer() {
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 mt-1 text-[#D4A843]" />
                   <span>
-                    401C Aspin Commercial Tower,<br />
-                    Near Financial Center Metro,<br />
-                    Sheikh Zayed Road,<br />
-                    Dubai, UAE
+                    403-017, Aspin commercial Tower,<br />
+                    Sheikh Zayed Rd,<br />
+                    Trade Centre 1 - Dubai,<br />
+                    Dubai, United Arab Emirates
                   </span>
                 </li>
 
                 <li className="flex items-start gap-3">
                   <div className="flex flex-col space-y-2">
-                    <a href="https://wa.me/971543087712" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-green-400 transition-colors duration-300">
+                    <a href="https://wa.me/971585964689" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-green-400 transition-colors duration-300">
                       <SiWhatsapp className="w-4 h-4 text-green-500" />
-                      +971 543087712
+                      +971 585964689
                     </a>
 
-                    <a href="tel:+9717604007170" className="flex items-center gap-2 hover:text-white transition-colors duration-300">
+                    <a href="tel:+919330230426" className="flex items-center gap-2 hover:text-white transition-colors duration-300">
                       <Phone className="w-4 h-4 text-[#D4A843]" />
-                      +971 7604007170
+                      +91 9330230426
                     </a>
                   </div>
                 </li>
 
                 <li className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-[#D4A843]" />
-                  <a href="mailto:sales@grpremium.com" className="hover:text-white">
-                    sales@grpremium.com
+                  <a href="mailto:info@grpremium.com" className="hover:text-white">
+                    info@grpremium.com
                   </a>
                 </li>
               </ul>
@@ -186,6 +222,7 @@ export default function Footer() {
               <Link href="/terms-conditions" className="hover:text-white">
                 Terms & Conditions
               </Link>
+
             </div>
           </div>
         </div>

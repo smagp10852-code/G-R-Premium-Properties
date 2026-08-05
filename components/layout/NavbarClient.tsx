@@ -105,6 +105,7 @@ export default function NavbarClient({
                   {t("nav.developers")}
                 </Link>
               </div>
+              
             </li>
 
             <li><Link href="/contact" className={isActive("/contact") ? "text-yellow-400" : ""}>{t("nav.contactUs")}</Link></li>
