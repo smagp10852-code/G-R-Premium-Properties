@@ -40,21 +40,21 @@ export default function PropertySlider({
 
   return (
     <>
-      <section className="py-24 bg-[#E5E7EB] dark:bg-[#0F172A]">
+      <section className="py-24 bg-[#E5E7EB] dark:bg-[#0F172A] font-body">
 
   <div className="max-w-7xl mx-auto px-4">
 
     {/* HEADING */}
     <div className="text-center max-w-2xl mx-auto mb-16">
-      <p className="text-sm tracking-[0.2em] font-semibold uppercase mb-4 text-[#C9A227]">
+      <p className="font-body text-sm tracking-[0.2em] font-semibold uppercase mb-4 text-[#C9A227]">
         Projects
       </p>
 
-      <h2 className="text-3xl md:text-4xl font-bold mb-5">
+      <h2 className="font-heading text-3xl md:text-4xl font-bold mb-5">
         Featured Properties
       </h2>
 
-      <p className="text-gray-600 dark:text-gray-400">
+      <p className="font-body text-gray-600 dark:text-gray-400">
         Discover the latest premium properties from top developers.
       </p>
     </div>
@@ -90,6 +90,7 @@ export default function PropertySlider({
       <Link
         href="/properties"
         className="
+        font-body
         inline-flex items-center gap-2
         px-10 py-4
         border-2 border-[#C9A227]

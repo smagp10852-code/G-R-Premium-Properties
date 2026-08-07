@@ -18,19 +18,19 @@ export default function TeamSection({ data }: Props) {
   const team = data.filter((m) => m.role === "team");
 
   return (
-    <section className="bg-[#faf9f7] py-20 px-6 md:px-24">
+    <section className="bg-[#faf9f7] py-20 px-6 md:px-24 font-body">
       {/* ================= HEADING ================= */}
       <div className="text-center max-w-3xl mx-auto mb-16">
         <p
-          className="text-sm tracking-widest uppercase"
+          className="font-body text-sm tracking-widest uppercase"
           style={{ color: goldenColor }}
         >
           Our People
         </p>
-        <h2 className="text-4xl md:text-5xl font-serif mt-3">
+        <h2 className="font-heading text-4xl md:text-5xl mt-3">
           Meet Our Team
         </h2>
-        <p className="mt-4 text-gray-600">
+        <p className="font-body mt-4 text-gray-600">
           Our experienced leadership and dedicated professionals work together
           to deliver exceptional real estate experiences.
         </p>
@@ -39,7 +39,7 @@ export default function TeamSection({ data }: Props) {
       {/* ================= LEADERSHIP ================= */}
       {leadership.length > 0 && (
         <div className="max-w-5xl mx-auto mb-20">
-          <h3 className="text-2xl font-serif text-center mb-10">
+          <h3 className="font-heading text-2xl text-center mb-10">
             Leadership
           </h3>
 
@@ -58,11 +58,11 @@ export default function TeamSection({ data }: Props) {
                   />
                 </div>
 
-                <h4 className="text-xl font-semibold">
+                <h4 className="font-heading text-xl font-semibold">
                   {member.name}
                 </h4>
                 <p
-                  className="mt-1 font-medium"
+                  className="font-body mt-1 font-medium"
                   style={{ color: goldenColor }}
                 >
                   {member.position}
@@ -76,7 +76,7 @@ export default function TeamSection({ data }: Props) {
       {/* ================= TEAM MEMBERS ================= */}
       {team.length > 0 && (
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-2xl font-serif text-center mb-12">
+          <h3 className="font-heading text-2xl text-center mb-12">
             Our Professionals
           </h3>
 
@@ -95,11 +95,11 @@ export default function TeamSection({ data }: Props) {
                   />
                 </div>
 
-                <h4 className="text-base font-semibold">
+                <h4 className="font-heading text-base font-semibold">
                   {member.name}
                 </h4>
                 <p
-                  className="text-sm mt-1"
+                  className="font-body text-sm mt-1"
                   style={{ color: goldenColor }}
                 >
                   {member.position}

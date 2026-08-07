@@ -31,7 +31,7 @@ export default async function DevelopersPage() {
   const developers: Developer[] = await sanityClient.fetch(query);
 
   return (
-    <main className="bg-white dark:bg-[#0f172a] transition-colors duration-300">
+    <main className="font-body bg-white dark:bg-[#0f172a] transition-colors duration-300">
 
       <section className="relative h-[70vh] w-full overflow-hidden">
         <Image
@@ -46,15 +46,15 @@ export default async function DevelopersPage() {
 
         <div className="relative z-10 flex h-full items-center justify-center px-6">
           <div className="max-w-4xl text-center">
-            <p className="text-yellow-400 tracking-widest uppercase mb-4 text-sm md:text-base">
+            <p className="font-body text-yellow-400 tracking-widest uppercase mb-4 text-sm md:text-base">
               <T k="developersPage.ourPartners" />
             </p>
 
-            <h1 className="text-white text-4xl md:text-6xl font-bold leading-tight">
+            <h1 className="font-heading text-white text-4xl md:text-6xl font-bold leading-tight">
               <T k="developersPage.heroTitle" />
             </h1>
 
-            <p className="text-gray-200 mt-6 text-base md:text-lg">
+            <p className="font-body text-gray-200 mt-6 text-base md:text-lg">
               <T k="developersPage.heroDescription" />
             </p>
           </div>
@@ -64,15 +64,15 @@ export default async function DevelopersPage() {
       <section className="py-20 px-6 max-w-7xl mx-auto">
 
         <div className="text-center mb-14">
-          <p className="text-[#C9A227] uppercase tracking-widest text-sm">
+          <p className="font-body text-[#C9A227] uppercase tracking-widest text-sm">
             <T k="developersPage.ourDevelopers" />
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 text-gray-900 dark:text-white">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mt-2 text-gray-900 dark:text-white">
             <T k="developersPage.sectionTitle" />
           </h2>
 
-          <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
+          <p className="font-body text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
             <T k="developersPage.sectionDescription" />
           </p>
         </div>

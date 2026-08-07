@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 
 import NavbarServer from "@/components/layout/NavbarServer";
@@ -18,6 +18,23 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+/* ================= SOBHA CENTRAL PAGE FONTS ================= */
+/* Playfair Display -> headings, Poppins -> body text */
+
+const playfair = Playfair_Display({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const poppins = Poppins({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
 });
 
 /* ================= SEO METADATA ================= */
@@ -83,7 +100,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0F172A] text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${poppins.variable} antialiased bg-[#0F172A] text-white`}
       >
         <LanguageProvider>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
@@ -95,7 +112,7 @@ export default function RootLayout({
 
             <FloatingButtons />
             <AutoPopupEnquiry />
-           
+
 
             {/* ================= STRUCTURED DATA ================= */}
             <script

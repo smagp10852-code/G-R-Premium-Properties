@@ -25,7 +25,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   return (
-    <main className="bg-white dark:bg-[#0F172A] transition-colors duration-300">
+    <main className="font-body bg-white dark:bg-[#0F172A] transition-colors duration-300">
       <BlogDetailClient blog={blog} />
       <CTA />
       <Footer />

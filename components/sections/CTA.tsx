@@ -39,28 +39,21 @@ export default function CtaSection() {
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
             {t("cta.title")}
           </h2>
 
-          <p
-            className="text-base md:text-lg mb-10 max-w-2xl mx-auto text-white/80 leading-relaxed"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
+          <p className="font-body text-base md:text-lg mb-10 max-w-2xl mx-auto text-white/80 leading-relaxed">
             {t("cta.description")}
           </p>
 
           {/* CTA BUTTON */}
           <button
             onClick={() => setOpen(true)}
-            className="px-10 py-3 rounded-md font-semibold text-black transition-all duration-300
+            className="font-body px-10 py-3 rounded-md font-semibold text-black transition-all duration-300
                        hover:scale-105 hover:shadow-xl active:scale-95"
             style={{
               backgroundColor: goldenColor,
-              fontFamily: "'DM Sans', sans-serif",
             }}
           >
             {t("cta.scheduleConsultation")}

@@ -27,15 +27,15 @@ export default async function AnnouncementDetail({ params }: Props) {
   );
 
   return (
-    <main className="pt-[80px] bg-gradient-to-b from-gray-50 to-white min-h-screen">
+    <main className="font-body pt-[80px] bg-gradient-to-b from-gray-50 to-white min-h-screen">
       <AnnouncementDetailClient announcement={announcement} />
 
       <div className="max-w-6xl mx-auto px-6 pb-16 flex justify-center">
-        <a
-          href={`https://wa.me/919999999999?text=${whatsappMessage}`}
+        
+         <a href={`https://wa.me/919999999999?text=${whatsappMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full md:w-auto text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-10 rounded-xl transition duration-300 shadow-lg"
+          className="font-body w-full md:w-auto text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-10 rounded-xl transition duration-300 shadow-lg"
         >
           📲 Book Slot on WhatsApp
         </a>

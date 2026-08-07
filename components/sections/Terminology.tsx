@@ -107,18 +107,18 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="w-full py-20 bg-[#FAF8F5] dark:bg-[#0F172A] transition-colors duration-300 overflow-hidden">
+    <section className="w-full py-20 bg-[#FAF8F5] dark:bg-[#0F172A] transition-colors duration-300 overflow-hidden font-body">
       <div className="max-w-4xl mx-auto px-4">
 
         {/* Heading */}
         <div className="text-center mb-14">
           <p
-            className="text-xs tracking-[0.2em] uppercase font-semibold mb-4"
+            className="font-body text-xs tracking-[0.2em] uppercase font-semibold mb-4"
             style={{ color: goldenColor }}
           >
             {t("testimonial.clientReviews")}
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold font-serif text-gray-900 dark:text-white">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
             {t("testimonial.whatOurClientsSay")}
           </h2>
         </div>
@@ -139,7 +139,7 @@ export default function Testimonials() {
 
                   <QuoteIcon />
 
-                  <p className="mt-6 italic text-gray-700 dark:text-gray-300 leading-relaxed font-serif">
+                  <p className="font-heading mt-6 italic text-gray-700 dark:text-gray-300 leading-relaxed">
                     "{item.text}"
                   </p>
 
@@ -153,7 +153,7 @@ export default function Testimonials() {
                   {/* User */}
                   <div className="flex items-center gap-3 mt-6">
                     <div
-                      className="w-9 h-9 rounded-full flex items-center justify-center font-semibold text-sm"
+                      className="font-body w-9 h-9 rounded-full flex items-center justify-center font-semibold text-sm"
                       style={{
                         backgroundColor: "#E8E0D4",
                         color: "#8B7355",
@@ -162,10 +162,10 @@ export default function Testimonials() {
                       {item.avatarInitial}
                     </div>
                     <div>
-                      <p className="font-bold text-sm text-gray-900 dark:text-white">
+                      <p className="font-body font-bold text-sm text-gray-900 dark:text-white">
                         {item.name}
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                      <p className="font-body text-xs text-gray-500 dark:text-gray-400">
                         {item.meta}
                       </p>
                     </div>

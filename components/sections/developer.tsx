@@ -46,20 +46,20 @@ export default function DeveloperSection({ developers }: Props) {
   if (!mounted || !sliderData.length) return null;
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-[#0F172A] transition-colors duration-300">
+    <section className="py-20 bg-gray-50 dark:bg-[#0F172A] transition-colors duration-300 font-body">
       <div className="max-w-7xl mx-auto px-4 relative">
 
         {/* ===== HEADING ===== */}
         <div className="text-center mb-14">
-          <span className="text-[#C9A227] text-sm font-semibold tracking-[0.2em] uppercase">
+          <span className="font-body text-[#C9A227] text-sm font-semibold tracking-[0.2em] uppercase">
             {t("developer.developers")}
           </span>
 
-          <h2 className="text-4xl font-serif text-gray-900 dark:text-white mt-3">
+          <h2 className="font-heading text-4xl text-gray-900 dark:text-white mt-3">
             {t("developer.trustedDevelopers")}
           </h2>
 
-          <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+          <p className="font-body mt-4 text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
             {t("developer.description")}
           </p>
         </div>
@@ -95,7 +95,7 @@ export default function DeveloperSection({ developers }: Props) {
         <div className="text-center mt-16">
           <Link
             href="/developers"
-            className="inline-flex items-center gap-2 px-10 py-4 border-2 border-[#C9A227] text-[#C9A227] rounded-full hover:bg-[#C9A227] hover:text-black transition-all duration-300"
+            className="font-body inline-flex items-center gap-2 px-10 py-4 border-2 border-[#C9A227] text-[#C9A227] rounded-full hover:bg-[#C9A227] hover:text-black transition-all duration-300"
           >
             {t("developer.viewAllDevelopers")}
           </Link>

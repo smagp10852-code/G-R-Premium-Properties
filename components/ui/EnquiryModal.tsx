@@ -18,7 +18,7 @@ export default function EnquiryModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999]">
+    <div className="fixed inset-0 z-[9999] font-body">
 
       {/* BACKDROP */}
       <div
@@ -40,7 +40,7 @@ export default function EnquiryModal({
               <X size={22} />
             </button>
 
-            <h2 className="text-xl font-semibold mb-6 text-center">
+            <h2 className="font-heading text-xl font-semibold mb-6 text-center">
               {t("enquiryModal.title")}
             </h2>
 

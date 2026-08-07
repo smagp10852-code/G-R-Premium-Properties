@@ -86,7 +86,7 @@ export default function Hero({
   if (!slidesToUse || slidesToUse.length === 0) {
     return (
       <section className="h-[80vh] flex items-center justify-center bg-gray-100 dark:bg-[#0F172A] transition-colors duration-300">
-        <p className="text-gray-500 dark:text-gray-400 text-lg">
+        <p className="font-body text-gray-500 dark:text-gray-400 text-lg">
           {t("hero.loading")}
         </p>
       </section>
@@ -147,12 +147,12 @@ export default function Hero({
   /* ================= FILTER ================= */
 
   const filtered = query.trim()
-  ? communities.filter(
+    ? communities.filter(
       (c) =>
         c.name?.toLowerCase().includes(query.toLowerCase()) ||
         c.area?.toLowerCase().includes(query.toLowerCase())
     )
-  : communities;
+    : communities;
 
   const handleSearch = () => {
     if (!query.trim()) return;
@@ -167,7 +167,7 @@ export default function Hero({
   /* ================= JSX ================= */
 
   return (
-    <section className="relative h-[90vh] w-full text-white overflow-hidden">
+    <section className="relative h-[90vh] w-full text-white overflow-hidden font-body">
       {/* ================= IMAGE SLIDER ================= */}
       <div className="absolute inset-0">
         {slidesToUse.map((slide, i) => {
@@ -178,10 +178,10 @@ export default function Hero({
             <div
               key={i}
               className={`absolute inset-0 transition-transform duration-500 ease-in-out ${i === index
-                  ? "translate-x-0 z-[2]"
-                  : i === prevIndex
-                    ? "-translate-x-full z-[1]"
-                    : "translate-x-full"
+                ? "translate-x-0 z-[2]"
+                : i === prevIndex
+                  ? "-translate-x-full z-[1]"
+                  : "translate-x-full"
                 }`}
 
 
@@ -203,12 +203,12 @@ export default function Hero({
       {/* ================= CONTENT ================= */}
       <div className="relative z-30 h-full flex items-center">
         <div className="max-w-5xl px-6 md:ml-36 w-full">
-          <h1 className="text-4xl md:text-6xl font-serif font-bold">
+          <h1 className="font-heading text-4xl md:text-6xl font-bold">
             {getSlideText(slidesToUse[index], "title")}
           </h1>
 
           {slidesToUse[index].subtitle && (
-            <p className="mt-4 text-gray-200 text-lg">
+            <p className="font-body mt-4 text-gray-200 text-lg">
               {getSlideText(slidesToUse[index], "subtitle")}
             </p>
           )}
@@ -222,7 +222,7 @@ export default function Hero({
                 router.push(`/developers/${developerSlug}`);
               }
             }}
-            className="mt-8 px-8 py-3 border border-white text-white hover:bg-white hover:text-black transition"
+            className="font-body mt-8 px-8 py-3 border border-white text-white hover:bg-white hover:text-black transition"
           >
             {localizedCTA}
           </button>
@@ -246,12 +246,12 @@ export default function Hero({
                 }}
                 onFocus={() => setShowSuggestions(true)}
                 placeholder={t("hero.communityOrBuilding")}
-                className="flex-1 px-4 py-3 bg-transparent outline-none text-sm"
+                className="font-body flex-1 px-4 py-3 bg-transparent outline-none text-sm"
               />
 
               <button
                 onClick={handleSearch}
-                className="px-6 py-3 text-white text-sm font-medium transition"
+                className="font-body px-6 py-3 text-white text-sm font-medium transition"
                 style={{ backgroundColor: goldenColor }}
               >
                 {t("hero.search")}
@@ -284,7 +284,7 @@ export default function Hero({
                       );
                       setShowSuggestions(false);
                     }}
-                    className="px-4 py-3 cursor-pointer 
+                    className="font-body px-4 py-3 cursor-pointer 
                                hover:bg-amber-50 
                                dark:hover:bg-white/10 transition"
                   >

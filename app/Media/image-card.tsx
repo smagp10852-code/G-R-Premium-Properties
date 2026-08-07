@@ -33,7 +33,7 @@ export default function ImageCard({
 
   return (
     <div
-      className="group perspective h-72 relative"
+      className="font-body group perspective h-72 relative"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -70,10 +70,10 @@ export default function ImageCard({
 
         {/* ================= BACK (TEXT) ================= */}
         <div className="absolute inset-0 rotate-y-180 backface-hidden rounded-xl bg-[#C9A227] flex flex-col items-center justify-center text-center p-5">
-          <h4 className="text-white text-xl font-semibold">
+          <h4 className="font-heading text-white text-xl font-semibold">
             {title}
           </h4>
-          <p className="text-white/90 text-sm mt-1">
+          <p className="font-body text-white/90 text-sm mt-1">
             {location}
           </p>
         </div>

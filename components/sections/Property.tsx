@@ -18,20 +18,20 @@ export default function Property({ properties }: PropertyProps) {
   if (!properties?.length) return null;
 
   return (
-    <section className="py-24 px-6 bg-[#E5E7EB] dark:bg-[#0F172A] transition-colors duration-300">
+    <section className="py-24 px-6 bg-[#E5E7EB] dark:bg-[#0F172A] transition-colors duration-300 font-body">
       <div className="max-w-7xl mx-auto">
 
         {/* ================= HEADING ================= */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-sm tracking-[0.2em] font-semibold uppercase mb-4 text-[#C9A227]">
+          <p className="font-body text-sm tracking-[0.2em] font-semibold uppercase mb-4 text-[#C9A227]">
             {t("property.projects")}
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold mb-5 text-gray-900 dark:text-white">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-5 text-gray-900 dark:text-white">
             {t("property.featuredProperties")}
           </h2>
 
-          <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed">
+          <p className="font-body text-gray-600 dark:text-gray-400 text-base leading-relaxed">
             {t("property.description")}
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function Property({ properties }: PropertyProps) {
         <div className="text-center mt-16">
           <Link
             href="/properties"
-            className="inline-flex items-center gap-2 px-10 py-4 border-2 border-[#C9A227] text-[#C9A227] rounded-full hover:bg-[#C9A227] hover:text-black transition-all duration-300"
+            className="font-body inline-flex items-center gap-2 px-10 py-4 border-2 border-[#C9A227] text-[#C9A227] rounded-full hover:bg-[#C9A227] hover:text-black transition-all duration-300"
           >
             {t("property.viewAllProperties")}
           </Link>

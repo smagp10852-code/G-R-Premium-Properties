@@ -44,7 +44,7 @@ export default async function PropertiesPage({
   });
 
   return (
-    <main className="bg-white dark:bg-[#0F172A] transition-colors duration-300">
+    <main className="font-body bg-white dark:bg-[#0F172A] transition-colors duration-300">
 
       {/* HERO */}
       <section className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden">
@@ -58,11 +58,11 @@ export default async function PropertiesPage({
 
         <div className="relative z-10 h-full flex items-center justify-center text-center px-4 sm:px-6">
           <div>
-            <h1 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold">
+            <h1 className="font-heading text-white text-3xl sm:text-4xl md:text-6xl font-bold">
               <T k="properties.findDreamProperty" />
             </h1>
 
-            <p className="text-gray-200 mt-4 text-base md:text-lg">
+            <p className="font-body text-gray-200 mt-4 text-base md:text-lg">
               <T k="properties.heroDescription" />
             </p>
           </div>
@@ -79,12 +79,12 @@ export default async function PropertiesPage({
           <div className="text-center py-24">
             <div className="text-6xl mb-6">🔍</div>
 
-            <h2 className="text-2xl md:text-3xl font-semibold 
+            <h2 className="font-heading text-2xl md:text-3xl font-semibold 
                            text-gray-900 dark:text-white">
               <T k="properties.noPropertiesFound" />
             </h2>
 
-            <p className="text-gray-600 dark:text-gray-400 mt-3">
+            <p className="font-body text-gray-600 dark:text-gray-400 mt-3">
               <T k="properties.noPropertiesDescription" />
             </p>
           </div>

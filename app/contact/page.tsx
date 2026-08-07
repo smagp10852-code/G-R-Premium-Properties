@@ -52,7 +52,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="w-full overflow-hidden bg-[#FBF6E9] dark:bg-[#0f172a] transition-colors duration-300">
+    <div className="font-body w-full overflow-hidden bg-[#FBF6E9] dark:bg-[#0f172a] transition-colors duration-300">
 
       {/* HERO */}
       <section className="relative h-[320px] sm:h-[420px] flex items-center justify-center text-center text-white">
@@ -63,13 +63,13 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 px-4 max-w-3xl">
-          <p className="tracking-widest text-yellow-400 mb-2">
+          <p className="font-body tracking-widest text-yellow-400 mb-2">
             {t("contact.getInTouch")}
           </p>
-          <h1 className="text-4xl sm:text-5xl font-serif mb-4">
+          <h1 className="font-heading text-4xl sm:text-5xl mb-4">
             {t("contact.contactUs")}
           </h1>
-          <p className="text-gray-200 text-sm sm:text-base">
+          <p className="font-body text-gray-200 text-sm sm:text-base">
             {t("contact.heroDescription")}
           </p>
         </div>
@@ -80,10 +80,10 @@ export default function ContactPage() {
 
         {/* LEFT INFO */}
         <div>
-          <p className="text-yellow-500 tracking-widest mb-2">
+          <p className="font-body text-yellow-500 tracking-widest mb-2">
             {t("contact.contactInformation")}
           </p>
-          <h2 className="text-3xl font-serif mb-8 dark:text-white">
+          <h2 className="font-heading text-3xl mb-8 dark:text-white">
             {t("contact.getInTouchTitle")}
           </h2>
 
@@ -105,12 +105,12 @@ Dubai, UAE`}
                 <SiWhatsapp className="w-5 h-5 text-green-600" />
               </div>
               <div>
-                <h4 className="font-semibold dark:text-white">WhatsApp</h4>
-                <a
-                  href="https://wa.me/971543087712"
+                <h4 className="font-heading font-semibold dark:text-white">WhatsApp</h4>
+                
+               <a   href="https://wa.me/971543087712"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-700 dark:text-gray-300 text-sm hover:text-green-500 transition-colors duration-300"
+                  className="font-body text-gray-700 dark:text-gray-300 text-sm hover:text-green-500 transition-colors duration-300"
                 >
                   +971 543087712
                 </a>
@@ -123,10 +123,10 @@ Dubai, UAE`}
                 <Phone className="w-5 h-5 text-[#C9A227]" />
               </div>
               <div>
-                <h4 className="font-semibold dark:text-white">Call Us</h4>
-                <a
-                  href="tel:+9717604007170"
-                  className="text-gray-700 dark:text-gray-300 text-sm hover:text-yellow-500 transition-colors duration-300"
+                <h4 className="font-heading font-semibold dark:text-white">Call Us</h4>
+                
+                <a  href="tel:+9717604007170"
+                  className="font-body text-gray-700 dark:text-gray-300 text-sm hover:text-yellow-500 transition-colors duration-300"
                 >
                   +971 7604007170
                 </a>
@@ -153,7 +153,7 @@ Sunday: By Appointment`}
 
         {/* RIGHT FORM */}
         <div className="bg-white dark:bg-[#111827] border-2 border-[#C9A227] rounded-2xl p-6 sm:p-8 shadow-sm self-start transition-colors duration-300">
-          <h3 className="text-2xl font-serif mb-6 dark:text-white">
+          <h3 className="font-heading text-2xl mb-6 dark:text-white">
             {t("contact.sendUsEnquiry")}
           </h3>
 
@@ -177,13 +177,13 @@ Sunday: By Appointment`}
 
             {/* Interested Property */}
             <div className="sm:col-span-2">
-              <label className="text-sm font-medium dark:text-gray-200">
+              <label className="font-body text-sm font-medium dark:text-gray-200">
                 {t("form.interestedProperty")} <span className="text-red-500">*</span>
               </label>
               <select
                 name="interested_property"
                 required
-                className="mt-2 w-full rounded-xl border-2 border-[#C9A227]
+                className="font-body mt-2 w-full rounded-xl border-2 border-[#C9A227]
                            bg-white dark:bg-[#1f2937]
                            text-gray-900 dark:text-white
                            px-4 py-3
@@ -207,7 +207,7 @@ Sunday: By Appointment`}
             {/* Consent */}
             <div className="sm:col-span-2 flex items-start gap-3 mt-2">
               <input type="checkbox" required className="mt-1" />
-              <p className="text-sm text-gray-700 dark:text-gray-300">
+              <p className="font-body text-sm text-gray-700 dark:text-gray-300">
                 {t("contact.consent")}
               </p>
             </div>
@@ -217,7 +217,7 @@ Sunday: By Appointment`}
               <button
                 disabled={loading}
                 type="submit"
-                className="w-full bg-[#C9A227] hover:bg-[#b8961f]
+                className="font-body w-full bg-[#C9A227] hover:bg-[#b8961f]
                            text-white py-3 rounded-xl
                            flex items-center justify-center gap-2
                            transition font-medium"
@@ -227,13 +227,13 @@ Sunday: By Appointment`}
               </button>
 
               {success && (
-                <p className="mt-3 text-green-600 text-sm font-medium text-center">
+                <p className="font-body mt-3 text-green-600 text-sm font-medium text-center">
                   {success}
                 </p>
               )}
 
               {error && (
-                <p className="mt-3 text-red-600 text-sm font-medium text-center">
+                <p className="font-body mt-3 text-red-600 text-sm font-medium text-center">
                   {error}
                 </p>
               )}
@@ -273,8 +273,8 @@ function Info({ icon, title, text }: any) {
         {icon}
       </div>
       <div>
-        <h4 className="font-semibold dark:text-white">{title}</h4>
-        <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line text-sm leading-relaxed">
+        <h4 className="font-heading font-semibold dark:text-white">{title}</h4>
+        <p className="font-body text-gray-700 dark:text-gray-300 whitespace-pre-line text-sm leading-relaxed">
           {text}
         </p>
       </div>
@@ -285,7 +285,7 @@ function Info({ icon, title, text }: any) {
 function Input({ label, placeholder, type = "text", name }: any) {
   return (
     <div>
-      <label className="text-sm font-medium dark:text-gray-200">
+      <label className="font-body text-sm font-medium dark:text-gray-200">
         {label} <span className="text-red-500">*</span>
       </label>
       <input
@@ -293,7 +293,7 @@ function Input({ label, placeholder, type = "text", name }: any) {
         required
         type={type}
         placeholder={placeholder}
-        className="mt-2 w-full rounded-xl border-2 border-[#C9A227]
+        className="font-body mt-2 w-full rounded-xl border-2 border-[#C9A227]
                    bg-white dark:bg-[#1f2937]
                    text-gray-900 dark:text-white
                    px-4 py-3
@@ -306,13 +306,13 @@ function Input({ label, placeholder, type = "text", name }: any) {
 function InputSelect({ label, name, options }: any) {
   return (
     <div>
-      <label className="text-sm font-medium dark:text-gray-200">
+      <label className="font-body text-sm font-medium dark:text-gray-200">
         {label} <span className="text-red-500">*</span>
       </label>
       <select
         name={name}
         required
-        className="mt-2 w-full rounded-xl border-2 border-[#C9A227]
+        className="font-body mt-2 w-full rounded-xl border-2 border-[#C9A227]
                    bg-white dark:bg-[#1f2937]
                    text-gray-900 dark:text-white
                    px-4 py-3

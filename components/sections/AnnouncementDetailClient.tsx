@@ -22,11 +22,11 @@ export default function AnnouncementDetailClient({
   const points = getLocalized(announcement, "points") || [];
 
   return (
-    <section className="max-w-5xl mx-auto px-6 py-20">
+    <section className="max-w-5xl mx-auto px-6 py-20 font-body">
       <div className="bg-white shadow-xl rounded-3xl p-10 border border-gray-100">
 
         {/* Title */}
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="font-heading text-4xl font-bold text-gray-900 mb-4">
           {title}
         </h1>
 

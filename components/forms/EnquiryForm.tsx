@@ -130,7 +130,7 @@ useEffect(() => {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] text-black bg-black/60 backdrop-blur-sm flex items-center justify-center px-4"
+      className="fixed inset-0 z-[9999] text-black bg-black/60 backdrop-blur-sm flex items-center justify-center px-4 font-body"
       onClick={() => {
         if (onClose) onClose();   // ✅ side click close
       }}
@@ -150,7 +150,7 @@ useEffect(() => {
           <X size={24} />
         </button>
 
-        <h2 className="text-2xl font-bold mb-6 text-center">
+        <h2 className="font-heading text-2xl font-bold mb-6 text-center">
           {t("form.sendEnquiry")}
         </h2>
 

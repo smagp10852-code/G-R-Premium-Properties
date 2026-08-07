@@ -66,7 +66,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="bg-white dark:bg-[#0F172A] overflow-hidden transition-colors duration-300">
+    <section className="bg-white dark:bg-[#0F172A] overflow-hidden transition-colors duration-300 font-body">
 
       {/* ================= STATS ================= */}
       <div className="bg-[#E5E7EB] dark:bg-[#111827] py-12 px-4 transition-colors duration-300">
@@ -89,11 +89,11 @@ export default function WhyChooseUs() {
                 style={{ color: goldenColor }}
               />
 
-              <div className="text-3xl font-bold text-gray-900 dark:text-white">
+              <div className="font-heading text-3xl font-bold text-gray-900 dark:text-white">
                 {stat.value}
               </div>
 
-              <p className="text-xs tracking-wider text-gray-500 dark:text-gray-400 mt-1">
+              <p className="font-body text-xs tracking-wider text-gray-500 dark:text-gray-400 mt-1">
                 {stat.label}
               </p>
             </motion.div>
@@ -126,8 +126,8 @@ export default function WhyChooseUs() {
               style={{ backgroundColor: goldenColor }}
             >
               <div className="text-center">
-                <div className="text-3xl font-bold">15+</div>
-                <div className="text-sm">{t("about.yearsOfExcellence")}</div>
+                <div className="font-heading text-3xl font-bold">15+</div>
+                <div className="font-body text-sm">{t("about.yearsOfExcellence")}</div>
               </div>
             </div>
           </motion.div>
@@ -141,7 +141,7 @@ export default function WhyChooseUs() {
             viewport={{ once: true }}
           >
             <motion.span
-              className="text-sm font-semibold tracking-wider uppercase inline-block"
+              className="font-body text-sm font-semibold tracking-wider uppercase inline-block"
               style={{ color: goldenColor }}
               variants={fadeUp}
             >
@@ -149,14 +149,14 @@ export default function WhyChooseUs() {
             </motion.span>
 
             <motion.h2
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white"
+              className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white"
               variants={fadeUp}
             >
               {t("about.whyChooseGrPremium")}
             </motion.h2>
 
             <motion.p
-              className="text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed"
+              className="font-body text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed"
               variants={fadeUp}
             >
               {t("about.description")}
@@ -177,7 +177,7 @@ export default function WhyChooseUs() {
                     className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
                     style={{ backgroundColor: goldenColor }}
                   />
-                  <span className="text-gray-700 dark:text-gray-300">
+                  <span className="font-body text-gray-700 dark:text-gray-300">
                     {feature}
                   </span>
                 </motion.li>
@@ -186,7 +186,7 @@ export default function WhyChooseUs() {
 
             <motion.button
               onClick={() => router.push("/about")}
-              className="px-8 py-3 cursor-pointer rounded-md font-semibold text-black w-fit"
+              className="font-body px-8 py-3 cursor-pointer rounded-md font-semibold text-black w-fit"
               style={{ backgroundColor: goldenColor }}
               whileHover={{
                 scale: 1.05,

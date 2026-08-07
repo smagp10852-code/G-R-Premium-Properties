@@ -80,13 +80,13 @@ export default function BrochureModal({
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0.9 }}
-            className="bg-white dark:bg-[#1F2937] rounded-2xl p-8 w-full max-w-md shadow-2xl"
+            className="bg-white dark:bg-[#1F2937] rounded-2xl p-8 w-full max-w-md shadow-2xl font-body"
           >
-            <h2 className="text-xl font-bold mb-2 text-center">
+            <h2 className="font-heading text-xl font-bold mb-2 text-center">
               {t("brochure.downloadBrochure")}
             </h2>
 
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 text-center">
+            <p className="font-body text-sm text-gray-600 dark:text-gray-400 mb-6 text-center">
               {propertyName}
             </p>
 
@@ -98,7 +98,7 @@ export default function BrochureModal({
                 placeholder={t("brochure.fullName")}
                 value={form.name}
                 onChange={handleChange}
-                className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent"
+                className="font-body w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent"
               />
 
               <input
@@ -108,7 +108,7 @@ export default function BrochureModal({
                 placeholder={t("brochure.emailAddress")}
                 value={form.email}
                 onChange={handleChange}
-                className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent"
+                className="font-body w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent"
               />
 
               <input
@@ -118,7 +118,7 @@ export default function BrochureModal({
                 placeholder={t("brochure.phoneNumber")}
                 value={form.phone}
                 onChange={handleChange}
-                className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent"
+                className="font-body w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent"
               />
 
               <input
@@ -128,13 +128,13 @@ export default function BrochureModal({
                 placeholder={t("brochure.country")}
                 value={form.country}
                 onChange={handleChange}
-                className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent"
+                className="font-body w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent"
               />
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-xl font-semibold text-black transition-all duration-300"
+                className="font-body w-full py-3 rounded-xl font-semibold text-black transition-all duration-300"
                 style={{ backgroundColor: goldenColor }}
               >
                 {loading
@@ -145,7 +145,7 @@ export default function BrochureModal({
 
             <button
               onClick={onClose}
-              className="mt-4 text-sm text-gray-500 w-full"
+              className="font-body mt-4 text-sm text-gray-500 w-full"
             >
               {t("brochure.cancel")}
             </button>

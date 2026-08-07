@@ -38,7 +38,7 @@ export default function DeveloperCardClient({
       : developer.slug?.current;
 
   return (
-    <div className="group rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-full">
+    <div className="group rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-full font-body">
 
       {/* ================= IMAGE SECTION ================= */}
       <div className="w-full h-56 bg-gray-100 flex items-center justify-center p-6">
@@ -51,7 +51,7 @@ export default function DeveloperCardClient({
             className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-gray-400 text-sm">
+          <div className="font-body flex h-full items-center justify-center text-gray-400 text-sm">
             {t("developersPage.noImage")}
           </div>
         )}
@@ -60,12 +60,12 @@ export default function DeveloperCardClient({
       {/* ================= CONTENT ================= */}
       <div className="p-6 flex flex-col flex-1">
 
-        <h3 className="text-xl font-semibold text-gray-900">
+        <h3 className="font-heading text-xl font-semibold text-gray-900">
           {developer.name}
         </h3>
 
         {getLocalized(developer, "shortDescription") && (
-          <p className="text-sm text-gray-700 mt-3 line-clamp-3 flex-1">
+          <p className="font-body text-sm text-gray-700 mt-3 line-clamp-3 flex-1">
             {getLocalized(developer, "shortDescription")}
           </p>
         )}
@@ -73,7 +73,7 @@ export default function DeveloperCardClient({
         {slugValue && (
           <Link
             href={`/developers/${slugValue}`}
-            className="mt-5 inline-flex items-center text-[#C9A227] font-medium hover:underline"
+            className="font-body mt-5 inline-flex items-center text-[#C9A227] font-medium hover:underline"
           >
             {t("developersPage.viewProjects")} 
           </Link>

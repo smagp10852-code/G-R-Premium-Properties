@@ -49,7 +49,7 @@ export default async function AboutPage() {
     <>
       <Navbar />
 
-      <main className="bg-white dark:bg-[#0F172A] transition-colors duration-300">
+      <main className="bg-white dark:bg-[#0F172A] transition-colors duration-300 font-body">
 
         {/* ================= HERO ================= */}
         <section className="relative h-[70vh] w-full">
@@ -64,15 +64,15 @@ export default async function AboutPage() {
 
           <div className="relative z-10 h-full flex items-center justify-center text-center">
             <div className="max-w-4xl px-6 text-white">
-              <p className="text-sm tracking-widest text-yellow-400">
+              <p className="font-body text-sm tracking-widest text-yellow-400">
                 <T k="aboutPage.whoWeAre" />
               </p>
 
-              <h1 className="text-4xl md:text-5xl font-serif mt-3">
+              <h1 className="font-heading text-4xl md:text-5xl mt-3">
                 <T k="aboutPage.title" />
               </h1>
 
-              <p className="mt-4 text-gray-200 mx-auto">
+              <p className="font-body mt-4 text-gray-200 mx-auto">
                 <T k="aboutPage.heroDescription" />
               </p>
             </div>
@@ -89,10 +89,10 @@ export default async function AboutPage() {
                     className="w-10 h-10 mx-auto"
                     style={{ color: goldenColor }}
                   />
-                  <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
+                  <h3 className="font-heading text-3xl font-bold text-gray-900 dark:text-white">
                     {item.value}
                   </h3>
-                  <p className="text-sm tracking-widest text-gray-600 dark:text-gray-400">
+                  <p className="font-body text-sm tracking-widest text-gray-600 dark:text-gray-400">
                     <T k={item.label} />
                   </p>
                 </div>
@@ -119,26 +119,26 @@ export default async function AboutPage() {
                 style={{ backgroundColor: goldenColor }}
               >
                 <div className="text-center">
-                  <div className="text-3xl font-bold">15+</div>
-                  <div className="text-sm"><T k="about.yearsOfExcellence" /></div>
+                  <div className="font-heading text-3xl font-bold">15+</div>
+                  <div className="font-body text-sm"><T k="about.yearsOfExcellence" /></div>
                 </div>
               </div>
             </div>
 
             <div className="order-2 lg:order-1">
-              <p className="text-sm font-semibold tracking-widest uppercase mb-3 text-yellow-600">
+              <p className="font-body text-sm font-semibold tracking-widest uppercase mb-3 text-yellow-600">
                 <T k="aboutPage.whyGrPremium" />
               </p>
 
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white leading-tight">
+              <h2 className="font-heading text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
                 <T k="aboutPage.whyChooseTitle" />
               </h2>
 
-              <p className="mt-6 text-gray-600 dark:text-gray-400 text-lg leading-relaxed max-w-xl">
+              <p className="font-body mt-6 text-gray-600 dark:text-gray-400 text-lg leading-relaxed max-w-xl">
                 <T k="aboutPage.whyChooseDescription" />
               </p>
 
-              <ul className="mt-8 space-y-4 text-gray-700 dark:text-gray-300">
+              <ul className="font-body mt-8 space-y-4 text-gray-700 dark:text-gray-300">
                 {[
                   "about.feature.exclusiveAccess",
                   "about.feature.expertGuidance",
@@ -153,7 +153,7 @@ export default async function AboutPage() {
                 ))}
               </ul>
 
-              <button className="mt-10 px-8 py-3 rounded-md font-semibold text-black bg-yellow-500 hover:bg-yellow-600 transition">
+              <button className="font-body mt-10 px-8 py-3 rounded-md font-semibold text-black bg-yellow-500 hover:bg-yellow-600 transition">
                 <T k="about.getStartedToday" />
               </button>
             </div>
@@ -189,11 +189,11 @@ export default async function AboutPage() {
                   <item.icon size={26} style={{ color: goldenColor }} />
                 </div>
 
-                <h3 className="text-2xl font-serif mb-4 text-gray-900 dark:text-white">
+                <h3 className="font-heading text-2xl mb-4 text-gray-900 dark:text-white">
                   <T k={item.title} />
                 </h3>
 
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p className="font-body text-gray-600 dark:text-gray-400 leading-relaxed">
                   <T k={item.desc} />
                 </p>
               </div>
@@ -208,12 +208,12 @@ export default async function AboutPage() {
 
             <div className="text-center mb-16">
               <p
-                className="text-sm tracking-widest uppercase mb-2"
+                className="font-body text-sm tracking-widest uppercase mb-2"
                 style={{ color: goldenColor }}
               >
                 <T k="aboutPage.whatWeStandFor" />
               </p>
-              <h2 className="text-4xl md:text-5xl font-serif text-gray-900 dark:text-white">
+              <h2 className="font-heading text-4xl md:text-5xl text-gray-900 dark:text-white">
                 <T k="aboutPage.ourCoreValues" />
               </h2>
             </div>
@@ -231,11 +231,11 @@ export default async function AboutPage() {
                     <item.icon size={26} style={{ color: goldenColor }} />
                   </div>
 
-                  <h3 className="text-xl font-serif mb-3 text-gray-900 dark:text-white">
+                  <h3 className="font-heading text-xl mb-3 text-gray-900 dark:text-white">
                     <T k={item.title} />
                   </h3>
 
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  <p className="font-body text-gray-600 dark:text-gray-400 leading-relaxed">
                     <T k={item.desc} />
                   </p>
                 </div>
@@ -245,101 +245,100 @@ export default async function AboutPage() {
         </section>
 
         {/* ================= TEAM ================= */}
-<section className="py-24 px-6 md:px-24 bg-[#E5E7EB] dark:bg-[#111827] transition-colors duration-300">
+        <section className="py-24 px-6 md:px-24 bg-[#E5E7EB] dark:bg-[#111827] transition-colors duration-300">
 
-  <div className="text-center max-w-2xl mx-auto">
-    <p className="text-sm tracking-widest uppercase" style={{ color: goldenColor }}>
-      <T k="aboutPage.ourPeople" />
-    </p>
+          <div className="text-center max-w-2xl mx-auto">
+            <p className="font-body text-sm tracking-widest uppercase" style={{ color: goldenColor }}>
+              <T k="aboutPage.ourPeople" />
+            </p>
 
-    <h2 className="text-3xl md:text-4xl font-serif mt-2 text-gray-900 dark:text-white">
-      <T k="aboutPage.meetOurTeam" />
-    </h2>
+            <h2 className="font-heading text-3xl md:text-4xl mt-2 text-gray-900 dark:text-white">
+              <T k="aboutPage.meetOurTeam" />
+            </h2>
 
-    <p className="mt-4 text-gray-600 dark:text-gray-400 text-sm md:text-base">
-      <T k="aboutPage.teamDescription" />
-    </p>
-  </div>
+            <p className="font-body mt-4 text-gray-600 dark:text-gray-400 text-sm md:text-base">
+              <T k="aboutPage.teamDescription" />
+            </p>
+          </div>
 
-  {/* ================= LEADERSHIP ================= */}
-  <div className="mt-20">
-    <h3 className="text-center text-xl font-serif mb-12 text-gray-900 dark:text-white">
-      <T k="aboutPage.leadership" />
-    </h3>
+          {/* ================= LEADERSHIP ================= */}
+          <div className="mt-20">
+            <h3 className="font-heading text-center text-xl mb-12 text-gray-900 dark:text-white">
+              <T k="aboutPage.leadership" />
+            </h3>
 
-    <div className="flex flex-wrap justify-center gap-12 max-w-5xl mx-auto">
-      {leadership.map((person: any) => (
-        <div
-          key={person._id}
-          className="w-full sm:w-[280px]
-                     bg-white dark:bg-[#1E293B]
-                     rounded-2xl p-8 text-center
-                     shadow-md hover:shadow-xl
-                     transition-all duration-300"
-        >
-          <img
-            src={
-              person.image
-                ? urlFor(person.image).width(300).url()
-                : "/assets/about1.png"
-            }
-            alt={person.name}
-            className="w-32 h-32 mx-auto rounded-full object-cover mb-6"
-          />
+            <div className="flex flex-wrap justify-center gap-12 max-w-5xl mx-auto">
+              {leadership.map((person: any) => (
+                <div
+                  key={person._id}
+                  className="w-full sm:w-[280px]
+                             bg-white dark:bg-[#1E293B]
+                             rounded-2xl p-8 text-center
+                             shadow-md hover:shadow-xl
+                             transition-all duration-300"
+                >
+                  <img
+                    src={
+                      person.image
+                        ? urlFor(person.image).width(300).url()
+                        : "/assets/about1.png"
+                    }
+                    alt={person.name}
+                    className="w-32 h-32 mx-auto rounded-full object-cover mb-6"
+                  />
 
-          <h4 className="font-serif text-lg text-gray-900 dark:text-white">
-            {person.name}
-          </h4>
+                  <h4 className="font-heading text-lg text-gray-900 dark:text-white">
+                    {person.name}
+                  </h4>
 
-          <p className="text-sm mt-1" style={{ color: goldenColor }}>
-            {person.position}
-          </p>
-        </div>
-      ))}
-    </div>
-  </div>
+                  <p className="font-body text-sm mt-1" style={{ color: goldenColor }}>
+                    {person.position}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-  {/* ================= TEAM MEMBERS ================= */}
-  <div className="mt-28">
-    <h3 className="text-center text-xl font-serif mb-12 text-gray-900 dark:text-white">
-      <T k="aboutPage.ourTeam" />
-    </h3>
+          {/* ================= TEAM MEMBERS ================= */}
+          <div className="mt-28">
+            <h3 className="font-heading text-center text-xl mb-12 text-gray-900 dark:text-white">
+              <T k="aboutPage.ourTeam" />
+            </h3>
 
-    <div className="flex flex-wrap justify-center gap-8 max-w-7xl mx-auto">
-      {team.map((member: any) => (
-        <div
-          key={member._id}
-          className="w-full sm:w-[240px]
-                     bg-white dark:bg-[#1E293B]
-                     rounded-xl p-6 text-center
-                     shadow-sm hover:shadow-lg
-                     hover:-translate-y-1
-                     transition-all duration-300"
-        >
-          <img
-            src={
-              member.image
-                ? urlFor(member.image).width(300).url()
-                : "/assets/about1.png"
-            }
-            alt={member.name}
-            className="w-24 h-24 mx-auto rounded-full object-cover mb-4"
-          />
+            <div className="flex flex-wrap justify-center gap-8 max-w-7xl mx-auto">
+              {team.map((member: any) => (
+                <div
+                  key={member._id}
+                  className="w-full sm:w-[240px]
+                             bg-white dark:bg-[#1E293B]
+                             rounded-xl p-6 text-center
+                             shadow-sm hover:shadow-lg
+                             hover:-translate-y-1
+                             transition-all duration-300"
+                >
+                  <img
+                    src={
+                      member.image
+                        ? urlFor(member.image).width(300).url()
+                        : "/assets/about1.png"
+                    }
+                    alt={member.name}
+                    className="w-24 h-24 mx-auto rounded-full object-cover mb-4"
+                  />
 
-          <h4 className="font-medium text-gray-900 dark:text-white">
-            {member.name}
-          </h4>
+                  <h4 className="font-heading font-medium text-gray-900 dark:text-white">
+                    {member.name}
+                  </h4>
 
-          <p className="text-sm mt-1" style={{ color: goldenColor }}>
-            {member.position}
-          </p>
-        </div>
-      ))}
-    </div>
-  </div>
+                  <p className="font-body text-sm mt-1" style={{ color: goldenColor }}>
+                    {member.position}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-</section>
-
+        </section>
 
         <CTA />
       </main>

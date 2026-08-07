@@ -41,7 +41,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="w-full bg-black text-gray-400">
+      <footer className="w-full bg-black text-gray-400 font-body">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 py-16 md:py-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
 
@@ -57,17 +57,17 @@ export default function Footer() {
                 />
 
                 <div>
-                  <h3 className="text-white text-lg font-bold tracking-wide">
+                  <h3 className="font-heading text-white text-lg font-bold tracking-wide">
                     G R Premium
                   </h3>
-                  <p className="text-[11px] uppercase tracking-[0.25em] text-gray-500">
+                  <p className="font-body text-[11px] uppercase tracking-[0.25em] text-gray-500">
                     Properties LLC
                   </p>
                 </div>
               </div>
 
               <div className="space-y-5">
-                <p className="text-sm text-gray-400 leading-7">
+                <p className="font-body text-sm text-gray-400 leading-7">
                   Dubai’s Most Trusted Real Estate Experts - 
                   <span className="text-white font-medium">
                     {" "}GR Premium Properties LLC
@@ -76,13 +76,13 @@ export default function Footer() {
                 </p>
 
                 <div className="inline-flex items-center rounded-full border border-[#D4A843]/40 bg-[#D4A843]/10 px-4 py-2">
-                  <span className="text-xs uppercase tracking-widest text-[#D4A843] font-semibold">
+                  <span className="font-body text-xs uppercase tracking-widest text-[#D4A843] font-semibold">
                     RERA Registered
                   </span>
 
                   <span className="mx-3 h-4 w-px bg-[#D4A843]/40" />
 
-                  <span className="text-sm text-white font-medium">
+                  <span className="font-body text-sm text-white font-medium">
                     No. 49939
                   </span>
                 </div>
@@ -127,10 +127,10 @@ export default function Footer() {
 
             {/* ================= QUICK LINKS ================= */}
             <div>
-              <h4 className="text-white text-sm font-bold uppercase mb-6 tracking-wide">
+              <h4 className="font-heading text-white text-sm font-bold uppercase mb-6 tracking-wide">
                 Quick Links
               </h4>
-              <ul className="space-y-3">
+              <ul className="font-body space-y-3">
                 <li><Link href="/" className="text-sm hover:text-white">Home</Link></li>
                 <li><Link href="/about" className="text-sm hover:text-white">About Us</Link></li>
                 <li><Link href="/properties" className="text-sm hover:text-white">Properties</Link></li>
@@ -148,10 +148,10 @@ export default function Footer() {
 
             {/* ================= PROPERTIES ================= */}
             <div>
-              <h4 className="text-white text-sm font-bold uppercase mb-6 tracking-wide">
+              <h4 className="font-heading text-white text-sm font-bold uppercase mb-6 tracking-wide">
                 Properties
               </h4>
-              <ul className="space-y-3">
+              <ul className="font-body space-y-3">
                 <li><Link href="/properties" className="text-sm hover:text-white">Apartments</Link></li>
                 <li><Link href="/properties" className="text-sm hover:text-white">Villas</Link></li>
                 <li><Link href="/properties" className="text-sm hover:text-white">Penthouses</Link></li>
@@ -161,11 +161,11 @@ export default function Footer() {
 
             {/* ================= CONTACT ================= */}
             <div>
-              <h4 className="text-white text-sm font-bold uppercase mb-6 tracking-wide">
+              <h4 className="font-heading text-white text-sm font-bold uppercase mb-6 tracking-wide">
                 Contact Info
               </h4>
 
-              <ul className="space-y-4 text-sm text-gray-400">
+              <ul className="font-body space-y-4 text-sm text-gray-400">
                 <li className="flex items-start gap-3">
                   <MapPin className="w-4 h-4 mt-1 text-[#D4A843]" />
                   <span>
@@ -200,7 +200,7 @@ export default function Footer() {
 
               <button
                 onClick={() => setOpen(true)}
-                className="mt-8 w-full px-6 py-3 font-semibold text-black text-sm rounded-md transition-all duration-300 hover:scale-[1.03]"
+                className="font-body mt-8 w-full px-6 py-3 font-semibold text-black text-sm rounded-md transition-all duration-300 hover:scale-[1.03]"
                 style={{ backgroundColor: goldenColor }}
               >
                 Enquire Now
@@ -212,10 +212,10 @@ export default function Footer() {
 
         <div className="border-t border-[#2a3a4a] py-5">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-xs text-gray-500">
+            <p className="font-body text-xs text-gray-500">
               © {new Date().getFullYear()} G R Premium Properties LLC. All Rights Reserved.
             </p>
-            <div className="flex items-center gap-6 text-xs text-gray-500">
+            <div className="font-body flex items-center gap-6 text-xs text-gray-500">
               <Link href="/privacy-policy" className="hover:text-white">
                 Privacy Policy
               </Link>

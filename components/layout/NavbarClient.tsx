@@ -56,7 +56,7 @@ export default function NavbarClient({
   return (
     <>
       {/* ================= TOP SCROLLING BAR ================= */}
-      <div className="marquee-container bg-yellow-500 text-black text-sm py-2 z-[1500]">
+      <div className="marquee-container bg-yellow-500 text-black text-sm py-2 z-[1500] font-body">
         {announcements?.length > 0 && (
   <div className="marquee-content font-medium px-4">
     {announcements.map((item, index) => (
@@ -74,7 +74,7 @@ export default function NavbarClient({
       </div>
 
       {/* ================= HEADER ================= */}
-      <header className="fixed top-[32px] left-0 w-full z-[1000] bg-black/40 backdrop-blur">
+      <header className="fixed top-[32px] left-0 w-full z-[1000] bg-black/40 backdrop-blur font-body">
         <nav className="flex items-center px-6 lg:px-14 py-2 text-white">
           <Link href="/" className="shrink-0">
             <Image
@@ -152,7 +152,7 @@ export default function NavbarClient({
       {/* ================= DRAWER ================= */}
       {drawerOpen && (
         <div className="fixed inset-0 z-[3000] bg-black/50">
-          <div className="absolute right-0 top-0 h-full w-[320px] bg-white text-black p-6 shadow-2xl overflow-y-auto z-[3100]">
+          <div className="absolute right-0 top-0 h-full w-[320px] bg-white text-black p-6 shadow-2xl overflow-y-auto z-[3100] font-body">
             <button
               onClick={() => setDrawerOpen(false)}
               className="text-2xl absolute top-4 right-4"
@@ -160,7 +160,7 @@ export default function NavbarClient({
               ✕
             </button>
 
-            <h2 className="text-xl font-bold mb-6">
+            <h2 className="font-heading text-xl font-bold mb-6">
               {t("nav.grPremiumProperties")}
             </h2>
 

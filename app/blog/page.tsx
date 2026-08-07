@@ -11,7 +11,7 @@ export default async function BlogPage() {
   const blogs = await sanityClient.fetch(allBlogsQuery);
 
   return (
-    <main className="bg-white dark:bg-[#0F172A] transition-colors duration-300">
+    <main className="font-body bg-white dark:bg-[#0F172A] transition-colors duration-300">
 
       {/* ================= HERO ================= */}
       <section className="relative h-[320px] md:h-[420px] flex items-center justify-center text-center text-white overflow-hidden">
@@ -27,10 +27,10 @@ export default async function BlogPage() {
 
         {/* Content */}
         <div className="relative z-10 max-w-2xl px-4">
-          <h1 className="text-4xl md:text-5xl font-bold">
+          <h1 className="font-heading text-4xl md:text-5xl font-bold">
             <T k="blog.ourBlog" />
           </h1>
-          <p className="mt-4 text-gray-200">
+          <p className="font-body mt-4 text-gray-200">
             <T k="blog.blogDescription" />
           </p>
         </div>
@@ -42,10 +42,10 @@ export default async function BlogPage() {
 
           {blogs.length === 0 ? (
             <div className="text-center py-20">
-              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+              <h2 className="font-heading text-2xl font-semibold text-gray-800 dark:text-white">
                 <T k="blog.noBlogsFound" />
               </h2>
-              <p className="text-gray-500 dark:text-gray-400 mt-3">
+              <p className="font-body text-gray-500 dark:text-gray-400 mt-3">
                 <T k="blog.checkBackLater" />
               </p>
             </div>

@@ -56,7 +56,7 @@ export default function PropertyCard({
       <motion.div
         whileHover={{ y: -8 }}
         transition={{ duration: 0.3 }}
-        className="w-full h-full flex flex-col bg-white dark:bg-[#101827] rounded-3xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300"
+        className="w-full h-full flex flex-col bg-white dark:bg-[#101827] rounded-3xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 font-body"
       >
         {/* IMAGE */}
         <div className="relative w-full h-[230px] flex-shrink-0 group">
@@ -111,17 +111,17 @@ export default function PropertyCard({
         <div className="p-6 flex flex-col flex-grow">
 
           {/* TITLE */}
-          <h3 className="text-lg sm:text-xl font-bold mb-1 line-clamp-1">
+          <h3 className="font-heading text-lg sm:text-xl font-bold mb-1 line-clamp-1">
             {property?.title}
           </h3>
 
           {/* LOCATION */}
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 min-h-[20px]">
+          <p className="font-body text-sm text-gray-600 dark:text-gray-400 mb-4 min-h-[20px]">
             {locationText}
           </p>
 
           {/* UNITS */}
-<div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 min-h-[160px] mb-5">
+<div className="font-body space-y-2 text-sm text-gray-700 dark:text-gray-300 min-h-[160px] mb-5">
 
   {property?.units?.slice(0, 6).map((unit: any, i: number) => {
 
@@ -161,7 +161,7 @@ export default function PropertyCard({
           {/* PAYMENT PLAN */}
           <div className="min-h-[110px] mb-5">
             {paymentPlan && (
-              <div className="bg-gray-100 dark:bg-[#1c2536] p-4 rounded-xl">
+              <div className="font-body bg-gray-100 dark:bg-[#1c2536] p-4 rounded-xl">
 
                 <div className="flex items-center gap-2 mb-2">
                   <Percent size={16} />
@@ -189,7 +189,7 @@ export default function PropertyCard({
           {/* HANDOVER */}
           <div className="min-h-[30px] mb-6">
             {property?.handover && (
-              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <div className="font-body flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <CalendarDays size={16} />
                 <span>
                   {t("property.handover")}: {property.handover}
@@ -203,7 +203,7 @@ export default function PropertyCard({
 
             <button
               onClick={() => setOpenBrochure(true)}
-              className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#C9A227] text-[#C9A227] hover:bg-[#C9A227] hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
+              className="font-body flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#C9A227] text-[#C9A227] hover:bg-[#C9A227] hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Download size={16} />
               {t("property.brochure")}
@@ -211,7 +211,7 @@ export default function PropertyCard({
 
             <button
               onClick={() => onEnquire?.(property)}
-              className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-black transition-all duration-300 hover:opacity-90"
+              className="font-body flex-1 py-2.5 rounded-xl text-sm font-semibold text-black transition-all duration-300 hover:opacity-90"
               style={{ backgroundColor: goldenColor }}
             >
               {t("property.enquire")}

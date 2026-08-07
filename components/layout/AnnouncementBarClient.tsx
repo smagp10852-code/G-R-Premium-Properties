@@ -24,7 +24,7 @@ export default function AnnouncementBarClient({
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-[#D4AF37] text-black text-sm py-2 z-[2000] overflow-hidden">
+    <div className="fixed top-0 left-0 w-full bg-[#D4AF37] text-black text-sm py-2 z-[2000] overflow-hidden font-body">
       <div className="marquee-wrapper">
         <div className="marquee-content">
           {announcements.map((item: any, index: number) => (
@@ -37,7 +37,7 @@ export default function AnnouncementBarClient({
               {item.slug && (
                 <Link
                   href={`/announcement/${item.slug}`}
-                  className="bg-black text-white px-3 py-1 rounded text-xs font-semibold"
+                  className="font-body bg-black text-white px-3 py-1 rounded text-xs font-semibold"
                 >
                   {t("announcement.viewDetails")}
                 </Link>

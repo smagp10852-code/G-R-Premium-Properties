@@ -27,7 +27,7 @@ export default async function MediaPage() {
   const media = await sanityClient.fetch(query);
 
   return (
-    <main className="bg-white dark:bg-[#0F172A] transition-colors duration-300">
+    <main className="font-body bg-white dark:bg-[#0F172A] transition-colors duration-300">
       
       {/* ================= HERO SECTION ================= */}
       <section className="relative h-[50vh] w-full">
@@ -41,10 +41,10 @@ export default async function MediaPage() {
 
         <div className="relative z-10 flex h-full items-center justify-center text-center text-white">
           <div>
-            <h1 className="text-4xl md:text-6xl font-bold">
+            <h1 className="font-heading text-4xl md:text-6xl font-bold">
               <T k="media.title" />
             </h1>
-            <p className="mt-3 text-lg text-gray-300">
+            <p className="font-body mt-3 text-lg text-gray-300">
               <T k="media.subtitle" />
             </p>
           </div>
@@ -62,7 +62,7 @@ export default async function MediaPage() {
                 className="space-y-3"
               >
                 {/* CARD TYPE LABEL */}
-                <h3 className="text-xs font-semibold uppercase tracking-widest text-[#C9A227]">
+                <h3 className="font-body text-xs font-semibold uppercase tracking-widest text-[#C9A227]">
                   {item.mediaType === "image" ? <T k="media.image" /> : <T k="media.video" />}
                 </h3>
 

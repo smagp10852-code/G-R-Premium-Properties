@@ -47,6 +47,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
       transition-all duration-300
       overflow-hidden
       flex flex-col
+      font-body
       "
     >
       {/* IMAGE */}
@@ -63,19 +64,19 @@ export default function BlogCard({ blog }: BlogCardProps) {
       <div className="p-6 flex flex-col flex-grow">
 
         {/* TITLE */}
-        <h3 className="text-lg font-semibold leading-snug mb-2 line-clamp-2 min-h-[56px]">
+        <h3 className="font-heading text-lg font-semibold leading-snug mb-2 line-clamp-2 min-h-[56px]">
           {getLocalized(blog, "title")}
         </h3>
 
         {/* SUBTITLE */}
         {getLocalized(blog, "subtitle") && (
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-3 line-clamp-1">
+          <p className="font-body text-sm text-gray-500 dark:text-gray-400 mb-3 line-clamp-1">
             {getLocalized(blog, "subtitle")}
           </p>
         )}
 
         {/* DESCRIPTION */}
-        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 mb-6 min-h-[72px]">
+        <p className="font-body text-gray-600 dark:text-gray-300 text-sm line-clamp-3 mb-6 min-h-[72px]">
           {getLocalized(blog, "excerpt")}
         </p>
 
@@ -83,6 +84,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
         <Link
           href={`/blog/${slug}`}
           className="
+          font-body
           mt-auto
           inline-flex items-center justify-center
           text-sm font-medium

@@ -1,18 +1,18 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
-  darkMode: "class", // 👈 Dark mode enable
-
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-
+  darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        heading: ["var(--font-heading)", "Playfair Display", "serif"],
+        body: ["var(--font-body)", "sans-serif"],
+      },
+    },
   },
-
   plugins: [],
 };
-
-export default config;

@@ -8,15 +8,15 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="bg-black text-gray-300 min-h-screen">
+    <div className="font-body bg-black text-gray-300 min-h-screen">
 
       <div className="relative bg-gradient-to-b from-black via-[#0d0d0d] to-black py-32 px-6 text-center overflow-hidden">
 
-        <h1 className="text-4xl md:text-6xl font-semibold text-[#D4A843] tracking-wide">
+        <h1 className="font-heading text-4xl md:text-6xl font-semibold text-[#D4A843] tracking-wide">
           Privacy Policy
         </h1>
 
-        <p className="mt-6 max-w-2xl mx-auto text-gray-400 text-lg leading-relaxed">
+        <p className="font-body mt-6 max-w-2xl mx-auto text-gray-400 text-lg leading-relaxed">
           Your trust matters to us. We are committed to protecting your
           personal information with transparency, security, and integrity.
         </p>
@@ -41,7 +41,7 @@ export default function PrivacyPolicy() {
           <div className="absolute -top-16 -left-16 w-72 h-72 
                           bg-[#D4A843]/10 blur-[120px] rounded-full" />
 
-          <p className="text-lg leading-relaxed text-gray-400 relative z-10">
+          <p className="font-body text-lg leading-relaxed text-gray-400 relative z-10">
             G R Premium Properties LLC (&ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;)
             respects your privacy and is dedicated to safeguarding your
             personal information. This Privacy Policy explains how we collect,
@@ -52,7 +52,7 @@ export default function PrivacyPolicy() {
           <div className="my-12 h-px bg-gradient-to-r from-transparent via-[#D4A843]/40 to-transparent"></div>
 
           <section className="space-y-6 relative z-10">
-            <h2 className="text-3xl font-semibold text-white">
+            <h2 className="font-heading text-3xl font-semibold text-white">
               Information We Collect
             </h2>
 
@@ -63,7 +63,7 @@ export default function PrivacyPolicy() {
                 "Information submitted through website forms",
                 "Recruitment-related submissions",
               ].map((item, index) => (
-                <li key={index} className="flex items-start gap-3 text-gray-400">
+                <li key={index} className="font-body flex items-start gap-3 text-gray-400">
                   <span className="w-2 h-2 mt-2 bg-[#D4A843] rounded-full shrink-0"></span>
                   {item}
                 </li>
@@ -74,7 +74,7 @@ export default function PrivacyPolicy() {
           <div className="my-12 h-px bg-gradient-to-r from-transparent via-[#D4A843]/40 to-transparent"></div>
 
           <section className="space-y-6 relative z-10">
-            <h2 className="text-3xl font-semibold text-white">
+            <h2 className="font-heading text-3xl font-semibold text-white">
               How We Use Your Information
             </h2>
 
@@ -85,7 +85,7 @@ export default function PrivacyPolicy() {
                 "Send marketing communications (where consent is provided)",
                 "Improve our services and customer experience",
               ].map((item, index) => (
-                <li key={index} className="flex items-start gap-3 text-gray-400">
+                <li key={index} className="font-body flex items-start gap-3 text-gray-400">
                   <span className="w-2 h-2 mt-2 bg-[#D4A843] rounded-full shrink-0"></span>
                   {item}
                 </li>
@@ -96,11 +96,11 @@ export default function PrivacyPolicy() {
           <div className="my-12 h-px bg-gradient-to-r from-transparent via-[#D4A843]/40 to-transparent"></div>
 
           <section className="space-y-6 relative z-10">
-            <h2 className="text-3xl font-semibold text-white">
+            <h2 className="font-heading text-3xl font-semibold text-white">
               Data Protection & Security
             </h2>
 
-            <p className="text-gray-400 leading-relaxed">
+            <p className="font-body text-gray-400 leading-relaxed">
               We implement appropriate technical and organizational security
               measures to protect your personal data against unauthorized
               access, disclosure, alteration, or misuse.
@@ -110,17 +110,17 @@ export default function PrivacyPolicy() {
           <div className="my-12 h-px bg-gradient-to-r from-transparent via-[#D4A843]/40 to-transparent"></div>
 
           <section className="space-y-6 relative z-10">
-            <h2 className="text-3xl font-semibold text-white">
+            <h2 className="font-heading text-3xl font-semibold text-white">
               Consent
             </h2>
 
-            <p className="text-gray-400 leading-relaxed">
+            <p className="font-body text-gray-400 leading-relaxed">
               By submitting any form on our website{" "}
-              <a
-                href="https://grpremium.com"
+              
+              <a  href="https://grpremium.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#D4A843] hover:underline"
+                className="font-body text-[#D4A843] hover:underline"
               >
                 grpremium.com
               </a>
@@ -132,16 +132,16 @@ export default function PrivacyPolicy() {
           <div className="my-12 h-px bg-gradient-to-r from-transparent via-[#D4A843]/40 to-transparent"></div>
 
           <section className="space-y-6 relative z-10">
-            <h2 className="text-3xl font-semibold text-white">
+            <h2 className="font-heading text-3xl font-semibold text-white">
               Contact Us
             </h2>
 
-            <p className="text-gray-400">
+            <p className="font-body text-gray-400">
               If you have any privacy-related concerns or questions, please
               contact us at:
             </p>
 
-            <p className="text-[#D4A843] font-medium text-lg">
+            <p className="font-body text-[#D4A843] font-medium text-lg">
               <a href="mailto:sales@grpremium.com">
                 sales@grpremium.com
               </a>

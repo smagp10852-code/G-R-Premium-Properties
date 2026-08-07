@@ -20,7 +20,7 @@ export default function PropertiesClient({
 
   return (
     <>
-      <section className="py-24 bg-white dark:bg-[#0F172A] transition-colors duration-300">
+      <section className="py-24 bg-white dark:bg-[#0F172A] transition-colors duration-300 font-body">
         <div className="w-full px-6">
           <div className="max-w-7xl mx-auto">
 

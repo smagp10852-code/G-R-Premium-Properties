@@ -81,7 +81,7 @@ export default async function DeveloperPage({
   if (!developer) return notFound();
 
   return (
-    <main>
+    <main className="font-body">
       <ScrollToHash />
 
       {/* ================= HERO ================= */}
@@ -103,30 +103,30 @@ export default async function DeveloperPage({
 
         <div className="relative z-10 h-full flex items-center justify-center text-center px-6">
           <div className="max-w-4xl">
-            <p className="text-yellow-400 tracking-widest uppercase mb-4">
+            <p className="font-body text-yellow-400 tracking-widest uppercase mb-4">
               <T k="developerDetail.ourPartner" />
             </p>
 
-            <h1 className="text-white text-4xl md:text-6xl font-bold">
+            <h1 className="font-heading text-white text-4xl md:text-6xl font-bold">
               {developer.name}
             </h1>
 
             {/* ✅ FIXED HERO TEXT COLOR */}
-            <p className="text-gray-200 mt-6 text-lg">
+            <p className="font-body text-gray-200 mt-6 text-lg">
               <T k="developerDetail.heroDescription" />
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-              <a
-                href="#projects"
-                className="bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold"
+              
+             <a   href="#projects"
+                className="font-body bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold"
               >
                 <T k="developerDetail.viewProjects" />
               </a>
 
-              <a
-                href="/contact"
-                className="bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold"
+              
+              <a  href="/contact"
+                className="font-body bg-yellow-500 text-black px-8 py-3 rounded-lg font-semibold"
               >
                 <T k="nav.enquireNow" />
               </a>
@@ -142,10 +142,10 @@ export default async function DeveloperPage({
 
             {developer.stats.experience && (
               <div>
-                <p className="text-4xl font-bold text-[#C9A227]">
+                <p className="font-body text-4xl font-bold text-[#C9A227]">
                   {developer.stats.experience}
                 </p>
-                <p className="text-sm uppercase tracking-widest text-gray-300 mt-2">
+                <p className="font-body text-sm uppercase tracking-widest text-gray-300 mt-2">
                   <T k="developerDetail.yearsExperience" />
                 </p>
               </div>
@@ -153,10 +153,10 @@ export default async function DeveloperPage({
 
             {developer.stats.projects && (
               <div>
-                <p className="text-4xl font-bold text-[#C9A227]">
+                <p className="font-body text-4xl font-bold text-[#C9A227]">
                   {developer.stats.projects}
                 </p>
-                <p className="text-sm uppercase tracking-widest text-gray-300 mt-2">
+                <p className="font-body text-sm uppercase tracking-widest text-gray-300 mt-2">
                   <T k="developerDetail.projectsDelivered" />
                 </p>
               </div>
@@ -164,10 +164,10 @@ export default async function DeveloperPage({
 
             {developer.stats.homes && (
               <div>
-                <p className="text-4xl font-bold text-[#C9A227]">
+                <p className="font-body text-4xl font-bold text-[#C9A227]">
                   {developer.stats.homes}
                 </p>
-                <p className="text-sm uppercase tracking-widest text-gray-300 mt-2">
+                <p className="font-body text-sm uppercase tracking-widest text-gray-300 mt-2">
                   <T k="developerDetail.homesSold" />
                 </p>
               </div>
@@ -175,10 +175,10 @@ export default async function DeveloperPage({
 
             {developer.stats.locations && (
               <div>
-                <p className="text-gray-300">
+                <p className="font-body text-gray-300">
                   {developer.stats.locations}
                 </p>
-                <p className="text-sm uppercase tracking-widest text-gray-400 mt-2">
+                <p className="font-body text-sm uppercase tracking-widest text-gray-400 mt-2">
                   <T k="developerDetail.primeLocations" />
                 </p>
               </div>
@@ -197,12 +197,12 @@ export default async function DeveloperPage({
         className="py-20 bg-white dark:bg-[#0F172A]"
       >
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-gray-900 dark:text-white">
+          <h2 className="font-heading text-3xl font-bold mb-12 text-gray-900 dark:text-white">
             <T k="developerDetail.projectsBy" /> {developer.name}
           </h2>
 
           {developer.properties?.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="font-body text-gray-500 dark:text-gray-400">
               <T k="developerDetail.noProjectsYet" />
             </p>
           ) : (

@@ -21,12 +21,12 @@ export default async function DeveloperPage({
   );
 
   return (
-    <main className="py-16 bg-white dark:bg-[#0F172A] transition-colors duration-300">
+    <main className="font-body py-16 bg-white dark:bg-[#0F172A] transition-colors duration-300">
       <div className="w-full px-4 sm:px-6 lg:px-8 lg:max-w-7xl lg:mx-auto">
 
         {/* ================= HEADING ================= */}
         <h1
-          className="text-3xl md:text-4xl font-bold mb-12 capitalize 
+          className="font-heading text-3xl md:text-4xl font-bold mb-12 capitalize 
                      text-gray-900 dark:text-white"
         >
           Projects by {slug.replace(/-/g, " ")}
@@ -34,7 +34,7 @@ export default async function DeveloperPage({
 
         {/* ================= CONTENT ================= */}
         {!properties || properties.length === 0 ? (
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="font-body text-gray-600 dark:text-gray-400">
             No properties found.
           </p>
         ) : (

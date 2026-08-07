@@ -12,7 +12,7 @@ import T from "@/components/ui/T";
 
 export default function HowItWorks() {
   return (
-    <main className="bg-white dark:bg-[#0F172A] transition-colors duration-300">
+    <main className="font-body bg-white dark:bg-[#0F172A] transition-colors duration-300">
       
       {/* HERO */}
       <section className="relative h-[70vh] w-full">
@@ -24,13 +24,13 @@ export default function HowItWorks() {
         />
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-center px-6">
           <div className="max-w-3xl text-white">
-            <p className="tracking-widest text-sm text-yellow-400 mb-3">
+            <p className="font-body tracking-widest text-sm text-yellow-400 mb-3">
               <T k="howItWorks.ourProcess" />
             </p>
-            <h1 className="text-4xl md:text-5xl font-serif mb-4">
+            <h1 className="font-heading text-4xl md:text-5xl mb-4">
               <T k="howItWorks.title" />
             </h1>
-            <p className="text-gray-200">
+            <p className="font-body text-gray-200">
               <T k="howItWorks.description" />
             </p>
           </div>
@@ -143,7 +143,7 @@ function Section({
 
           {/* STEP + ICON */}
           <div className="flex items-center gap-4 mb-6">
-            <span className="text-5xl font-serif text-[#E8D9A8] dark:text-[#C9A227]">
+            <span className="font-heading text-5xl text-[#E8D9A8] dark:text-[#C9A227]">
               {step}
             </span>
 
@@ -152,11 +152,11 @@ function Section({
             </div>
           </div>
 
-          <h3 className="text-2xl font-serif mb-4 text-gray-900 dark:text-white">
+          <h3 className="font-heading text-2xl mb-4 text-gray-900 dark:text-white">
             {title}
           </h3>
 
-          <p className="text-gray-700 dark:text-gray-300 mb-6">
+          <p className="font-body text-gray-700 dark:text-gray-300 mb-6">
             {text}
           </p>
 
@@ -166,7 +166,7 @@ function Section({
                 <span className="w-5 h-5 rounded-full border border-[#C9A227] flex items-center justify-center text-[#C9A227] text-xs">
                   ✓
                 </span>
-                <span className="text-gray-800 dark:text-gray-300">
+                <span className="font-body text-gray-800 dark:text-gray-300">
                   {p}
                 </span>
               </li>

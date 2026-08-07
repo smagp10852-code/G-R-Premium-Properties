@@ -126,7 +126,7 @@ export default function PropertyFilter({ communities }: Props) {
   ];
 
   return (
-    <section className="sticky top-[80px] z-50 w-full bg-white dark:bg-[#0F172A] border-b border-gray-200 dark:border-gray-800 shadow-lg transition-colors duration-300">
+    <section className="sticky top-[80px] z-50 w-full bg-white dark:bg-[#0F172A] border-b border-gray-200 dark:border-gray-800 shadow-lg transition-colors duration-300 font-body">
       <div className="w-full px-6 py-5">
         <div className="flex flex-wrap items-center gap-4">
 
@@ -141,7 +141,7 @@ export default function PropertyFilter({ communities }: Props) {
               }}
               onFocus={() => setSearchOpen(true)}
               placeholder={t("properties.communityOrArea")}
-              className="w-full border border-gray-300 dark:border-gray-700 
+              className="font-body w-full border border-gray-300 dark:border-gray-700 
                          bg-white dark:bg-[#111827] 
                          text-black dark:text-white
                          rounded-full px-6 py-3
@@ -177,7 +177,7 @@ export default function PropertyFilter({ communities }: Props) {
 
                       router.push(`/properties?${params.toString()}`);
                     }}
-                    className="w-full text-left px-6 py-3
+                    className="font-body w-full text-left px-6 py-3
                                hover:bg-gray-100 dark:hover:bg-white/10
                                transition"
                   >
@@ -199,7 +199,7 @@ export default function PropertyFilter({ communities }: Props) {
               key={idx}
               value={item.value}
               onChange={(e) => item.setter(e.target.value)}
-              className="appearance-none border border-gray-300 dark:border-gray-700
+              className="font-body appearance-none border border-gray-300 dark:border-gray-700
                          bg-white dark:bg-[#111827]
                          text-black dark:text-white
                          px-6 py-3 rounded-full min-w-[150px]
@@ -218,7 +218,7 @@ export default function PropertyFilter({ communities }: Props) {
           {/* ================= BUTTONS */}
           <button
             onClick={applyFilters}
-            className="bg-[#D4AF37] hover:bg-[#c19d2f]
+            className="font-body bg-[#D4AF37] hover:bg-[#c19d2f]
                        text-white px-7 py-3 rounded-full
                        transition font-medium"
           >
@@ -227,7 +227,7 @@ export default function PropertyFilter({ communities }: Props) {
 
           <button
             onClick={resetFilters}
-            className="border border-[#D4AF37]
+            className="font-body border border-[#D4AF37]
                        text-[#D4AF37]
                        hover:bg-[#D4AF37] hover:text-white
                        px-7 py-3 rounded-full
