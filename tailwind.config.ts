@@ -10,7 +10,21 @@ module.exports = {
     extend: {
       fontFamily: {
         heading: ["var(--font-heading)", "Playfair Display", "serif"],
-        body: ["var(--font-body)", "sans-serif"],
+        body: [
+          "var(--font-body)",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "Noto Sans",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
+        ],
       },
     },
   },
