@@ -73,15 +73,15 @@ export default function PropertyFilter({ communities }: Props) {
   };
 
   const filterConfig = [
-    {
-      value: purpose,
-      setter: setPurpose,
-      label: t("properties.buyRent"),
-      options: [
-        { label: t("properties.buy"), value: "buy" },
-        { label: t("properties.rent"), value: "rent" },
-      ],
-    },
+    // {
+    //   value: purpose,
+    //   setter: setPurpose,
+    //   label: t("properties.buyRent"),
+    //   options: [
+    //     { label: t("properties.buy"), value: "buy" },
+    //     { label: t("properties.rent"), value: "rent" },
+    //   ],
+    // },
     {
       value: bedroom,
       setter: setBedroom,
@@ -94,21 +94,24 @@ export default function PropertyFilter({ communities }: Props) {
         { label: "4+ " + t("property.bed"), value: "4" },
       ],
     },
-    {
-      value: type,
-      setter: setType,
-      label: t("properties.propertyType"),
-      options: [
-        { label: t("properties.apartment"), value: "apartment" },
-        { label: t("properties.villa"), value: "villa" },
-        { label: t("properties.penthouse"), value: "penthouse" },
-        { label: t("properties.townhouse"), value: "townhouse" },
-      ],
-    },
+    // {
+    //   value: type,
+    //   setter: setType,
+    //   label: t("properties.propertyType"),
+    //   options: [
+    //     { label: t("properties.apartment"), value: "apartment" },
+    //     { label: t("properties.villa"), value: "villa" },
+    //     { label: t("properties.penthouse"), value: "penthouse" },
+    //     { label: t("properties.townhouse"), value: "townhouse" },
+    //   ],
+    // },
     {
       value: minPrice,
       setter: setMinPrice,
       label: t("properties.minPrice"),
+      // ✅ Raw AED values — page.tsx ab "1.20 M" jaisi text ko
+      // parse karke full number (1200000) banata hai, isliye yaha
+      // bhi raw AED hi bhejna hai
       options: [
         { label: "AED 500K", value: "500000" },
         { label: "AED 1M", value: "1000000" },

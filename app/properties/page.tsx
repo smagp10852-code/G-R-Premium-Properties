@@ -22,6 +22,24 @@ type SearchParams = {
   bed?: string;
 };
 
+// ✅ FIX: Sanity me "price" text field hai (jaise "1.20 M", "500K").
+// Isko number me convert karne ke liye parser — min/max filtering
+// isi parsed number se hogi, GROQ me nahi.
+function parsePriceToNumber(value: unknown): number {
+  if (typeof value === "number") return value;
+  if (typeof value !== "string") return 0;
+
+  const match = value.trim().match(/([\d,.]+)\s*([MK]?)/i);
+  if (!match) return 0;
+
+  const raw = parseFloat(match[1].replace(/,/g, ""));
+  const suffix = match[2]?.toUpperCase();
+
+  if (suffix === "M") return raw * 1_000_000;
+  if (suffix === "K") return raw * 1_000;
+  return raw;
+}
+
 export default async function PropertiesPage({
   searchParams,
 }: {
@@ -31,17 +49,44 @@ export default async function PropertiesPage({
   // ✅ Next.js 16 fix
   const params = (await searchParams) || {};
 
-  const communities = await sanityClient.fetch(communitiesQuery);
+  const communities = await sanityClient.fetch(
+    communitiesQuery,
+    {},
+    { cache: "no-store" }
+  );
 
-  const properties = await sanityClient.fetch(propertiesQuery, {
-    community: params.community ?? null,
-    search: params.search ?? null,
-    purpose: params.purpose ?? null,
-    type: params.type ?? null,
-    bed: params.bed ?? null,
-    min: params.min ? Number(params.min) : null,
-    max: params.max ? Number(params.max) : null,
-  });
+  const rawProperties = await sanityClient.fetch(
+    propertiesQuery,
+    {
+      community: params.community ?? null,
+      search: params.search ?? null,
+      purpose: params.purpose ?? null,
+      type: params.type ?? null,
+      bed: params.bed
+        ? params.bed === "studio"
+          ? 0
+          : Number(params.bed)
+        : null,
+    },
+    { cache: "no-store" }
+  );
+
+  // ✅ FIX: min/max price filtering yaha JS me — price string ko
+  // parse karke check karte hain ki koi unit us range me aata hai
+  const minPrice = params.min ? Number(params.min) : null;
+  const maxPrice = params.max ? Number(params.max) : null;
+
+  const properties =
+    minPrice == null && maxPrice == null
+      ? rawProperties
+      : (rawProperties || []).filter((property: any) =>
+          (property.units || []).some((unit: any) => {
+            const unitPrice = parsePriceToNumber(unit.price);
+            if (minPrice != null && unitPrice < minPrice) return false;
+            if (maxPrice != null && unitPrice > maxPrice) return false;
+            return true;
+          })
+        );
 
   return (
     <main className="font-body bg-white dark:bg-[#0F172A] transition-colors duration-300">

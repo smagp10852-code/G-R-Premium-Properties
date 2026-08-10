@@ -97,23 +97,21 @@ export const propertiesQuery = groq`
     location->area match "*" + $search + "*"
   ) &&
 
-  (!defined($purpose) || purpose == $purpose) &&
+  (!defined($purpose) || lower(purpose) == lower($purpose)) &&
 
-  (!defined($type) || type == $type) &&
+  (!defined($type) || lower(type) == lower($type)) &&
 
   (!defined($bed) || 
     count(units[
       unitType == "bedroom" && 
-      (
-        bedroomCount == $bed ||
-        ($bed == "studio" && bedroomCount == 0)
-      )
+      bedroomCount == $bed
     ]) > 0
-  ) &&
+  )
 
-  (!defined($min) || count(units[price >= $min]) > 0) &&
-
-  (!defined($max) || count(units[price <= $max]) > 0)
+  // ✅ NOTE: min/max price filtering GROQ se hata diya — Sanity me "price"
+  // field text hai (jaise "1.20 M"), isliye numeric >= / <= compare kaam
+  // nahi karta. Ab min/max ka filtering page.tsx me JS se hoga (price
+  // string parse karke) — neeche dekho.
 ]
 | order(_createdAt desc){
   _id,
