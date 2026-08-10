@@ -75,7 +75,7 @@ export default function NavbarClient({
 
       {/* ================= HEADER ================= */}
       <header className="fixed top-[32px] left-0 w-full z-[1000] bg-black/40 backdrop-blur font-body">
-        <nav className="flex items-center px-6 lg:px-14 py-2 text-white">
+        <nav className="flex items-center max-w-7xl mx-auto px-6 lg:px-14 py-2 text-white">
           <Link href="/" className="shrink-0">
             <Image
               src="/assets/logo.png"

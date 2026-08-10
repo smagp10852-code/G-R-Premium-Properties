@@ -167,7 +167,7 @@ export default function Hero({
   /* ================= JSX ================= */
 
   return (
-    <section className="relative h-[90vh] w-full text-white overflow-hidden font-body">
+    <section className="relative h-[83vh] w-full text-white overflow-hidden font-body">
       {/* ================= IMAGE SLIDER ================= */}
       <div className="absolute inset-0">
         {slidesToUse.map((slide, i) => {
@@ -202,7 +202,7 @@ export default function Hero({
 
       {/* ================= CONTENT ================= */}
       <div className="relative z-30 h-full flex items-center">
-        <div className="max-w-5xl px-6 md:ml-36 w-full">
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 w-full">
           <h1 className="font-heading text-4xl md:text-6xl font-bold">
             {getSlideText(slidesToUse[index], "title")}
           </h1>
@@ -302,32 +302,7 @@ export default function Hero({
         </div>
       </div>
 
-      {/* ================= ARROWS ================= */}
-      <button
-        onClick={() =>
-          changeSlide(
-            (index - 1 + slidesToUse.length) % slidesToUse.length
-          )
-        }
-        className="absolute left-6 top-1/2 -translate-y-1/2 z-30
-             bg-black/40 p-3 rounded-full
-             text-white hover:bg-black/60
-             transition cursor-pointer"
-      >
-        <ChevronLeft />
-      </button>
-
-      <button
-        onClick={() =>
-          changeSlide((index + 1) % slidesToUse.length)
-        }
-        className="absolute right-6 top-1/2 -translate-y-1/2 z-30
-             bg-black/40 p-3 rounded-full
-             text-white hover:bg-black/60
-             transition cursor-pointer"
-      >
-        <ChevronRight />
-      </button>
+     
 
     </section>
   );

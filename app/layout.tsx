@@ -10,6 +10,9 @@ import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "@/lib/language-context";
 import AutoPopupEnquiry from "@/components/ui/AutoPopupEnquiry";
 
+// import GoogleTag from "@/components/analytics/GoogleTag";
+// import MetaPixel from "@/components/analytics/MetaPixel";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -102,6 +105,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${poppins.variable} antialiased bg-[#0F172A] text-white`}
       >
+         {/* <GoogleTag />
+        <MetaPixel /> */}
         <LanguageProvider>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
 
