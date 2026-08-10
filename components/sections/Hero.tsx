@@ -172,7 +172,7 @@ export default function Hero({
   /* ================= JSX ================= */
 
   return (
-    <section className="relative h-[83vh] w-full text-white overflow-hidden font-body">
+    <section className="relative h-[81vh] w-full text-white overflow-hidden font-body">
       {/* ================= MEDIA SLIDER ================= */}
       <div className="absolute inset-0">
         {slidesToUse.map((slide, i) => {
