@@ -197,7 +197,7 @@ export default function Hero({
         })}
 
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/50 z-[2] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-[2] pointer-events-none" />
       </div>
 
       {/* ================= CONTENT ================= */}
