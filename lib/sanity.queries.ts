@@ -10,6 +10,7 @@ export const homepageHeroQuery = groq`
   heroCTA_hi, heroCTA_ar, heroCTA_ru,
   supportedLanguages,
   heroSlides[]{
+    mediaType,
     title,
     title_hi, title_ar, title_ru,
     subtitle,
@@ -17,6 +18,13 @@ export const homepageHeroQuery = groq`
     active,
     image{
       asset->{ url }
+    },
+    video{
+      asset->{
+        _id,
+        url,
+        mimeType
+      }
     },
     linkedProperty->{
       _id,

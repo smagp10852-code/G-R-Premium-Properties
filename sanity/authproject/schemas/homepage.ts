@@ -46,6 +46,22 @@ export default defineType({
           type: "object",
           fields: [
 
+            // ── Media Type selector ──
+            defineField({
+              name: "mediaType",
+              title: "Media Type",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Image", value: "image" },
+                  { title: "Video", value: "video" },
+                ],
+                layout: "radio",
+              },
+              initialValue: "image",
+              validation: (Rule) => Rule.required(),
+            }),
+
             // Default English
             defineField({
               name: "title",
@@ -60,13 +76,36 @@ export default defineType({
               type: "string",
             }),
 
-            // Image
+            // Image — shown only when mediaType === "image"
             defineField({
               name: "image",
               title: "Background Image",
               type: "image",
               options: { hotspot: true },
-              validation: (Rule) => Rule.required(),
+              hidden: ({ parent }) => (parent as any)?.mediaType !== "image",
+              validation: (Rule) =>
+                Rule.custom((value, context) => {
+                  const parent = context.parent as { mediaType?: string };
+                  if (parent?.mediaType === "video") return true;
+                  return value ? true : "Background Image is required when Media Type is Image";
+                }),
+            }),
+
+            // Video — shown only when mediaType === "video"
+            defineField({
+              name: "video",
+              title: "Background Video",
+              type: "file",
+              options: {
+                accept: "video/mp4,video/webm,video/quicktime",
+              },
+              hidden: ({ parent }) => (parent as any)?.mediaType !== "video",
+              validation: (Rule) =>
+                Rule.custom((value, context) => {
+                  const parent = context.parent as { mediaType?: string };
+                  if (parent?.mediaType !== "video") return true;
+                  return value ? true : "Background Video is required when Media Type is Video";
+                }),
             }),
 
             // Active Toggle
@@ -99,6 +138,23 @@ export default defineType({
               }),
             ]),
           ],
+
+          // Preview shows which media type + a thumbnail
+          preview: {
+            select: {
+              title: "title",
+              mediaType: "mediaType",
+              media: "image",
+            },
+            prepare(selection: Record<string, any>) {
+              const { title, mediaType, media } = selection;
+              return {
+                title: title || "Untitled",
+                subtitle: mediaType === "video" ? "🎬 Video" : "🖼 Image",
+                media,
+              };
+            },
+          },
         },
       ],
     }),
