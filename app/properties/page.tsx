@@ -47,7 +47,7 @@ export default async function PropertiesPage({
     <main className="font-body bg-white dark:bg-[#0F172A] transition-colors duration-300">
 
       {/* HERO */}
-      <section className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden">
+      <section className="relative h-[30vh] md:h-[40vh] w-full overflow-hidden">
         <img
           src="/assets/hero-1.jpg"
           alt="Luxury Properties Dubai"

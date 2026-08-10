@@ -127,11 +127,12 @@ export default function PropertyFilter({ communities }: Props) {
 
   return (
     <section className="sticky top-[80px] z-50 w-full bg-white dark:bg-[#0F172A] border-b border-gray-200 dark:border-gray-800 shadow-lg transition-colors duration-300 font-body">
-      <div className="w-full px-6 py-5">
-        <div className="flex flex-wrap items-center gap-4">
+      {/* ✅ WIDTH FIX: same max-width + horizontal padding as header/hero container instead of full-bleed */}
+      <div className="max-w-7xl mx-auto px-6 py-3">
+        <div className="flex flex-wrap items-center gap-2">
 
           {/* ================= SEARCH ================= */}
-          <div ref={containerRef} className="relative flex-1 min-w-[260px]">
+          <div ref={containerRef} className="relative flex-1 min-w-[220px]">
             <input
               value={query}
               onChange={(e) => {
@@ -144,7 +145,8 @@ export default function PropertyFilter({ communities }: Props) {
               className="font-body w-full border border-gray-300 dark:border-gray-700 
                          bg-white dark:bg-[#111827] 
                          text-black dark:text-white
-                         rounded-full px-6 py-3
+                         text-sm
+                         rounded-full px-4 py-2
                          focus:outline-none focus:ring-2 focus:ring-[#D4AF37]
                          transition"
             />
@@ -177,7 +179,7 @@ export default function PropertyFilter({ communities }: Props) {
 
                       router.push(`/properties?${params.toString()}`);
                     }}
-                    className="font-body w-full text-left px-6 py-3
+                    className="font-body w-full text-left px-4 py-2
                                hover:bg-gray-100 dark:hover:bg-white/10
                                transition"
                   >
@@ -202,7 +204,8 @@ export default function PropertyFilter({ communities }: Props) {
               className="font-body appearance-none border border-gray-300 dark:border-gray-700
                          bg-white dark:bg-[#111827]
                          text-black dark:text-white
-                         px-6 py-3 rounded-full min-w-[150px]
+                         text-sm
+                         px-4 py-2 rounded-full min-w-[110px]
                          focus:outline-none focus:ring-2 focus:ring-[#D4AF37]
                          transition"
             >
@@ -219,7 +222,7 @@ export default function PropertyFilter({ communities }: Props) {
           <button
             onClick={applyFilters}
             className="font-body bg-[#D4AF37] hover:bg-[#c19d2f]
-                       text-white px-7 py-3 rounded-full
+                       text-white text-sm px-5 py-2 rounded-full
                        transition font-medium"
           >
             {t("properties.find")}
@@ -228,9 +231,9 @@ export default function PropertyFilter({ communities }: Props) {
           <button
             onClick={resetFilters}
             className="font-body border border-[#D4AF37]
-                       text-[#D4AF37]
+                       text-[#D4AF37] text-sm
                        hover:bg-[#D4AF37] hover:text-white
-                       px-7 py-3 rounded-full
+                       px-5 py-2 rounded-full
                        transition font-medium"
           >
             {t("properties.reset")}

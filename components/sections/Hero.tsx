@@ -99,7 +99,6 @@ export default function Hero({
   const [prevIndex, setPrevIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const [buyType, setBuyType] = useState<"buy" | "rent">("buy");
   const [query, setQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [direction, setDirection] = useState<"left" | "right">("right");
@@ -154,12 +153,14 @@ export default function Hero({
     )
     : communities;
 
+  // ✅ FIX: purpose param hata diya — UI me Buy/Rent choose karne ka option hi nahi tha,
+  // isliye "buy" hamesha force ho raha tha aur "rent" wali properties ke liye
+  // "No properties found" aa raha tha. Ab sirf community/area text se search hoga,
+  // aur purpose ka filter properties page ke apne Buy/Rent dropdown se hi lagega.
   const handleSearch = () => {
     if (!query.trim()) return;
 
-    router.push(
-      `/properties?search=${encodeURIComponent(query)}&purpose=${buyType}`
-    );
+    router.push(`/properties?search=${encodeURIComponent(query)}`);
 
     setShowSuggestions(false);
   };
@@ -277,10 +278,9 @@ export default function Hero({
                   <div
                     key={c._id}
                     onClick={() => {
+                      // ✅ FIX: yaha bhi purpose=buy hardcode nahi kar rahe ab
                       router.push(
-                        `/properties?search=${encodeURIComponent(
-                          c.name
-                        )}&purpose=${buyType}`
+                        `/properties?search=${encodeURIComponent(c.name)}`
                       );
                       setShowSuggestions(false);
                     }}

@@ -82,7 +82,7 @@ export const featuredPropertiesQuery = groq`
 `;
 
 /* ======================================================
-   ALL PROPERTIES (FILTER PAGE)
+   ALL PROPERTIES (FILTER PAGE) — FIXED SEARCH MATCH
 ====================================================== */
 
 export const propertiesQuery = groq`
@@ -92,8 +92,9 @@ export const propertiesQuery = groq`
   (!defined($community) || location->slug.current == $community) &&
 
   (!defined($search) || 
-    title match $search + "*" ||
-    location->name match $search + "*"
+    title match "*" + $search + "*" ||
+    location->name match "*" + $search + "*" ||
+    location->area match "*" + $search + "*"
   ) &&
 
   (!defined($purpose) || purpose == $purpose) &&
