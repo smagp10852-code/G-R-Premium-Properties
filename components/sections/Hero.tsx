@@ -8,6 +8,7 @@ import { useTranslation } from "@/lib/language-context";
 /* ================= TYPES ================= */
 
 interface HeroSlide {
+  mediaType?: "image" | "video"; // NEW
   title: string;
   subtitle?: string;
   title_hi?: string;
@@ -19,6 +20,13 @@ interface HeroSlide {
   image?: {
     asset?: {
       url?: string;
+    };
+  };
+  video?: {
+    asset?: {
+      _id?: string;
+      url?: string;
+      mimeType?: string;
     };
   };
   active?: boolean;
@@ -33,7 +41,6 @@ interface HeroSlide {
   };
   [key: string]: any;
 }
-
 
 interface Community {
   _id: string;
@@ -52,6 +59,16 @@ interface HeroProps {
 
 const goldenColor = "#C9A227";
 const PLACEHOLDER_IMAGE = "/images/placeholder.png";
+
+// Old slides with no mediaType saved -> treat as "image" (backward compatible)
+const getSlideMediaType = (slide: HeroSlide): "image" | "video" =>
+  slide.mediaType === "video" ? "video" : "image";
+
+const slideHasValidMedia = (slide: HeroSlide) => {
+  const type = getSlideMediaType(slide);
+  if (type === "video") return !!slide?.video?.asset?.url;
+  return !!slide?.image?.asset?.url;
+};
 
 /* ================= COMPONENT ================= */
 
@@ -77,7 +94,8 @@ export default function Hero({
 
   /* ================= SAFE SLIDES ================= */
 
-  const validSlides = slides.filter((s) => s?.image?.asset?.url);
+  // CHANGED: checks the correct media field depending on mediaType
+  const validSlides = slides.filter(slideHasValidMedia);
   const activeSlides =
     validSlides.filter((s) => s.active) || validSlides;
   const slidesToUse =
@@ -103,7 +121,6 @@ export default function Hero({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [direction, setDirection] = useState<"left" | "right">("right");
 
-
   /* ================= SLIDER ================= */
 
   const changeSlide = (newIndex: number) => {
@@ -112,10 +129,6 @@ export default function Hero({
     setPrevIndex(index);
     setIndex(newIndex);
   };
-
-
-
-
 
   useEffect(() => {
     if (slidesToUse.length < 2) return;
@@ -127,9 +140,6 @@ export default function Hero({
 
     return () => clearInterval(timer);
   }, [slidesToUse]);
-
-
-
 
   /* ================= OUTSIDE CLICK ================= */
 
@@ -153,15 +163,9 @@ export default function Hero({
     )
     : communities;
 
-  // ✅ FIX: purpose param hata diya — UI me Buy/Rent choose karne ka option hi nahi tha,
-  // isliye "buy" hamesha force ho raha tha aur "rent" wali properties ke liye
-  // "No properties found" aa raha tha. Ab sirf community/area text se search hoga,
-  // aur purpose ka filter properties page ke apne Buy/Rent dropdown se hi lagega.
   const handleSearch = () => {
     if (!query.trim()) return;
-
     router.push(`/properties?search=${encodeURIComponent(query)}`);
-
     setShowSuggestions(false);
   };
 
@@ -169,30 +173,44 @@ export default function Hero({
 
   return (
     <section className="relative h-[83vh] w-full text-white overflow-hidden font-body">
-      {/* ================= IMAGE SLIDER ================= */}
+      {/* ================= MEDIA SLIDER ================= */}
       <div className="absolute inset-0">
         {slidesToUse.map((slide, i) => {
-          const imageUrl =
-            slide?.image?.asset?.url || PLACEHOLDER_IMAGE;
+          const mediaType = getSlideMediaType(slide);
+          const positionClass =
+            i === index
+              ? "translate-x-0 z-[2]"
+              : i === prevIndex
+                ? "-translate-x-full z-[1]"
+                : "translate-x-full";
 
           return (
             <div
               key={i}
-              className={`absolute inset-0 transition-transform duration-500 ease-in-out ${i === index
-                ? "translate-x-0 z-[2]"
-                : i === prevIndex
-                  ? "-translate-x-full z-[1]"
-                  : "translate-x-full"
-                }`}
-
-
-
+              className={`absolute inset-0 transition-transform duration-500 ease-in-out ${positionClass}`}
             >
-              <img
-                src={imageUrl}
-                alt={slide.title || "Hero Image"}
-                className="w-full h-full object-cover"
-              />
+              {mediaType === "video" && slide?.video?.asset?.url ? (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls={false}
+                  poster={slide?.image?.asset?.url || undefined}
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source
+                    src={slide.video.asset.url}
+                    type={slide.video.asset.mimeType || "video/mp4"}
+                  />
+                </video>
+              ) : (
+                <img
+                  src={slide?.image?.asset?.url || PLACEHOLDER_IMAGE}
+                  alt={slide.title || "Hero Image"}
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
           );
         })}
@@ -228,13 +246,8 @@ export default function Hero({
             {localizedCTA}
           </button>
 
-
-
           {/* ================= SEARCH ================= */}
-          <div
-            ref={searchRef}
-            className="relative mt-10 w-full max-w-xl"
-          >
+          <div ref={searchRef} className="relative mt-10 w-full max-w-xl">
             <div className="flex items-center bg-white dark:bg-[#1E293B] 
                             text-gray-900 dark:text-white 
                             rounded-xl shadow-xl overflow-hidden transition-colors duration-300">
@@ -259,7 +272,6 @@ export default function Hero({
               </button>
             </div>
 
-            {/* ================= SUGGESTIONS ================= */}
             {showSuggestions && filtered.length > 0 && (
               <div
                 className="absolute left-0 top-full w-full 
@@ -271,14 +283,10 @@ export default function Hero({
              text-sm
              transition-colors duration-300"
               >
-
-
-
                 {filtered.map((c) => (
                   <div
                     key={c._id}
                     onClick={() => {
-                      // ✅ FIX: yaha bhi purpose=buy hardcode nahi kar rahe ab
                       router.push(
                         `/properties?search=${encodeURIComponent(c.name)}`
                       );
@@ -301,9 +309,6 @@ export default function Hero({
           </div>
         </div>
       </div>
-
-     
-
     </section>
   );
 }
