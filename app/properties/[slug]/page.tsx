@@ -57,6 +57,16 @@ function getBedroomRangeText(units: any[] = []) {
   return hasStudio ? `Studio - ${max}` : range;
 }
 
+// Per-unit label for the pricing table below — e.g. "1 Bedroom", "Studio",
+// "Office", or the custom label for anything else.
+function getUnitLabel(unit: any): string {
+  if (unit?.unitType === "studio") return "Studio";
+  if (unit?.unitType === "bedroom") return `${unit?.bedroomCount} Bedroom`;
+  if (unit?.unitType === "office") return "Office";
+  if (unit?.unitType === "other") return unit?.customLabel || "Unit";
+  return "Unit";
+}
+
 function urlOrPlaceholder(img: any): string {
   if (typeof img === "string") return img;
   if (img?.asset?.url) return img.asset.url;
@@ -319,6 +329,65 @@ export default function PropertyDetailPage() {
           </div>
         </div>
       </motion.section>
+
+      {/* ================= UNIT TYPES & PRICING ================= */}
+      {property?.units?.length > 0 && (
+        <motion.section
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="pb-16 px-4 sm:px-6 lg:px-8"
+        >
+          <div className="max-w-7xl mx-auto">
+            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: goldenColor }}>
+              Pricing
+            </p>
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+              Available Unit Types
+            </h2>
+
+            <div className="border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden">
+              {/* Header row — desktop/tablet only, mobile rows are self-labeled */}
+              <div className="hidden sm:grid grid-cols-3 gap-4 px-6 py-3 bg-gray-50 dark:bg-[#101827] text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                <span>Unit Type</span>
+                <span>Size</span>
+                <span className="text-right">Starting Price</span>
+              </div>
+
+              {property.units.map((unit: any, i: number) => (
+                <div
+                  key={i}
+                  className={`flex sm:grid sm:grid-cols-3 items-center justify-between gap-2 sm:gap-4 px-4 sm:px-6 py-3.5 sm:py-4 hover:bg-gray-50 dark:hover:bg-[#101827]/60 transition-colors ${
+                    i > 0 ? "border-t border-gray-100 dark:border-gray-800" : ""
+                  }`}
+                >
+                  <div>
+                    <p className="font-medium text-gray-900 dark:text-white text-sm sm:text-base">
+                      {getUnitLabel(unit)}
+                    </p>
+                    {/* Size shown inline here on mobile since the column is hidden below sm */}
+                    <p className="sm:hidden text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      {unit?.size} sq ft
+                    </p>
+                  </div>
+
+                  <span className="hidden sm:block text-sm text-gray-600 dark:text-gray-400">
+                    {unit?.size} sq ft
+                  </span>
+
+                  <span
+                    className="font-heading font-bold text-sm sm:text-base text-right"
+                    style={{ color: goldenColor }}
+                  >
+                    AED {unit?.price}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+      )}
 
       {/* ================= GALLERY ================= */}
       {galleryImages?.length > 0 && (
