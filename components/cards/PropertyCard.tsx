@@ -1,22 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  BedDouble,
-  CalendarDays,
-  Download,
-  ChevronLeft,
-  ChevronRight,
-  Percent,
-} from "lucide-react";
-
-import BrochureModal from "@/components/ui/BrochureModal";
-import { useTranslation } from "@/lib/language-context";
+import { MapPin, BedDouble, Mail, Phone, MessageCircle } from "lucide-react";
 
 const goldenColor = "#C9A227";
 const PLACEHOLDER = "/images/placeholder.jpg";
+
+// TODO: replace with the real agency contact details (or read them from
+// `property` if each listing has its own agent).
+const CONTACT_EMAIL = "info@grpremium.com";
+const CONTACT_PHONE = "+919330230426";
+const CONTACT_WHATSAPP = "971585964689"; // digits only, no + — required by wa.me
 
 export default function PropertyCard({
   property,
@@ -25,209 +21,150 @@ export default function PropertyCard({
   property: any;
   onEnquire?: (p: any) => void;
 }) {
-  const { t } = useTranslation();
-
   const images =
     property?.images?.map((img: any) => img?.asset?.url).filter(Boolean) || [];
-
-  const brochureUrl = property?.brochure?.asset?.url;
-  const paymentPlan = property?.paymentPlan;
-
-  const [index, setIndex] = useState(0);
-  const [openBrochure, setOpenBrochure] = useState(false);
-
-  useEffect(() => {
-    if (images.length <= 1) return;
-
-    const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % images.length);
-    }, 3500);
-
-    return () => clearInterval(timer);
-  }, [images.length]);
 
   const locationText =
     typeof property?.location === "string"
       ? property.location
       : property?.location?.name || "";
 
+  const units = property?.units || [];
+
+  const getBedRange = () => {
+    const counts = units
+      .filter((u: any) => u?.unitType === "bedroom")
+      .map((u: any) => Number(u?.bedroomCount))
+      .filter((n: number) => !isNaN(n));
+    const hasStudio = units.some((u: any) => u?.unitType === "studio");
+
+    if (counts.length === 0) return hasStudio ? "Studio" : "";
+
+    const min = Math.min(...counts);
+    const max = Math.max(...counts);
+    const range =
+      min === max
+        ? `${min} Bedroom${min > 1 ? "s" : ""}`
+        : `${min}-${max} Bedrooms`;
+
+    return hasStudio ? `Studio - ${max} Bedroom${max > 1 ? "s" : ""}` : range;
+  };
+  const bedRange = getBedRange();
+
+  const startingPrice = units[0]?.price;
+
+  const slug =
+    typeof property?.slug === "string" ? property.slug : property?.slug?.current;
+  const detailHref = slug ? `/properties/${slug}` : "#";
+
+  const enquirySubject = encodeURIComponent(`Enquiry: ${property?.title || "Property"}`);
+  const whatsappMessage = encodeURIComponent(
+    `Hi, I'm interested in ${property?.title || "this property"}. Could you share more details?`
+  );
+
   return (
-    <>
-      <motion.div
-        whileHover={{ y: -8 }}
-        transition={{ duration: 0.3 }}
-        className="w-full h-full flex flex-col bg-white dark:bg-[#101827] rounded-3xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 font-body"
-      >
-        {/* IMAGE */}
-        <div className="relative w-full h-[230px] flex-shrink-0 group">
-          <Image
-            src={images[index] || PLACEHOLDER}
-            alt={property?.title || "Property"}
-            fill
-            sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 33vw"
-            className="object-cover"
-          />
+    <motion.div
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.3 }}
+      className="w-full h-full flex flex-col bg-white dark:bg-[#101827] rounded-xl lg:rounded-2xl shadow-md hover:shadow-xl overflow-hidden transition-all duration-300 font-body"
+    >
+      {/* IMAGE — tapping it goes to the detail page */}
+      <Link href={detailHref} className="relative block w-full aspect-[4/3] flex-shrink-0">
+        <Image
+          src={images[0] || PLACEHOLDER}
+          alt={property?.title || "Property"}
+          fill
+          sizes="(max-width:1024px) 50vw, 33vw"
+          className="object-cover"
+        />
 
-          {images.length > 1 && (
-            <>
-              <button
-                onClick={() =>
-                  setIndex((prev) =>
-                    prev === 0 ? images.length - 1 : prev - 1
-                  )
-                }
-                className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
-              >
-                <ChevronLeft size={18} />
-              </button>
+        {/* Top-left: property type badge */}
+        {property?.propertyType && (
+          <span className="absolute top-2 left-2 text-[9px] lg:text-xs font-semibold px-2 py-1 rounded-md bg-[#0F172A] text-white">
+            {property.propertyType}
+          </span>
+        )}
 
-              <button
-                onClick={() =>
-                  setIndex((prev) => (prev + 1) % images.length)
-                }
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
-              >
-                <ChevronRight size={18} />
-              </button>
+        {/* Bottom-right: handover badge */}
+        {property?.handover && (
+          <span className="absolute bottom-2 right-2 text-[9px] lg:text-xs font-semibold px-2 py-1 rounded-md bg-black/70 text-white">
+            {property.handover}
+          </span>
+        )}
+      </Link>
 
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-                {images.map((_: string, i: number) => (
-                  <button
-                    key={i}
-                    onClick={() => setIndex(i)}
-                    className={
-                      i === index
-                        ? "h-2.5 w-6 bg-white rounded-full transition"
-                        : "h-2.5 w-2.5 bg-white/50 rounded-full transition"
-                    }
-                  />
-                ))}
-              </div>
-            </>
+      {/* CONTENT */}
+      <div className="p-2.5 lg:p-4 flex flex-col flex-grow">
+        <Link href={detailHref}>
+          <h3 className="font-heading text-[13px] lg:text-base font-bold mb-0.5 line-clamp-1 hover:text-[#C9A227] transition-colors">
+            {property?.title}
+          </h3>
+        </Link>
+
+        {property?.developerName && (
+          <p className="font-body text-[10px] lg:text-xs text-gray-500 dark:text-gray-500 mb-1">
+            by {property.developerName}
+          </p>
+        )}
+
+        <div className="flex items-center justify-between gap-2 mb-2 lg:mb-3">
+          <span className="flex items-center gap-1 text-[10px] lg:text-xs text-gray-600 dark:text-gray-400 min-w-0">
+            <MapPin size={11} className="flex-shrink-0" />
+            <span className="line-clamp-1">{locationText}</span>
+          </span>
+
+          {bedRange && (
+            <span className="flex items-center gap-1 text-[10px] lg:text-xs text-gray-600 dark:text-gray-400 flex-shrink-0">
+              <BedDouble size={11} />
+              {bedRange}
+            </span>
           )}
         </div>
 
-        {/* CONTENT */}
-        <div className="p-6 flex flex-col flex-grow">
-
-          {/* TITLE */}
-          <h3 className="font-heading text-lg sm:text-xl font-bold mb-1 line-clamp-1">
-            {property?.title}
-          </h3>
-
-          {/* LOCATION */}
-          <p className="font-body text-sm text-gray-600 dark:text-gray-400 mb-4 min-h-[20px]">
-            {locationText}
+        <div className="border-t border-gray-100 dark:border-gray-800 pt-2 mb-2 lg:mb-3">
+          <p className="text-[9px] lg:text-[10px] uppercase tracking-wide text-gray-400 mb-0.5">
+            Starting Price
           </p>
-
-          {/* UNITS */}
-<div className="font-body space-y-2 text-sm text-gray-700 dark:text-gray-300 min-h-[160px] mb-5">
-
-  {property?.units?.slice(0, 6).map((unit: any, i: number) => {
-
-    let unitLabel = "";
-
-    if (unit?.unitType === "studio") {
-      unitLabel = "Studio";
-    } 
-    else if (unit?.unitType === "bedroom") {
-      unitLabel = `${unit?.bedroomCount} ${t("property.bed")}`;
-    } 
-    else if (unit?.unitType === "office") {
-      unitLabel = "Office";
-    } 
-    else if (unit?.unitType === "other") {
-      unitLabel = unit?.customLabel || "";
-    }
-
-    return (
-      <div key={i} className="flex items-start gap-2">
-        <BedDouble size={16} />
-
-        <span>
-          <strong>{unitLabel}</strong> • {unit?.size}{" "}
-          {t("property.sqFt")} •{" "}
-          <strong>
-            {t("property.aed")} {unit?.price}
-          </strong>
-        </span>
-      </div>
-    );
-
-  })}
-
-</div>
-
-          {/* PAYMENT PLAN */}
-          <div className="min-h-[110px] mb-5">
-            {paymentPlan && (
-              <div className="font-body bg-gray-100 dark:bg-[#1c2536] p-4 rounded-xl">
-
-                <div className="flex items-center gap-2 mb-2">
-                  <Percent size={16} />
-                  <span className="text-sm font-semibold">
-                    Payment Plan
-                  </span>
-                </div>
-
-                <div className="flex justify-between text-sm font-medium">
-                  <span>{paymentPlan.booking || 0}%</span>
-                  <span>{paymentPlan.construction || 0}%</span>
-                  <span>{paymentPlan.handover || 0}%</span>
-                </div>
-
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
-                  <span>Booking</span>
-                  <span>Construction</span>
-                  <span>Handover</span>
-                </div>
-
-              </div>
-            )}
-          </div>
-
-          {/* HANDOVER */}
-          <div className="min-h-[30px] mb-6">
-            {property?.handover && (
-              <div className="font-body flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <CalendarDays size={16} />
-                <span>
-                  {t("property.handover")}: {property.handover}
-                </span>
-              </div>
-            )}
-          </div>
-
-          {/* BUTTONS */}
-          <div className="flex gap-3 mt-auto">
-
-            <button
-              onClick={() => setOpenBrochure(true)}
-              className="font-body flex-1 py-2.5 rounded-xl text-sm font-medium border border-[#C9A227] text-[#C9A227] hover:bg-[#C9A227] hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
+          {startingPrice && (
+            <p
+              className="font-body text-[13px] lg:text-lg font-bold"
+              style={{ color: goldenColor }}
             >
-              <Download size={16} />
-              {t("property.brochure")}
-            </button>
-
-            <button
-              onClick={() => onEnquire?.(property)}
-              className="font-body flex-1 py-2.5 rounded-xl text-sm font-semibold text-black transition-all duration-300 hover:opacity-90"
-              style={{ backgroundColor: goldenColor }}
-            >
-              {t("property.enquire")}
-            </button>
-
-          </div>
-
+              AED {startingPrice}
+            </p>
+          )}
         </div>
-      </motion.div>
 
-      <BrochureModal
-        open={openBrochure}
-        onClose={() => setOpenBrochure(false)}
-        pdfUrl={brochureUrl}
-        propertyName={property?.title}
-      />
-    </>
+        {/* CONTACT ROW — Email / Call / WhatsApp */}
+        <div className="mt-auto grid grid-cols-3 gap-1.5">
+          <a
+            href={`mailto:${CONTACT_EMAIL}?subject=${enquirySubject}`}
+            onClick={() => onEnquire?.(property)}
+            className="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#1c2536] text-gray-700 dark:text-gray-300 hover:bg-[#C9A227] hover:text-black transition-colors"
+          >
+            <Mail size={13} />
+            <span className="text-[8px] lg:text-[10px] font-medium">Email</span>
+          </a>
+
+          <a
+            href={`tel:${CONTACT_PHONE}`}
+            className="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-lg bg-gray-100 dark:bg-[#1c2536] text-gray-700 dark:text-gray-300 hover:bg-[#C9A227] hover:text-black transition-colors"
+          >
+            <Phone size={13} />
+            <span className="text-[8px] lg:text-[10px] font-medium">Call</span>
+          </a>
+
+          <a
+            href={`https://wa.me/${CONTACT_WHATSAPP}?text=${whatsappMessage}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-lg bg-green-500/10 text-green-700 dark:text-green-400 hover:bg-green-500 hover:text-white transition-colors"
+          >
+            <MessageCircle size={13} />
+            <span className="text-[8px] lg:text-[10px] font-medium">WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </motion.div>
   );
 }

@@ -67,11 +67,10 @@ export default function WhyChooseUs() {
 
   return (
     <section className="bg-white dark:bg-[#0F172A] overflow-hidden transition-colors duration-300 font-body">
-
       {/* ================= STATS ================= */}
-      <div className="bg-[#E5E7EB] dark:bg-[#111827] py-12 px-4 transition-colors duration-300">
+      <div className="bg-[#E5E7EB] dark:bg-[#111827] py-10 sm:py-12 px-4 transition-colors duration-300">
         <motion.div
-          className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8"
+          className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 sm:gap-8"
           variants={container}
           initial="hidden"
           whileInView="visible"
@@ -85,15 +84,15 @@ export default function WhyChooseUs() {
               whileHover={{ scale: 1.05 }}
             >
               <stat.icon
-                className="w-10 h-10 mx-auto mb-3"
+                className="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 sm:mb-3"
                 style={{ color: goldenColor }}
               />
 
-              <div className="font-heading text-3xl font-bold text-gray-900 dark:text-white">
+              <div className="font-heading text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                 {stat.value}
               </div>
 
-              <p className="font-body text-xs tracking-wider text-gray-500 dark:text-gray-400 mt-1">
+              <p className="font-body text-[11px] sm:text-xs tracking-wider text-gray-500 dark:text-gray-400 mt-1">
                 {stat.label}
               </p>
             </motion.div>
@@ -102,46 +101,53 @@ export default function WhyChooseUs() {
       </div>
 
       {/* ================= MAIN CONTENT ================= */}
-      <div className="py-16 px-4 md:py-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
+      <div className="py-12 px-4 sm:px-6 sm:py-16 md:py-24 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* IMAGE BLOCK */}
           <motion.div
-            className="order-1 lg:order-2 relative"
+            className="order-1 lg:order-2 relative px-2 sm:px-0"
             variants={fadeRight}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.img
-              src="/assets/about1.png"
-              alt="Luxury Property"
-              className="w-full rounded-xl shadow-xl"
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.3 }}
-            />
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] rounded-xl overflow-hidden shadow-xl">
+              <motion.img
+                src="/assets/about1.png"
+                alt="Luxury Property"
+                loading="lazy"
+                className="w-full h-full object-cover"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
 
+            {/* Badge kept within the image's own bounds on mobile so the
+               section's overflow-hidden never clips it; only offsets
+               outward from sm breakpoint up where there's room. */}
             <div
-              className="absolute -bottom-8 left-[-10px] md:left-[-14px] px-4 py-4 rounded-lg text-white shadow-lg"
+              className="absolute -bottom-5 left-3 sm:-bottom-8 sm:left-[-10px] md:left-[-14px] px-3.5 py-3 sm:px-4 sm:py-4 rounded-lg text-white shadow-lg"
               style={{ backgroundColor: goldenColor }}
             >
               <div className="text-center">
-                <div className="font-heading text-3xl font-bold">15+</div>
-                <div className="font-body text-sm">{t("about.yearsOfExcellence")}</div>
+                <div className="font-heading text-2xl sm:text-3xl font-bold">15+</div>
+                <div className="font-body text-xs sm:text-sm whitespace-nowrap">
+                  {t("about.yearsOfExcellence")}
+                </div>
               </div>
             </div>
           </motion.div>
 
           {/* TEXT BLOCK */}
           <motion.div
-            className="order-2 lg:order-1 space-y-6"
+            className="order-2 lg:order-1 space-y-5 sm:space-y-6 mt-8 lg:mt-0"
             variants={fadeLeft}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
             <motion.span
-              className="font-body text-sm font-semibold tracking-wider uppercase inline-block"
+              className="font-body text-xs sm:text-sm font-semibold tracking-wider uppercase inline-block"
               style={{ color: goldenColor }}
               variants={fadeUp}
             >
@@ -149,23 +155,20 @@ export default function WhyChooseUs() {
             </motion.span>
 
             <motion.h2
-              className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white"
+              className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight"
               variants={fadeUp}
             >
               {t("about.whyChooseGrPremium")}
             </motion.h2>
 
             <motion.p
-              className="font-body text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed"
+              className="font-body text-gray-600 dark:text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed"
               variants={fadeUp}
             >
               {t("about.description")}
             </motion.p>
 
-            <motion.ul
-              className="space-y-4"
-              variants={container}
-            >
+            <motion.ul className="space-y-3 sm:space-y-4" variants={container}>
               {features.map((feature, i) => (
                 <motion.li
                   key={i}
@@ -174,10 +177,10 @@ export default function WhyChooseUs() {
                   whileHover={{ x: 6 }}
                 >
                   <span
-                    className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
+                    className="w-2 h-2 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"
                     style={{ backgroundColor: goldenColor }}
                   />
-                  <span className="font-body text-gray-700 dark:text-gray-300">
+                  <span className="font-body text-sm sm:text-base text-gray-700 dark:text-gray-300">
                     {feature}
                   </span>
                 </motion.li>
@@ -186,7 +189,7 @@ export default function WhyChooseUs() {
 
             <motion.button
               onClick={() => router.push("/about")}
-              className="font-body px-8 py-3 cursor-pointer rounded-md font-semibold text-black w-fit"
+              className="font-body px-8 py-3 cursor-pointer rounded-md font-semibold text-black w-full sm:w-fit text-center"
               style={{ backgroundColor: goldenColor }}
               whileHover={{
                 scale: 1.05,
@@ -198,7 +201,6 @@ export default function WhyChooseUs() {
               {t("about.getStartedToday")}
             </motion.button>
           </motion.div>
-
         </div>
       </div>
     </section>

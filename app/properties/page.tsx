@@ -22,7 +22,7 @@ type SearchParams = {
   bed?: string;
 };
 
-// ✅ FIX: Sanity me "price" text field hai (jaise "1.20 M", "500K").
+// Sanity me "price" text field hai (jaise "1.20 M", "500K").
 // Isko number me convert karne ke liye parser — min/max filtering
 // isi parsed number se hogi, GROQ me nahi.
 function parsePriceToNumber(value: unknown): number {
@@ -45,8 +45,6 @@ export default async function PropertiesPage({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
-
-  // ✅ Next.js 16 fix
   const params = (await searchParams) || {};
 
   const communities = await sanityClient.fetch(
@@ -71,8 +69,6 @@ export default async function PropertiesPage({
     { cache: "no-store" }
   );
 
-  // ✅ FIX: min/max price filtering yaha JS me — price string ko
-  // parse karke check karte hain ki koi unit us range me aata hai
   const minPrice = params.min ? Number(params.min) : null;
   const maxPrice = params.max ? Number(params.max) : null;
 
@@ -90,7 +86,6 @@ export default async function PropertiesPage({
 
   return (
     <main className="font-body bg-white dark:bg-[#0F172A] transition-colors duration-300">
-
       {/* HERO */}
       <section className="relative h-[30vh] md:h-[40vh] w-full overflow-hidden">
         <img
@@ -98,15 +93,12 @@ export default async function PropertiesPage({
           alt="Luxury Properties Dubai"
           className="absolute inset-0 w-full h-full object-cover"
         />
-
         <div className="absolute inset-0 bg-black/60" />
-
         <div className="relative z-10 h-full flex items-center justify-center text-center px-4 sm:px-6">
           <div>
             <h1 className="font-heading text-white text-3xl sm:text-4xl md:text-6xl font-bold">
               <T k="properties.findDreamProperty" />
             </h1>
-
             <p className="font-body text-gray-200 mt-4 text-base md:text-lg">
               <T k="properties.heroDescription" />
             </p>
@@ -119,16 +111,12 @@ export default async function PropertiesPage({
 
       {/* RESULTS */}
       <section className="w-full px-4 sm:px-6 lg:px-8 py-16 lg:max-w-7xl lg:mx-auto">
-
         {properties.length === 0 ? (
           <div className="text-center py-24">
             <div className="text-6xl mb-6">🔍</div>
-
-            <h2 className="font-heading text-2xl md:text-3xl font-semibold 
-                           text-gray-900 dark:text-white">
+            <h2 className="font-heading text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white">
               <T k="properties.noPropertiesFound" />
             </h2>
-
             <p className="font-body text-gray-600 dark:text-gray-400 mt-3">
               <T k="properties.noPropertiesDescription" />
             </p>
@@ -136,12 +124,10 @@ export default async function PropertiesPage({
         ) : (
           <PropertiesClient properties={properties} />
         )}
-
       </section>
 
       <CTA />
       <Footer />
-
     </main>
   );
 }

@@ -57,6 +57,12 @@ export const featuredPropertiesQuery = groq`
   "slug": slug.current,
   handover,
   featured,
+  type,
+
+  developer->{
+    name,
+    "slug": slug.current
+  },
 
   paymentPlan{
     booking,
@@ -132,6 +138,11 @@ export const propertiesQuery = groq`
   purpose,
   type,
 
+  developer->{
+    name,
+    "slug": slug.current
+  },
+
   paymentPlan{
     booking,
     construction,
@@ -164,7 +175,7 @@ export const propertiesQuery = groq`
 `;
 
 /* ======================================================
-   SINGLE PROPERTY
+   SINGLE PROPERTY (DETAIL PAGE)
 ====================================================== */
 
 export const propertyBySlugQuery = groq`
@@ -187,7 +198,8 @@ export const propertyBySlugQuery = groq`
 
   developer->{
     name,
-    "slug": slug.current
+    "slug": slug.current,
+    "logo": logo.asset->url
   },
 
   location->{
@@ -202,15 +214,59 @@ export const propertyBySlugQuery = groq`
   },
 
   units[]{
-  unitType,
-  bedroomCount,
-  customLabel,
-  size,
-  price
-},
+    unitType,
+    bedroomCount,
+    customLabel,
+    size,
+    price
+  },
 
   brochure{
     asset->{ url }
+  },
+
+  // ============= NEW — detail page sections =============
+  description,
+  sizeRange,
+  completionDate,
+  keyPotentialPercent,
+
+  galleryImages[]{
+    asset->{ url }
+  },
+
+  amenities[]{
+    icon,
+    label
+  },
+
+  investmentHighlights,
+
+  investmentStat{
+    label,
+    value
+  },
+
+  floorPlansPdf{
+    asset->{ url }
+  },
+
+  locationLandmarks[]{
+    label,
+    distance
+  },
+
+  mapLocation,
+
+  agent{
+    name,
+    title,
+    "photoUrl": photo.asset->url
+  },
+
+  faqs[]{
+    question,
+    answer
   }
 }
 `;
@@ -231,6 +287,7 @@ export const propertiesByDeveloperQuery = groq`
   "slug": slug.current,
   handover,
   featured,
+  type,
 
   paymentPlan{
     booking,
