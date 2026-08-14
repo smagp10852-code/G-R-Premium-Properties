@@ -61,23 +61,26 @@ export default async function DevelopersPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6 max-w-7xl mx-auto">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 max-w-7xl mx-auto">
 
-        <div className="text-center mb-14">
+        <div className="text-center mb-10 sm:mb-14">
           <p className="font-body text-[#C9A227] uppercase tracking-widest text-sm">
             <T k="developersPage.ourDevelopers" />
           </p>
 
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mt-2 text-gray-900 dark:text-white">
+          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mt-2 text-gray-900 dark:text-white">
             <T k="developersPage.sectionTitle" />
           </h2>
 
-          <p className="font-body text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
+          <p className="font-body text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-3 sm:mt-4 max-w-2xl mx-auto">
             <T k="developersPage.sectionDescription" />
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        {/* Same rule as everywhere else on the site: 2 columns from mobile
+            up, 3 columns from lg (1024px) — so iPad Pro/laptop get 3 per
+            row instead of getting stuck waiting for a wider md/xl. */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-10">
           {developers.map((dev) => (
             <DeveloperCardClient
               key={dev._id}

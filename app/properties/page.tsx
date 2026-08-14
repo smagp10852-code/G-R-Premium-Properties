@@ -96,10 +96,10 @@ export default async function PropertiesPage({
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 h-full flex items-center justify-center text-center px-4 sm:px-6">
           <div>
-            <h1 className="font-heading text-white text-3xl sm:text-4xl md:text-6xl font-bold">
+            <h1 className="font-heading text-white text-2xl sm:text-4xl md:text-6xl font-bold">
               <T k="properties.findDreamProperty" />
             </h1>
-            <p className="font-body text-gray-200 mt-4 text-base md:text-lg">
+            <p className="font-body text-gray-200 mt-2 sm:mt-4 text-sm sm:text-base md:text-lg">
               <T k="properties.heroDescription" />
             </p>
           </div>
@@ -110,14 +110,14 @@ export default async function PropertiesPage({
       <PropertyFilter communities={communities || []} />
 
       {/* RESULTS */}
-      <section className="w-full px-4 sm:px-6 lg:px-8 py-16 lg:max-w-7xl lg:mx-auto">
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:max-w-7xl lg:mx-auto">
         {properties.length === 0 ? (
-          <div className="text-center py-24">
-            <div className="text-6xl mb-6">🔍</div>
-            <h2 className="font-heading text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white">
+          <div className="text-center py-16 sm:py-24">
+            <div className="text-5xl sm:text-6xl mb-4 sm:mb-6">🔍</div>
+            <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white">
               <T k="properties.noPropertiesFound" />
             </h2>
-            <p className="font-body text-gray-600 dark:text-gray-400 mt-3">
+            <p className="font-body text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-2 sm:mt-3">
               <T k="properties.noPropertiesDescription" />
             </p>
           </div>

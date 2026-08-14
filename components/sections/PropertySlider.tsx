@@ -43,16 +43,15 @@ export default function PropertySlider({
             </p>
           </div>
 
-          {/* STATIC GRID — 2 columns from mobile up, 3 from desktop.
-              No swipe/carousel: every card is visible and tappable at once,
-              which is what makes this fit well on small screens. */}
+          {/* STATIC GRID — 2 columns on mobile/tablet (all 4 cards, 2x2),
+              3 columns from lg (1024px) up. The 4th card is hidden exactly
+              at lg so laptop/iPad Pro get a clean single row of 3 instead
+              of an orphan 4th card wrapping alone to a second row. */}
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
             {displayProperties.map((property, index) => (
-              <PropertyCard
-                key={`${property._id}-${index}`}
-                property={property}
-                onEnquire={handleEnquire}
-              />
+              <div key={`${property._id}-${index}`} className={index === 3 ? "lg:hidden" : ""}>
+                <PropertyCard property={property} onEnquire={handleEnquire} />
+              </div>
             ))}
           </div>
 

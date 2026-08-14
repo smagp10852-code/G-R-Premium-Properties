@@ -5,9 +5,9 @@ import PropertyCard from "@/components/cards/PropertyCard";
 import EnquiryModal from "@/components/ui/EnquiryModal";
 
 export default function PropertiesClient({
-  properties,
+  properties = [],
 }: {
-  properties: any[];
+  properties?: any[];
 }) {
   const [openEnquiry, setOpenEnquiry] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState("");
@@ -20,12 +20,15 @@ export default function PropertiesClient({
 
   return (
     <>
-      <section className="py-24 bg-white dark:bg-[#0F172A] transition-colors duration-300 font-body">
-        <div className="w-full px-6">
+      <section className="py-12 sm:py-24 bg-white dark:bg-[#0F172A] transition-colors duration-300 font-body">
+        <div className="w-full px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
 
-            {/* RESPONSIVE GRID */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 items-stretch">
+            {/* Same rule as everywhere else on the site: 2 columns from
+                mobile up, 3 columns from lg (1024px) — so iPad Pro/laptop
+                get 3 per row, and mobile isn't stuck at a single lonely
+                full-width card. */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 items-stretch">
 
               {properties.map((property: any) => (
                 <div key={property._id} className="h-full flex">

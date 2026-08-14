@@ -39,10 +39,10 @@ export default function BlogCard({ blog }: BlogCardProps) {
   return (
     <article
       className="
-      h-full
+      w-full h-full
       bg-white dark:bg-[#101827]
       text-black dark:text-white
-      rounded-2xl
+      rounded-xl sm:rounded-2xl
       shadow-md hover:shadow-2xl
       transition-all duration-300
       overflow-hidden
@@ -51,7 +51,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
       "
     >
       {/* IMAGE */}
-      <div className="relative w-full h-[220px] overflow-hidden flex-shrink-0">
+      <div className="relative w-full aspect-[4/3] sm:h-[220px] sm:aspect-auto overflow-hidden flex-shrink-0">
         <Image
           src={imageUrl}
           alt={getLocalized(blog, "title")}
@@ -61,22 +61,21 @@ export default function BlogCard({ blog }: BlogCardProps) {
       </div>
 
       {/* CONTENT */}
-      <div className="p-6 flex flex-col flex-grow">
-
+      <div className="p-3 sm:p-6 flex flex-col flex-grow">
         {/* TITLE */}
-        <h3 className="font-heading text-lg font-semibold leading-snug mb-2 line-clamp-2 min-h-[56px]">
+        <h3 className="font-heading text-sm sm:text-lg font-semibold leading-snug mb-1 sm:mb-2 line-clamp-2">
           {getLocalized(blog, "title")}
         </h3>
 
-        {/* SUBTITLE */}
+        {/* SUBTITLE — hidden on mobile to save space, shown from sm up */}
         {getLocalized(blog, "subtitle") && (
-          <p className="font-body text-sm text-gray-500 dark:text-gray-400 mb-3 line-clamp-1">
+          <p className="hidden sm:block font-body text-sm text-gray-500 dark:text-gray-400 mb-3 line-clamp-1">
             {getLocalized(blog, "subtitle")}
           </p>
         )}
 
         {/* DESCRIPTION */}
-        <p className="font-body text-gray-600 dark:text-gray-300 text-sm line-clamp-3 mb-6 min-h-[72px]">
+        <p className="font-body text-gray-600 dark:text-gray-300 text-[11px] sm:text-sm line-clamp-2 sm:line-clamp-3 mb-3 sm:mb-6">
           {getLocalized(blog, "excerpt")}
         </p>
 
@@ -87,9 +86,9 @@ export default function BlogCard({ blog }: BlogCardProps) {
           font-body
           mt-auto
           inline-flex items-center justify-center
-          text-sm font-medium
+          text-[11px] sm:text-sm font-medium
           text-black
-          px-5 py-2
+          px-3 sm:px-5 py-1.5 sm:py-2
           rounded-md
           transition-all duration-300
           hover:opacity-90
@@ -98,7 +97,6 @@ export default function BlogCard({ blog }: BlogCardProps) {
         >
           {t("blog.readMore")}
         </Link>
-
       </div>
     </article>
   );

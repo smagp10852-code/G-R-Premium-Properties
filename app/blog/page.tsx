@@ -15,7 +15,7 @@ export default async function BlogPage() {
 
       {/* ================= HERO ================= */}
       <section className="relative h-[320px] md:h-[420px] flex items-center justify-center text-center text-white overflow-hidden">
-        
+
         <img
           src="/assets/hero-1.jpg"
           alt="Blog Hero Background"
@@ -37,8 +37,8 @@ export default async function BlogPage() {
       </section>
 
       {/* ================= BLOG LIST ================= */}
-      <section className="py-20 bg-white dark:bg-[#0F172A] transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-12 sm:py-20 bg-white dark:bg-[#0F172A] transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
           {blogs.length === 0 ? (
             <div className="text-center py-20">
@@ -50,12 +50,14 @@ export default async function BlogPage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            // Same rule as the homepage sections: 2 columns from mobile up,
+            // 3 columns from lg (1024px) — so iPad Pro/laptop get 3 per row
+            // instead of getting stuck waiting for xl.
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-10">
               {blogs.map((blog: any) => (
-                <BlogCard
-                  key={blog._id}
-                  blog={blog}
-                />
+                <div key={blog._id} className="h-full flex">
+                  <BlogCard blog={blog} />
+                </div>
               ))}
             </div>
           )}

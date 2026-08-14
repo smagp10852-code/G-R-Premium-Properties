@@ -1,15 +1,9 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { useTranslation } from "@/lib/language-context";
 import DeveloperCardClient from "@/components/sections/DeveloperCardClient";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
-
-import "swiper/css";
-import "swiper/css/navigation";
 
 interface Developer {
   _id: string;
@@ -28,27 +22,15 @@ interface Props {
 
 export default function DeveloperSection({ developers }: Props) {
   const { t } = useTranslation();
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  if (!developers?.length) return null;
 
-  // Duplicate slides if less than 4 (so desktop can loop)
-  const sliderData = useMemo(() => {
-    if (!developers) return [];
-    if (developers.length < 4) {
-      return [...developers, ...developers];
-    }
-    return developers;
-  }, [developers]);
-
-  if (!mounted || !sliderData.length) return null;
+  // Homepage shows only the top 4 — full list lives on /developers
+  const displayDevelopers = developers.slice(0, 4);
 
   return (
     <section className="py-20 bg-gray-50 dark:bg-[#0F172A] transition-colors duration-300 font-body">
-      <div className="max-w-7xl mx-auto px-4 relative">
-
+      <div className="max-w-7xl mx-auto px-4">
         {/* ===== HEADING ===== */}
         <div className="text-center mb-14">
           <span className="font-body text-[#C9A227] text-sm font-semibold tracking-[0.2em] uppercase">
@@ -64,32 +46,26 @@ export default function DeveloperSection({ developers }: Props) {
           </p>
         </div>
 
-        {/* ===== SLIDER ===== */}
-        <Swiper
-          modules={[Autoplay, Navigation]}
-          spaceBetween={30}
-          loop={true}
-          navigation={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          breakpoints={{
-            0: { slidesPerView: 1 },
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-        >
-          {sliderData.map((dev, index) => (
-            <SwiperSlide key={`${dev._id}-${index}`}>
-              <DeveloperCardClient
-                developer={dev}
-                logoUrl={dev.logo}
-              />
-            </SwiperSlide>
+        {/* ===== STATIC GRID ===== */}
+        {/* 2 columns on mobile/tablet (all 4 cards, 2x2), 3 columns from lg
+            (1024px) up. The 4th card is hidden exactly at lg so laptop/iPad
+            Pro get a clean single row of 3 instead of an orphan 4th card
+            wrapping alone to a second row — same pattern as the properties
+            grid on this homepage. */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          {displayDevelopers.map((dev, index) => (
+            <motion.div
+              key={dev._id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className={index === 3 ? "lg:hidden" : ""}
+            >
+              <DeveloperCardClient developer={dev} logoUrl={dev.logo} />
+            </motion.div>
           ))}
-        </Swiper>
+        </div>
 
         {/* ===== VIEW ALL BUTTON ===== */}
         <div className="text-center mt-16">
@@ -100,7 +76,6 @@ export default function DeveloperSection({ developers }: Props) {
             {t("developer.viewAllDevelopers")}
           </Link>
         </div>
-
       </div>
     </section>
   );

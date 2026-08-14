@@ -44,8 +44,9 @@ export default function PropertyClient({
 
           </div>
 
-          {/* RESPONSIVE GRID */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 items-stretch">
+          {/* RESPONSIVE GRID — lg (1024px) not xl (1280px), so iPad Pro gets
+              3 columns like it's supposed to, instead of being stuck at 2. */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
 
             {properties.map((p) => (
               <div key={p._id} className="h-full flex">
