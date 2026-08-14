@@ -142,7 +142,7 @@ export default function PropertyDetailPage() {
   return (
     <div className="font-body bg-white dark:bg-[#0F172A]">
       {/* ================= HERO ================= */}
-      <section className="relative w-full h-[65vh] sm:h-[75vh] min-h-[560px] text-white overflow-hidden">
+      <section className="relative w-full h-[85vh] sm:h-[75vh] min-h-[640px] text-white overflow-hidden">
         <div className="absolute inset-0">
           {heroImage && (
             <motion.div
@@ -166,11 +166,15 @@ export default function PropertyDetailPage() {
         {/* Content wrapper: text block + quick-facts card sit side-by-side
             in one flex row on lg+, stacked on mobile, both bottom-aligned
             via items-end — no absolute-position magic numbers, so this
-            stays correctly placed at every screen size. */}
+            stays correctly placed at every screen size.
+            pt-28 on mobile reserves safe space below the fixed navbar so
+            the "Limited Availability" badge (first item in this stack)
+            never renders underneath it, even when the stacked content is
+            tall enough to otherwise push up that far. */}
         <div
           className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full
                      flex flex-col lg:flex-row lg:items-end lg:justify-between
-                     gap-6 lg:gap-10 justify-end pb-10 sm:pb-14"
+                     gap-6 lg:gap-10 justify-end pt-28 sm:pt-0 pb-10 sm:pb-14"
         >
           {/* Text column */}
           <div className="lg:max-w-xl">
