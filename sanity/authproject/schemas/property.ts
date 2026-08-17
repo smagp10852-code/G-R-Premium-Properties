@@ -37,7 +37,24 @@ export default defineType({
         "Select which languages this content supports. English is always included.",
       group: "content",
     }),
-
+// Drives the "Hot" / "Launching Soon" badges on the card, the two
+    // dedicated homepage sections (3 each), and the price label on the
+    // card + detail page ("EOI" instead of "Starting Price" for
+    // Launching Soon listings). Leave empty for a normal listing.
+    defineField({
+      name: "projectStatus",
+      title: "Project Status",
+      description:
+        'Marks this listing as "Hot" or "Launching Soon" for the homepage sections and card badge. Leave empty for a normal listing.',
+      type: "string",
+      options: {
+        list: [
+          { title: "🔥 Hot", value: "hot" },
+          { title: "🚀 Launching Soon", value: "launching_soon" },
+        ],
+      },
+      group: "content",
+    }),
     defineField({
       name: "title",
       title: "Property Title",
@@ -115,6 +132,8 @@ export default defineType({
       initialValue: false,
       group: "content",
     }),
+
+    
 
     defineField({
       name: "images",
@@ -201,6 +220,9 @@ export default defineType({
       title: "Handover Date",
       type: "string",
       group: "content",
+      // Not applicable yet for a Launching Soon listing — nothing has
+      // handed over. Hidden in Studio when that status is selected.
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
     }),
 
     defineField({
@@ -213,6 +235,9 @@ export default defineType({
         { name: "construction", title: "Construction (%)", type: "number" },
         { name: "handover", title: "Handover (%)", type: "number" },
       ],
+      // Payment structure usually isn't finalized before public launch —
+      // hidden in Studio for Launching Soon listings.
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
     }),
 
     defineField({
@@ -233,6 +258,7 @@ export default defineType({
       type: "text",
       rows: 6,
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
     }),
     defineField({
       name: "sizeRange",
@@ -240,12 +266,14 @@ export default defineType({
       description: 'e.g. "719 - 2,610 sq. ft."',
       type: "string",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
     }),
     defineField({
       name: "completionDate",
       title: "Completion Date",
       type: "date",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
     }),
     defineField({
       name: "keyPotentialPercent",
@@ -253,6 +281,7 @@ export default defineType({
       description: 'Shown in the hero quick-facts panel, e.g. "8%"',
       type: "string",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
     }),
     defineField({
       name: "galleryImages",
@@ -261,12 +290,14 @@ export default defineType({
       type: "array",
       of: [{ type: "image", options: { hotspot: true } }],
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
     }),
     defineField({
       name: "amenities",
       title: "Lifestyle Amenities",
       type: "array",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
       of: [
         {
           type: "object",
@@ -290,12 +321,14 @@ export default defineType({
       type: "array",
       of: [{ type: "string" }],
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
     }),
     defineField({
       name: "investmentStat",
       title: "Investment Potential — Stat Box",
       type: "object",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
       fields: [
         { name: "label", type: "string", description: 'e.g. "As of 2026"' },
         {
@@ -310,6 +343,7 @@ export default defineType({
       title: "Floor Plans (PDF)",
       type: "file",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
       options: { accept: ".pdf" },
     }),
     defineField({
@@ -317,6 +351,7 @@ export default defineType({
       title: "Nearby Landmarks",
       type: "array",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
       of: [
         {
           type: "object",
@@ -332,12 +367,14 @@ export default defineType({
       title: "Map Pin",
       type: "geopoint",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
     }),
     defineField({
       name: "agent",
       title: "Consultation Agent",
       type: "object",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
       fields: [
         { name: "name", type: "string" },
         { name: "title", type: "string", description: 'e.g. "Property Consultant"' },
@@ -349,6 +386,7 @@ export default defineType({
       title: "Frequently Asked Questions",
       type: "array",
       group: "detail",
+      hidden: ({ document }: any) => document?.projectStatus === "launching_soon",
       of: [
         {
           type: "object",

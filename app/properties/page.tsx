@@ -20,6 +20,7 @@ type SearchParams = {
   max?: string;
   purpose?: string;
   bed?: string;
+  status?: string; // "hot" | "launching_soon" — from homepage "View All" links
 };
 
 // Sanity me "price" text field hai (jaise "1.20 M", "500K").
@@ -60,6 +61,9 @@ export default async function PropertiesPage({
       search: params.search ?? null,
       purpose: params.purpose ?? null,
       type: params.type ?? null,
+      // ✅ THE FIX — this was missing, so GROQ's "$status referenced, but
+      // not provided" error fired on every /properties visit.
+      status: params.status ?? null,
       bed: params.bed
         ? params.bed === "studio"
           ? 0

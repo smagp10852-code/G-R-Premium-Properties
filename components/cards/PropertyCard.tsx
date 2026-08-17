@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { MapPin, BedDouble, Mail, Phone, MessageCircle } from "lucide-react";
+import { MapPin, BedDouble, Mail, Phone, MessageCircle, Flame, Rocket } from "lucide-react";
 
 const goldenColor = "#C9A227";
 const PLACEHOLDER = "/images/placeholder.jpg";
@@ -53,6 +53,13 @@ export default function PropertyCard({
 
   const startingPrice = units[0]?.price;
 
+  // "hot" -> red/orange flame badge. "launching_soon" -> gold rocket badge
+  // + the price label below switches from "Starting Price" to "EOI"
+  // (Expression of Interest), since there's no final price yet.
+  const isHot = property?.projectStatus === "hot";
+  const isLaunchSoon = property?.projectStatus === "launching_soon";
+  const priceLabel = isLaunchSoon ? "EOI" : "Starting Price";
+
   const slug =
     typeof property?.slug === "string" ? property.slug : property?.slug?.current;
   const detailHref = slug ? `/properties/${slug}` : "#";
@@ -82,6 +89,23 @@ export default function PropertyCard({
         {property?.propertyType && (
           <span className="absolute top-2 left-2 text-[9px] lg:text-xs font-semibold px-2 py-1 rounded-md bg-[#0F172A] text-white">
             {property.propertyType}
+          </span>
+        )}
+
+        {/* Top-right: Hot / Launching Soon badge */}
+        {isHot && (
+          <span className="absolute top-2 right-2 flex items-center gap-1 text-[9px] lg:text-xs font-bold px-2 py-1 rounded-md bg-red-600 text-white shadow-sm">
+            <Flame size={11} className="fill-white" />
+            Hot
+          </span>
+        )}
+        {isLaunchSoon && (
+          <span
+            className="absolute top-2 right-2 flex items-center gap-1 text-[9px] lg:text-xs font-bold px-2 py-1 rounded-md text-black shadow-sm"
+            style={{ backgroundColor: goldenColor }}
+          >
+            <Rocket size={11} />
+            Launching Soon
           </span>
         )}
 
@@ -123,7 +147,7 @@ export default function PropertyCard({
 
         <div className="border-t border-gray-100 dark:border-gray-800 pt-2 mb-2 lg:mb-3">
           <p className="text-[9px] lg:text-[10px] uppercase tracking-wide text-gray-400 mb-0.5">
-            Starting Price
+            {priceLabel}
           </p>
           {startingPrice && (
             <p

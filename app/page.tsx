@@ -1,9 +1,10 @@
-
 export const dynamic = "force-dynamic";
 
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import PropertySlider from "@/components/sections/PropertySlider";
+import PropertyHot from "@/components/sections/PropertyHot";
+import PropertyLaunchSoon from "@/components/sections/LaunchingSoon";
 import DeveloperSection from "@/components/sections/developer";
 import FeaturedBlogs from "@/components/sections/FeaturedBlogs";
 import Terminology from "@/components/sections/Terminology";
@@ -16,6 +17,8 @@ import {
   communitiesQuery,
   featuredDevelopersQuery,
   featuredPropertiesQuery,
+  hotPropertiesQuery,
+  launchSoonPropertiesQuery,
   latestBlogsQuery,
 } from "@/lib/sanity.queries";
 
@@ -29,12 +32,16 @@ export default async function Home() {
       developers,
       communities,
       featuredProperties,
+      hotProperties,
+      launchSoonProperties,
       blogs,
     ] = await Promise.all([
       sanityClient.fetch<HomepageData>(homepageHeroQuery),
       sanityClient.fetch(featuredDevelopersQuery),
       sanityClient.fetch(communitiesQuery),
       sanityClient.fetch(featuredPropertiesQuery),
+      sanityClient.fetch(hotPropertiesQuery),
+      sanityClient.fetch(launchSoonPropertiesQuery),
       sanityClient.fetch(latestBlogsQuery),
     ]);
 
@@ -61,7 +68,13 @@ export default async function Home() {
 
         <About />
 
-        <PropertySlider properties={featuredProperties || []} />
+       
+
+        {/* Both hide themselves automatically if there's nothing tagged
+            "hot" / "launching_soon" in Sanity yet — no empty sections. */}
+        <PropertyHot properties={hotProperties || []} />
+        <PropertyLaunchSoon properties={launchSoonProperties || []} />
+         
 
         <DeveloperSection developers={developers || []} />
 

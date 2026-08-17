@@ -46,7 +46,11 @@ export const homepageHeroQuery = groq`
 export const featuredPropertiesQuery = groq`
 *[
   _type == "property" &&
-  showOnHomePage == true
+  showOnHomePage == true &&
+  // ✅ Excludes anything already tagged Hot / Launching Soon — those get
+  // their own dedicated homepage sections, so they shouldn't also show up
+  // (duplicated) in the general Featured Properties row.
+  !(projectStatus in ["hot", "launching_soon"])
 ]
 | order(_createdAt desc)
 [0...10]{
@@ -58,6 +62,7 @@ export const featuredPropertiesQuery = groq`
   handover,
   featured,
   type,
+  projectStatus,
 
   developer->{
     name,
@@ -96,6 +101,120 @@ export const featuredPropertiesQuery = groq`
 `;
 
 /* ======================================================
+   HOT PROJECTS (HOMEPAGE — 3 CARDS)
+====================================================== */
+
+export const hotPropertiesQuery = groq`
+*[
+  _type == "property" &&
+  projectStatus == "hot"
+]
+| order(_createdAt desc)
+[0...3]{
+  _id,
+  title,
+  title_hi, title_ar, title_ru,
+  supportedLanguages,
+  "slug": slug.current,
+  handover,
+  featured,
+  type,
+  projectStatus,
+
+  developer->{
+    name,
+    "slug": slug.current
+  },
+
+  paymentPlan{
+    booking,
+    construction,
+    handover
+  },
+
+  location->{
+    name,
+    name_hi, name_ar, name_ru,
+    supportedLanguages,
+    "slug": slug.current
+  },
+
+  images[]{
+    asset->{ url }
+  },
+
+  units[]{
+    unitType,
+    bedroomCount,
+    customLabel,
+    size,
+    price
+  },
+
+  brochure{
+    asset->{ url }
+  }
+}
+`;
+
+/* ======================================================
+   LAUNCHING SOON (HOMEPAGE — 3 CARDS)
+====================================================== */
+
+export const launchSoonPropertiesQuery = groq`
+*[
+  _type == "property" &&
+  projectStatus == "launching_soon"
+]
+| order(_createdAt desc)
+[0...3]{
+  _id,
+  title,
+  title_hi, title_ar, title_ru,
+  supportedLanguages,
+  "slug": slug.current,
+  handover,
+  featured,
+  type,
+  projectStatus,
+
+  developer->{
+    name,
+    "slug": slug.current
+  },
+
+  paymentPlan{
+    booking,
+    construction,
+    handover
+  },
+
+  location->{
+    name,
+    name_hi, name_ar, name_ru,
+    supportedLanguages,
+    "slug": slug.current
+  },
+
+  images[]{
+    asset->{ url }
+  },
+
+  units[]{
+    unitType,
+    bedroomCount,
+    customLabel,
+    size,
+    price
+  },
+
+  brochure{
+    asset->{ url }
+  }
+}
+`;
+
+/* ======================================================
    ALL PROPERTIES (FILTER PAGE) — FIXED SEARCH MATCH
 ====================================================== */
 
@@ -120,7 +239,13 @@ export const propertiesQuery = groq`
       unitType == "bedroom" && 
       bedroomCount == $bed
     ]) > 0
-  )
+  ) &&
+
+  // ✅ NEW — optional status filter. When $status is not passed, every
+  // listing matches (default "no filter" behaviour on a plain /properties
+  // visit). When homepage's "View All" buttons link here with
+  // ?status=hot or ?status=launching_soon, this narrows the results.
+  (!defined($status) || projectStatus == $status)
 
   // ✅ NOTE: min/max price filtering GROQ se hata diya — Sanity me "price"
   // field text hai (jaise "1.20 M"), isliye numeric >= / <= compare kaam
@@ -137,6 +262,7 @@ export const propertiesQuery = groq`
   handover,
   purpose,
   type,
+  projectStatus,
 
   developer->{
     name,
@@ -189,6 +315,7 @@ export const propertyBySlugQuery = groq`
   featured,
   purpose,
   type,
+  projectStatus,
 
   paymentPlan{
     booking,
@@ -288,6 +415,7 @@ export const propertiesByDeveloperQuery = groq`
   handover,
   featured,
   type,
+  projectStatus,
 
   paymentPlan{
     booking,
