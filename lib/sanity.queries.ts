@@ -110,7 +110,7 @@ export const hotPropertiesQuery = groq`
   projectStatus == "hot"
 ]
 | order(_createdAt desc)
-[0...3]{
+[0...4]{
   _id,
   title,
   title_hi, title_ar, title_ru,
@@ -167,7 +167,7 @@ export const launchSoonPropertiesQuery = groq`
   projectStatus == "launching_soon"
 ]
 | order(_createdAt desc)
-[0...3]{
+[0...4]{
   _id,
   title,
   title_hi, title_ar, title_ru,

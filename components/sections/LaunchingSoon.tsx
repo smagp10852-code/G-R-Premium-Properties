@@ -56,6 +56,7 @@ export default function PropertyLaunchSoon({ properties = [] }: { properties?: a
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
+                className={index === 3 ? "lg:hidden" : ""}
               >
                 <PropertyCard property={property} onEnquire={handleEnquire} />
               </motion.div>
