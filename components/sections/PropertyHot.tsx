@@ -3,13 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Rocket } from "lucide-react";
+import { Flame } from "lucide-react";
 import PropertyCard from "@/components/cards/PropertyCard";
 import EnquiryModal from "@/components/ui/EnquiryModal";
 
-const goldenColor = "#C9A227";
-
-export default function PropertyLaunchSoon({ properties = [] }: { properties?: any[] }) {
+export default function PropertyHot({ properties = [] }: { properties?: any[] }) {
   const [openEnquiry, setOpenEnquiry] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState("");
 
@@ -19,30 +17,27 @@ export default function PropertyLaunchSoon({ properties = [] }: { properties?: a
     setOpenEnquiry(true);
   };
 
-  // Nothing to show yet (no properties tagged "Launching Soon" in Sanity) —
-  // hide the whole section rather than showing an empty heading.
+  // Nothing to show yet (no properties tagged "Hot" in Sanity) — hide the
+  // whole section rather than showing an empty heading with no cards.
   if (!properties?.length) return null;
 
   return (
     <>
-      <section className="py-16 sm:py-24 bg-[#E5E7EB] dark:bg-[#0F172A] font-body">
+      <section className="py-16 sm:py-24 bg-white dark:bg-[#0F172A] font-body">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* HEADING */}
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
-            <p
-              className="font-body flex items-center justify-center gap-1.5 text-xs sm:text-sm tracking-[0.2em] font-semibold uppercase mb-3 sm:mb-4"
-              style={{ color: goldenColor }}
-            >
-              <Rocket size={16} />
-              Launching Soon
+            <p className="font-body flex items-center justify-center gap-1.5 text-xs sm:text-sm tracking-[0.2em] font-semibold uppercase mb-3 sm:mb-4 text-red-600">
+              <Flame size={16} className="fill-red-600" />
+              Hot Projects
             </p>
 
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5">
-              Register Your Interest Early
+              Trending Right Now
             </h2>
 
             <p className="font-body text-sm sm:text-base text-gray-600 dark:text-gray-400">
-              Upcoming launches — register your EOI now for priority access before public launch.
+              The most in-demand projects our clients are asking about this week.
             </p>
           </div>
 
@@ -62,17 +57,13 @@ export default function PropertyLaunchSoon({ properties = [] }: { properties?: a
             ))}
           </div>
 
-          {/* BUTTON — links to the filtered properties list, pre-set to
-              Launching Soon */}
+          {/* BUTTON — links to the filtered properties list, pre-set to Hot */}
           <div className="text-center mt-10 sm:mt-16">
             <Link
-              href="/properties?status=launching_soon"
-              className="font-body inline-flex items-center gap-2 px-6 sm:px-10 py-2.5 sm:py-4 text-sm sm:text-base border-2 rounded-full hover:text-black transition-all duration-300"
-              style={{ borderColor: goldenColor, color: goldenColor }}
-              onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.backgroundColor = goldenColor)}
-              onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.backgroundColor = "transparent")}
+              href="/properties?status=hot"
+              className="font-body inline-flex items-center gap-2 px-6 sm:px-10 py-2.5 sm:py-4 text-sm sm:text-base border-2 border-red-600 text-red-600 rounded-full hover:bg-red-600 hover:text-white transition-all duration-300"
             >
-              View All Launching Soon →
+              View All Hot Projects →
             </Link>
           </div>
         </div>
