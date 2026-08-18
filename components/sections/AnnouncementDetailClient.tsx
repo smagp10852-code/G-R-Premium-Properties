@@ -41,6 +41,7 @@ export default function AnnouncementDetailClient({
   const title = getLocalized(announcement, "title");
   const description = getLocalized(announcement, "description");
   const city = getLocalized(announcement, "city");
+  const venue = getLocalized(announcement, "venue");
   const points = getLocalized(announcement, "points") || [];
 
   return (
@@ -58,6 +59,7 @@ export default function AnnouncementDetailClient({
             <span>📅 {formatEventDate(announcement.eventDate)}</span>
           )}
           {city && <span>📍 {city}</span>}
+          {venue && <span>🏨 {venue}</span>}
         </div>
 
         {/* Sanity Image - FULL visible (no crop) */}

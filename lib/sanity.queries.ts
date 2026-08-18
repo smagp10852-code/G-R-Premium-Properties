@@ -628,6 +628,9 @@ export const announcementQuery = groq`
   city,
   city_hi, city_ar, city_ru,
 
+  venue,
+  venue_hi, venue_ar, venue_ru,
+
   supportedLanguages,
 
   "slug": slug.current,
@@ -650,6 +653,8 @@ export const singleAnnouncementQuery = groq`
     eventDate,
     city,
     city_hi, city_ar, city_ru,
+    venue,
+    venue_hi, venue_ar, venue_ru,
     supportedLanguages,
     mainImage{
       asset->{ url }

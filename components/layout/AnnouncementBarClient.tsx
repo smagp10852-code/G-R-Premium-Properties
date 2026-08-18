@@ -57,6 +57,9 @@ export default function AnnouncementBarClient({
             >
               📅 {formatEventDate(item.eventDate)} – {getLocalized(item, "city")} 🔥{" "}
               {getLocalized(item, "title")}
+              {getLocalized(item, "venue") && (
+                <span> – {getLocalized(item, "venue")}</span>
+              )}
               {item.slug && (
                 <Link
                   href={`/announcement/${item.slug}`}

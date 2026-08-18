@@ -61,6 +61,16 @@ export default defineType({
       group: "content",
     }),
 
+    // ✅ NEW — venue/hotel name, shown right after the title in the
+    // marquee bar and on the detail page.
+    defineField({
+      name: "venue",
+      title: "Venue / Hotel Name (English)",
+      description: 'e.g. "Sayaji Hotel"',
+      type: "string",
+      group: "content",
+    }),
+
     defineField({
       name: "slug",
       title: "Slug",
@@ -106,7 +116,7 @@ export default defineType({
         title: `Title (${lang.title})`,
         type: "string",
         group: "translations",
-        hidden: ({ document }) =>
+        hidden: ({ document }: any) =>
           !Array.isArray(document?.supportedLanguages) ||
           !document.supportedLanguages.includes(lang.id),
       }),
@@ -116,7 +126,18 @@ export default defineType({
         title: `City (${lang.title})`,
         type: "string",
         group: "translations",
-        hidden: ({ document }) =>
+        hidden: ({ document }: any) =>
+          !Array.isArray(document?.supportedLanguages) ||
+          !document.supportedLanguages.includes(lang.id),
+      }),
+
+      // ✅ NEW — translated venue name
+      defineField({
+        name: `venue_${lang.id}`,
+        title: `Venue / Hotel Name (${lang.title})`,
+        type: "string",
+        group: "translations",
+        hidden: ({ document }: any) =>
           !Array.isArray(document?.supportedLanguages) ||
           !document.supportedLanguages.includes(lang.id),
       }),
@@ -126,7 +147,7 @@ export default defineType({
         title: `Description (${lang.title})`,
         type: "text",
         group: "translations",
-        hidden: ({ document }) =>
+        hidden: ({ document }: any) =>
           !Array.isArray(document?.supportedLanguages) ||
           !document.supportedLanguages.includes(lang.id),
       }),
@@ -137,7 +158,7 @@ export default defineType({
         type: "array",
         of: [{ type: "string" }],
         group: "translations",
-        hidden: ({ document }) =>
+        hidden: ({ document }: any) =>
           !Array.isArray(document?.supportedLanguages) ||
           !document.supportedLanguages.includes(lang.id),
       }),
