@@ -89,7 +89,7 @@ export default async function Home() {
         <PropertyHot properties={hotSectionProperties} />
 
         {/* Unchanged, per client's explicit "isko yese rahne dete hai" */}
-        <PropertyLaunchSoon properties={launchSoonProperties || []} />
+        {/* <PropertyLaunchSoon properties={launchSoonProperties || []} /> */}
 
         <DeveloperSection developers={developers || []} />
 
