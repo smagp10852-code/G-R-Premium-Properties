@@ -113,7 +113,7 @@ export default function WhyChooseUs() {
           >
             <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] rounded-xl overflow-hidden shadow-xl">
               <motion.img
-                src="/assets/about1.png"
+                src="/home-about.png"
                 alt="Luxury Property"
                 loading="lazy"
                 className="w-full h-full object-cover"

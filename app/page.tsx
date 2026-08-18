@@ -55,6 +55,20 @@ export default async function Home() {
         return !!slide?.image?.asset?.url;
       }) || [];
 
+    // ✅ NEW — PropertySlider ("Featured Properties") already shows the
+    // first 4 items from `featuredProperties`. To avoid showing the exact
+    // same cards again in the section below, the "3 normal" fill for that
+    // section starts from item index 4 onward (the next 3 after what
+    // PropertySlider already displayed) — featuredPropertiesQuery fetches
+    // up to 10, so there's enough to draw from.
+    const normalFillForHotSection = (featuredProperties || []).slice(4, 7);
+
+    // 3 Hot + 3 Normal = 6 total, Hot ones first.
+    const hotSectionProperties = [
+      ...(hotProperties || []),
+      ...normalFillForHotSection,
+    ];
+
     return (
       <>
         <Hero
@@ -68,13 +82,14 @@ export default async function Home() {
 
         <About />
 
-       
+        {/* <PropertySlider properties={featuredProperties || []} /> */}
 
-        {/* Both hide themselves automatically if there's nothing tagged
-            "hot" / "launching_soon" in Sanity yet — no empty sections. */}
-        <PropertyHot properties={hotProperties || []} />
+        {/* 3 Hot + 3 latest normal, merged — no more standalone "Hot"
+            branding, hides itself automatically if there's nothing to show. */}
+        <PropertyHot properties={hotSectionProperties} />
+
+        {/* Unchanged, per client's explicit "isko yese rahne dete hai" */}
         <PropertyLaunchSoon properties={launchSoonProperties || []} />
-         
 
         <DeveloperSection developers={developers || []} />
 

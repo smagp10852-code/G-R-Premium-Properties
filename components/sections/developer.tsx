@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
 import { useTranslation } from "@/lib/language-context";
 import DeveloperCardClient from "@/components/sections/DeveloperCardClient";
 
@@ -25,13 +23,15 @@ export default function DeveloperSection({ developers }: Props) {
 
   if (!developers?.length) return null;
 
-  // Homepage shows only the top 4 — full list lives on /developers
-  const displayDevelopers = developers.slice(0, 4);
+  // Duplicated once so the CSS animation can loop seamlessly (scrolls
+  // exactly -50% then jumps back to 0, which lands on an identical copy —
+  // no visible seam/jump).
+  const marqueeItems = [...developers, ...developers];
 
   return (
     <section className="py-20 bg-gray-50 dark:bg-[#0F172A] transition-colors duration-300 font-body">
       <div className="max-w-7xl mx-auto px-4">
-        {/* ===== HEADING ===== */}
+        {/* HEADING */}
         <div className="text-center mb-14">
           <span className="font-body text-[#C9A227] text-sm font-semibold tracking-[0.2em] uppercase">
             {t("developer.developers")}
@@ -45,38 +45,39 @@ export default function DeveloperSection({ developers }: Props) {
             {t("developer.description")}
           </p>
         </div>
+      </div>
 
-        {/* ===== STATIC GRID ===== */}
-        {/* 2 columns on mobile/tablet (all 4 cards, 2x2), 3 columns from lg
-            (1024px) up. The 4th card is hidden exactly at lg so laptop/iPad
-            Pro get a clean single row of 3 instead of an orphan 4th card
-            wrapping alone to a second row — same pattern as the properties
-            grid on this homepage. */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {displayDevelopers.map((dev, index) => (
-            <motion.div
-              key={dev._id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className={index === 3 ? "lg:hidden" : ""}
-            >
+      {/* AUTO-SCROLLING STRIP — constrained to the SAME max-w-7xl container
+          as every other section on the page (not full-bleed edge-to-edge).
+          overflow-hidden lives on this inner wrapper so cards visually
+          scroll off at the container's own edges, matching the width of
+          "Trusted Developers" heading above it. */}
+      <div className="max-w-7xl mx-auto px-4 overflow-hidden">
+        <div className="marquee-track flex gap-4 sm:gap-6 w-max">
+          {marqueeItems.map((dev, index) => (
+            <div key={`${dev._id}-${index}`} className="w-[150px] sm:w-[220px] lg:w-[280px] flex-shrink-0">
               <DeveloperCardClient developer={dev} logoUrl={dev.logo} />
-            </motion.div>
+            </div>
           ))}
         </div>
-
-        {/* ===== VIEW ALL BUTTON ===== */}
-        <div className="text-center mt-16">
-          <Link
-            href="/developers"
-            className="font-body inline-flex items-center gap-2 px-10 py-4 border-2 border-[#C9A227] text-[#C9A227] rounded-full hover:bg-[#C9A227] hover:text-black transition-all duration-300"
-          >
-            {t("developer.viewAllDevelopers")}
-          </Link>
-        </div>
       </div>
+
+      <style>{`
+        .marquee-track {
+          animation: marquee-scroll 35s linear infinite;
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+        @keyframes marquee-scroll {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -54,7 +54,7 @@ export default async function AboutPage() {
         {/* ================= HERO ================= */}
         <section className="relative h-[70vh] w-full">
           <Image
-            src="/assets/hero-2.jpg"
+            src="/home-about.png"
             alt="About GR Premium Properties"
             fill
             className="object-cover"
@@ -107,7 +107,7 @@ export default async function AboutPage() {
 
             <div className="order-1 lg:order-2 relative">
               <Image
-                src="/aboutmulti1.jpg"
+                src="/home-about.png"
                 alt="Luxury Villa Dubai"
                 width={620}
                 height={460}

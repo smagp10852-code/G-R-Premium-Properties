@@ -110,7 +110,7 @@ export const hotPropertiesQuery = groq`
   projectStatus == "hot"
 ]
 | order(_createdAt desc)
-[0...4]{
+[0...3]{
   _id,
   title,
   title_hi, title_ar, title_ru,
