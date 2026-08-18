@@ -8,6 +8,29 @@ interface Announcement {
   [key: string]: any;
 }
 
+// Turns Sanity's raw date ("2026-09-05") into "5th Sep." — day with an
+// ordinal suffix + abbreviated month with a trailing period.
+function formatEventDate(dateStr?: string): string {
+  if (!dateStr) return "";
+
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return dateStr; // fallback if unparsable
+
+  const day = date.getDate();
+  const suffix =
+    day % 10 === 1 && day !== 11
+      ? "st"
+      : day % 10 === 2 && day !== 12
+      ? "nd"
+      : day % 10 === 3 && day !== 13
+      ? "rd"
+      : "th";
+
+  const month = date.toLocaleString("en-US", { month: "short" }); // "Sep"
+
+  return `${day}${suffix} ${month}.`;
+}
+
 export default function AnnouncementBarClient({
   announcements,
 }: {
@@ -32,7 +55,7 @@ export default function AnnouncementBarClient({
               key={index}
               className="mx-8 inline-flex items-center gap-4"
             >
-              📅 {item.eventDate} – {getLocalized(item, "city")} 🔥{" "}
+              📅 {formatEventDate(item.eventDate)} – {getLocalized(item, "city")} 🔥{" "}
               {getLocalized(item, "title")}
               {item.slug && (
                 <Link

@@ -4,6 +4,28 @@ import Link from "next/link";
 import { useTranslation } from "@/lib/language-context";
 import T from "@/components/ui/T";
 
+// Same formatter as AnnouncementBarClient — "2026-09-05" -> "5th Sep."
+function formatEventDate(dateStr?: string): string {
+  if (!dateStr) return "";
+
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return dateStr;
+
+  const day = date.getDate();
+  const suffix =
+    day % 10 === 1 && day !== 11
+      ? "st"
+      : day % 10 === 2 && day !== 12
+      ? "nd"
+      : day % 10 === 3 && day !== 13
+      ? "rd"
+      : "th";
+
+  const month = date.toLocaleString("en-US", { month: "short" });
+
+  return `${day}${suffix} ${month}.`;
+}
+
 export default function AnnouncementDetailClient({
   announcement,
 }: {
@@ -33,7 +55,7 @@ export default function AnnouncementDetailClient({
         {/* Date & City */}
         <div className="flex flex-wrap gap-6 text-gray-500 text-sm mb-8">
           {announcement.eventDate && (
-            <span>📅 {announcement.eventDate}</span>
+            <span>📅 {formatEventDate(announcement.eventDate)}</span>
           )}
           {city && <span>📍 {city}</span>}
         </div>
@@ -65,7 +87,6 @@ export default function AnnouncementDetailClient({
           </div>
         )}
 
-        
       </div>
     </section>
   );
