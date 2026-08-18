@@ -128,10 +128,7 @@ export default function ContactPage() {
             <Info
               icon={<MapPin size={18} />}
               title="Office Address"
-              text={`401C Aspin Commercial Tower
-Near Financial Center Metro
-Sheikh Zayed Road
-Dubai, UAE`}
+              text={`403-017, Aspin commercial Tower , Sheikh Zayed Rd , Trade Centre 1 - Dubai - United Arab Emirates`}
             />
 
             {/* WhatsApp */}
