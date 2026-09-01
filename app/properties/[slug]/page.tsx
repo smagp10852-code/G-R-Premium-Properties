@@ -709,7 +709,7 @@ export default function PropertyDetailPage() {
               <div className="bg-white dark:bg-[#101827] rounded-xl p-5 shadow-sm relative">
                 <Quote size={22} className="mb-2 opacity-30" style={{ color: goldenColor }} />
                 <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-                  I'll guide you step by step so you can make a confident property decision.
+                  We promise that our company will be with you every step of the way — from your first inquiry to the final handover and beyond.
                 </p>
               </div>
 
