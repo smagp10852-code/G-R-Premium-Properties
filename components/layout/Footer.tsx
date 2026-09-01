@@ -106,7 +106,7 @@ export default function Footer() {
                     label: "Google Reviews",
                   },
                   {
-                    href: "https://www.linkedin.com/company/gr-premium-properties-llc/",
+                    href: "https://www.linkedin.com/company/grpremiumproperties",
                     icon: SiLinkedin,
                     label: "LinkedIn",
                   },
