@@ -13,7 +13,6 @@ import { motion } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import {
   MapPin,
-  Download,
   ChevronDown,
   Star,
   Phone,
@@ -26,12 +25,12 @@ import {
   CheckCircle2,
   FileText,
   Quote,
+  Download,
 } from "lucide-react";
 
 import { sanityClient } from "@/lib/sanity.client";
 import { propertyBySlugQuery } from "@/lib/sanity.queries";
 import EnquiryForm from "@/components/forms/EnquiryForm";
-import BrochureModal from "@/components/ui/BrochureModal";
 import CtaSection from "@/components/sections/CTA";
 import Footer from "@/components/layout/Footer";
 
@@ -85,7 +84,6 @@ export default function PropertyDetailPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [submitted, setSubmitted] = useState(false);
   const [showEnquiry, setShowEnquiry] = useState(false);
-  const [showBrochureGate, setShowBrochureGate] = useState(false);
 
   useEffect(() => {
     if (!slug) return;
@@ -291,18 +289,20 @@ export default function PropertyDetailPage() {
               {property?.description}
             </p>
 
+            {/* Free Consultation CTA — replaces the old "Download Brochure"
+                button. Opens the same EnquiryForm used everywhere else on
+                this page, which auto-fills the property/developer name via
+                its defaultProperty prop. */}
             <div className="flex flex-wrap gap-3">
-              {property?.brochure?.asset?.url && (
-                <button
-                  type="button"
-                  onClick={() => setShowBrochureGate(true)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-black transition hover:opacity-90"
-                  style={{ backgroundColor: goldenColor }}
-                >
-                  <Download size={18} />
-                  Download Brochure
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={() => setShowEnquiry(true)}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-black transition hover:opacity-90"
+                style={{ backgroundColor: goldenColor }}
+              >
+                <Phone size={18} />
+                Free Consultation
+              </button>
             </div>
           </div>
 
@@ -734,37 +734,38 @@ export default function PropertyDetailPage() {
         </div>
       </motion.section>
 
-     
-
-      {/* ================= BROCHURE DOWNLOAD ================= */}
-      {property?.brochure?.asset?.url && (
-        <motion.section initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, ease: "easeOut" }} className="py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <div
-              className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4"
-              style={{ backgroundColor: `${goldenColor}18` }}
-            >
-              <FileText size={26} style={{ color: goldenColor }} />
-            </div>
-            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: goldenColor }}>
-              Free Download
-            </p>
-            <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-3 text-gray-900 dark:text-white">
-              Project Brochure
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">All you need to know about this project.</p>
-            <button
-              type="button"
-              onClick={() => setShowBrochureGate(true)}
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-md font-semibold text-black transition hover:opacity-90"
-              style={{ backgroundColor: goldenColor }}
-            >
-              <Download size={18} />
-              Download Brochure
-            </button>
+      {/* ================= FREE CONSULTATION CTA ================= */}
+      {/* Replaces the old "Download Brochure" section. Brochure data on
+          Sanity (property.brochure) is left untouched for future use —
+          this section just no longer surfaces a download button. */}
+      <motion.section initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, ease: "easeOut" }} className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <div
+            className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4"
+            style={{ backgroundColor: `${goldenColor}18` }}
+          >
+            <Phone size={26} style={{ color: goldenColor }} />
           </div>
-        </motion.section>
-      )}
+          <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: goldenColor }}>
+            Talk To Our Expert
+          </p>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-3 text-gray-900 dark:text-white">
+            Book Your Free Consultation
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            Get personalized guidance on this property from our advisor.
+          </p>
+          <button
+            type="button"
+            onClick={() => setShowEnquiry(true)}
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-md font-semibold text-black transition hover:opacity-90"
+            style={{ backgroundColor: goldenColor }}
+          >
+            <Phone size={18} />
+            Free Consultation
+          </button>
+        </div>
+      </motion.section>
 
       {/* ================= FAQ ================= */}
       {property?.faqs?.length > 0 && (
@@ -804,26 +805,14 @@ export default function PropertyDetailPage() {
       <CtaSection />
       <Footer />
 
-
-
-      {/* ================= ENQUIRY MODAL — opened by "Check Availability" ================= */}
+      {/* ================= ENQUIRY MODAL — opened by "Check Availability",
+          "Request a Call Back", and both "Free Consultation" buttons ================= */}
       {showEnquiry && (
         <EnquiryForm
           onClose={() => setShowEnquiry(false)}
           defaultProperty={property?.developer?.name || ""}
         />
       )}
-
-      {/* Brochure download — BrochureModal has its own lead form (name/email/
-          phone/country), posts to /api/brochure, and opens the PDF itself
-          on success. No `open && (...)` wrapper needed — it's controlled by
-          its own `open` prop like AnimatePresence expects. */}
-      <BrochureModal
-        open={showBrochureGate}
-        onClose={() => setShowBrochureGate(false)}
-        pdfUrl={property?.brochure?.asset?.url || ""}
-        propertyName={property?.title || ""}
-      />
     </div>
   );
 }
