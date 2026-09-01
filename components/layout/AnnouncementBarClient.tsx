@@ -1,17 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { useTranslation } from "@/lib/language-context";
 
-// "2026-09-27" -> "27th Sep. 2026"
-// Same suffix logic as AnnouncementDetailClient, but includes the year
-// since the requested banner format needs it: "🗓️ 27th Sep. 2026"
+interface Announcement {
+  title: string;
+  [key: string]: any;
+}
+
+// Turns Sanity's raw date ("2026-09-05") into "5th Sep. 2026" — day with an
+// ordinal suffix + abbreviated month with a trailing period + year.
 function formatEventDate(dateStr?: string): string {
   if (!dateStr) return "";
 
   const date = new Date(dateStr);
-  if (isNaN(date.getTime())) return dateStr;
+  if (isNaN(date.getTime())) return dateStr; // fallback if unparsable
 
   const day = date.getDate();
   const suffix =
@@ -23,7 +26,7 @@ function formatEventDate(dateStr?: string): string {
       ? "rd"
       : "th";
 
-  const month = date.toLocaleString("en-US", { month: "short" });
+  const month = date.toLocaleString("en-US", { month: "short" }); // "Sep"
   const year = date.getFullYear();
 
   return `${day}${suffix} ${month}. ${year}`;
@@ -32,55 +35,44 @@ function formatEventDate(dateStr?: string): string {
 export default function AnnouncementBarClient({
   announcements,
 }: {
-  announcements: any[];
+  announcements: Announcement[];
 }) {
-  const { lang, t } = useTranslation();
-  const [dismissed, setDismissed] = useState(false);
+  const { t, lang } = useTranslation();
 
-  if (!announcements?.length || dismissed) return null;
-
-  // Bar shows the single latest/first announcement (matches the current
-  // single-row banner in the screenshot). If you actually need to rotate
-  // through multiple announcements, say so and I'll add a marquee/rotator.
-  const announcement = announcements[0];
+  if (!announcements.length) return null;
 
   const getLocalized = (item: any, field: string) => {
     if (lang === "en") return item[field];
-    return item[`${field}_${lang}`] || item[field];
+    const localized = item[`${field}_${lang}`];
+    return localized || item[field];
   };
 
-  const title = getLocalized(announcement, "title");
-  const venue = getLocalized(announcement, "venue");
-  const formattedDate = formatEventDate(announcement.eventDate);
-  const slug = announcement.slug?.current || announcement.slug;
-
   return (
-    <div className="w-full bg-[#D4A843] text-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4">
-        <p className="flex-1 min-w-0 truncate text-sm sm:text-base font-medium">
-          🔥 Join {title}
-          {formattedDate && <span>, 🗓️ {formattedDate}</span>}
-          {venue && <span>, 📍 {venue}</span>}
-        </p>
-
-        <div className="flex items-center gap-3 flex-shrink-0">
-          {slug && (
-            <Link
-              href={`/announcement/${slug}`}
-              className="px-4 py-1.5 rounded-md bg-black text-white text-xs sm:text-sm font-semibold whitespace-nowrap hover:opacity-90 transition"
+    <div className="fixed top-0 left-0 w-full bg-[#D4AF37] text-black text-sm py-2 z-[2000] overflow-hidden font-body">
+      <div className="marquee-wrapper">
+        <div className="marquee-content">
+          {announcements.map((item: any, index: number) => (
+            <span
+              key={index}
+              className="mx-8 inline-flex items-center gap-4"
             >
-              View Details
-            </Link>
-          )}
-
-          <button
-            type="button"
-            aria-label="Dismiss announcement"
-            onClick={() => setDismissed(true)}
-            className="text-black/70 hover:text-black text-lg leading-none"
-          >
-            ×
-          </button>
+              🔥 Join {getLocalized(item, "title")}
+              {formatEventDate(item.eventDate) && (
+                <span>, 🗓️ {formatEventDate(item.eventDate)}</span>
+              )}
+              {getLocalized(item, "venue") && (
+                <span>, 📍 {getLocalized(item, "venue")}</span>
+              )}
+              {item.slug && (
+                <Link
+                  href={`/announcement/${item.slug}`}
+                  className="font-body bg-black text-white px-3 py-1 rounded text-xs font-semibold"
+                >
+                  {t("announcement.viewDetails")}
+                </Link>
+              )}
+            </span>
+          ))}
         </div>
       </div>
     </div>
