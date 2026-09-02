@@ -5,7 +5,7 @@ import { Phone } from "lucide-react";
 export function CallButton() {
   return (
     <a
-      href="tel:+919330230426"
+      href="tel:+971585964689"
       className="w-11 h-11 rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform"
       style={{ backgroundColor: "#D4A843", color: "#fff" }}
     >
