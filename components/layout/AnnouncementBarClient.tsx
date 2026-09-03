@@ -58,10 +58,10 @@ export default function AnnouncementBarClient({
             >
               🔥 Join {getLocalized(item, "title")}
               {formatEventDate(item.eventDate) && (
-                <span>, 🗓️ {formatEventDate(item.eventDate)}</span>
+                <span>🗓️ {formatEventDate(item.eventDate)}</span>
               )}
               {getLocalized(item, "venue") && (
-                <span>, 📍 {getLocalized(item, "venue")}</span>
+                <span>📍 {getLocalized(item, "venue")}</span>
               )}
               {item.slug && (
                 <Link
