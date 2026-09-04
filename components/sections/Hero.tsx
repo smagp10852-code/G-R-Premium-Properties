@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "@/lib/language-context";
+import HeroOfferPanel from "./HeroOfferPanel";
 
 /* ================= TYPES ================= */
 
@@ -48,6 +49,18 @@ interface Community {
   area: string;
 }
 
+// Matches the item shape returned by `latestUpdatesQuery` in lib/sanity.queries.ts
+interface UpdateItem {
+  _id: string;
+  text: string;
+  text_hi?: string;
+  text_ar?: string;
+  text_ru?: string;
+  url?: string;
+  expiresAt?: string;
+  linkedProperty?: { slug?: string } | null;
+}
+
 interface HeroProps {
   slides: HeroSlide[];
   ctaText: string;
@@ -55,6 +68,10 @@ interface HeroProps {
   ctaText_ar?: string;
   ctaText_ru?: string;
   communities: Community[];
+  // Optional — "Latest Update" / limited-offer box. Desktop: right column
+  // of the hero. Mobile: compact version below the search bar. Pass [] or
+  // omit if there are no latestUpdate docs in Sanity yet; nothing renders.
+  updates?: UpdateItem[];
 }
 
 const goldenColor = "#C9A227";
@@ -84,6 +101,7 @@ export default function Hero({
   ctaText_ar,
   ctaText_ru,
   communities = [],
+  updates = [],
 }: HeroProps) {
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
@@ -105,6 +123,11 @@ export default function Hero({
   const validSlides = slides.filter(slideHasValidMedia);
   const activeSlides = validSlides.filter((s) => s.active) || validSlides;
   const slidesToUse = activeSlides.length > 0 ? activeSlides : validSlides;
+
+  const hasUpdates = updates && updates.length > 0;
+  // Mobile shows only the single most important (first) offer, compactly —
+  // keeps the hero from growing too tall with a long list on small screens.
+  const mobileUpdates = updates.slice(0, 1);
 
   if (!slidesToUse || slidesToUse.length === 0) {
     return (
@@ -205,16 +228,13 @@ export default function Hero({
   return (
     <section
       className="relative w-full text-white overflow-hidden font-body
-                 h-[70vh] min-h-[560px] sm:h-[75vh] lg:h-[70vh] xl:h-[81vh]"
+                 min-h-[560px] sm:h-[75vh] lg:h-[70vh] xl:h-[81vh]"
     >
       {/* ================= MEDIA SLIDER ================= */}
       <div className="absolute inset-0">
         {slidesToUse.map((slide, i) => {
           const mediaType = getSlideMediaType(slide);
           const isLoaded = loadedSlides.has(i);
-          // Video runs on every device now — but only once this slide has
-          // actually had its turn. Until then it shows the poster/fallback,
-          // so we're never downloading videos the user hasn't scrolled to yet.
           const useVideo = mediaType === "video" && isLoaded && !!slide?.video?.asset?.url;
 
           const imageUrl = slide?.image?.asset?.url;
@@ -262,9 +282,6 @@ export default function Hero({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                // No image set in Sanity, or it failed to load — show a clean
-                // branded gradient instead of a broken-image icon. Looks
-                // intentional, never looks like a bug.
                 <div className={`w-full h-full ${FALLBACK_GRADIENT}`} />
               )}
             </div>
@@ -297,89 +314,119 @@ export default function Hero({
         </>
       )}
 
-      {/* ================= CONTENT ================= */}
-      <div className="relative z-30 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-14 w-full">
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold leading-tight max-w-xl md:max-w-2xl">
-            {getSlideText(slidesToUse[index], "title")}
-          </h1>
+      {/* ================= CONTENT — 2 COLUMNS ON DESKTOP ================= */}
+      {/* ✅ FIX: header/nav is `fixed top-[32px]` (≈70px tall → covers the
+          top ~100-110px of every page). On mobile this wrapper's content
+          starts right at the section's top edge, so the title/subtitle were
+          rendering underneath that fixed nav — hidden, not missing. Fix:
+          `pt-[130px]` on mobile clears the announcement bar + navbar before
+          any hero text starts. From `sm:` up the section already has a
+          large fixed height (`sm:h-[75vh]` etc.) and the content is
+          vertically centered within it, which naturally sits well clear of
+          the ~100px nav — so no extra offset is needed there. */}
+      <div className="relative z-30 pt-[130px] pb-10 sm:pt-0 sm:pb-0 sm:h-full sm:flex sm:items-center">
+        <div
+          className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-14 w-full grid grid-cols-1 gap-8 items-center ${
+            hasUpdates ? "lg:grid-cols-[1fr_340px]" : "lg:grid-cols-1"
+          }`}
+        >
+          {/* ---------- LEFT COLUMN ---------- */}
+          <div>
+            <h1 className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold leading-tight max-w-xl md:max-w-2xl">
+              {getSlideText(slidesToUse[index], "title")}
+            </h1>
 
-          {slidesToUse[index].subtitle && (
-            <p className="font-body mt-3 sm:mt-4 text-gray-200 text-sm sm:text-base md:text-lg max-w-md">
-              {getSlideText(slidesToUse[index], "subtitle")}
-            </p>
-          )}
+            {slidesToUse[index].subtitle && (
+              <p className="font-body mt-3 sm:mt-4 text-gray-200 text-sm sm:text-base md:text-lg max-w-md">
+                {getSlideText(slidesToUse[index], "subtitle")}
+              </p>
+            )}
 
-          <button
-            onClick={() => {
-              const developerSlug = slidesToUse[index]?.linkedProperty?.developer?.slug;
-              if (developerSlug) {
-                router.push(`/developers/${developerSlug}`);
-              }
-            }}
-            className="font-body mt-5 sm:mt-8 px-6 sm:px-8 py-2.5 sm:py-3 border border-white text-white text-sm sm:text-base
-                       hover:bg-white hover:text-black transition w-full sm:w-auto text-center"
-          >
-            {localizedCTA}
-          </button>
-
-          {/* ================= SEARCH ================= */}
-          <div ref={searchRef} className="relative mt-6 sm:mt-10 w-full max-w-xl">
-            <div
-              className="flex items-stretch sm:items-center bg-white dark:bg-[#1E293B]
-                         text-gray-900 dark:text-white
-                         rounded-xl shadow-xl overflow-hidden transition-colors duration-300"
+            <button
+              onClick={() => {
+                const developerSlug = slidesToUse[index]?.linkedProperty?.developer?.slug;
+                if (developerSlug) {
+                  router.push(`/developers/${developerSlug}`);
+                }
+              }}
+              className="font-body mt-5 sm:mt-8 px-6 sm:px-8 py-2.5 sm:py-3 border border-white text-white text-sm sm:text-base
+                         hover:bg-white hover:text-black transition w-full sm:w-auto text-center"
             >
-              <input
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                  setShowSuggestions(true);
-                }}
-                onFocus={() => setShowSuggestions(true)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                placeholder={t("hero.communityOrBuilding")}
-                className="font-body flex-1 min-w-0 px-3 sm:px-4 py-3 bg-transparent outline-none text-sm"
-              />
+              {localizedCTA}
+            </button>
 
-              <button
-                onClick={handleSearch}
-                className="font-body shrink-0 px-4 sm:px-6 py-3 text-white text-sm font-medium transition"
-                style={{ backgroundColor: goldenColor }}
+            {/* ================= SEARCH ================= */}
+            <div ref={searchRef} className="relative mt-6 sm:mt-10 w-full max-w-xl">
+              <div
+                className="flex items-stretch sm:items-center bg-white dark:bg-[#1E293B]
+                           text-gray-900 dark:text-white
+                           rounded-xl shadow-xl overflow-hidden transition-colors duration-300"
               >
-                {t("hero.search")}
-              </button>
+                <input
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  placeholder={t("hero.communityOrBuilding")}
+                  className="font-body flex-1 min-w-0 px-3 sm:px-4 py-3 bg-transparent outline-none text-sm"
+                />
+
+                <button
+                  onClick={handleSearch}
+                  className="font-body shrink-0 px-4 sm:px-6 py-3 text-white text-sm font-medium transition"
+                  style={{ backgroundColor: goldenColor }}
+                >
+                  {t("hero.search")}
+                </button>
+              </div>
+
+              {showSuggestions && filtered.length > 0 && (
+                <div
+                  className="absolute left-0 top-full w-full
+                             bg-white dark:bg-[#1E293B]
+                             shadow-xl rounded-lg mt-2
+                             z-50
+                             max-h-[160px]
+                             overflow-y-auto
+                             text-sm
+                             transition-colors duration-300"
+                >
+                  {filtered.map((c) => (
+                    <div
+                      key={c._id}
+                      onClick={() => {
+                        router.push(`/properties?search=${encodeURIComponent(c.name)}`);
+                        setShowSuggestions(false);
+                      }}
+                      className="font-body px-4 py-3 cursor-pointer
+                                 hover:bg-amber-50
+                                 dark:hover:bg-white/10 transition"
+                    >
+                      <p className="font-medium text-gray-900 dark:text-white">{c.name}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{c.area}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {showSuggestions && filtered.length > 0 && (
-              <div
-                className="absolute left-0 top-full w-full
-                           bg-white dark:bg-[#1E293B]
-                           shadow-xl rounded-lg mt-2
-                           z-50
-                           max-h-[160px]
-                           overflow-y-auto
-                           text-sm
-                           transition-colors duration-300"
-              >
-                {filtered.map((c) => (
-                  <div
-                    key={c._id}
-                    onClick={() => {
-                      router.push(`/properties?search=${encodeURIComponent(c.name)}`);
-                      setShowSuggestions(false);
-                    }}
-                    className="font-body px-4 py-3 cursor-pointer
-                               hover:bg-amber-50
-                               dark:hover:bg-white/10 transition"
-                  >
-                    <p className="font-medium text-gray-900 dark:text-white">{c.name}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{c.area}</p>
-                  </div>
-                ))}
+            {/* ---------- MOBILE/TABLET: compact offer box below search bar ---------- */}
+            {hasUpdates && (
+              <div className="lg:hidden mt-5 w-full max-w-xl">
+                <HeroOfferPanel updates={mobileUpdates} compact />
               </div>
             )}
           </div>
+
+          {/* ---------- RIGHT COLUMN (desktop only) — full-size Latest Update / Offer box ---------- */}
+          {hasUpdates && (
+            <div className="hidden lg:block self-start justify-self-end w-full max-w-[340px] mt-2">
+              <HeroOfferPanel updates={updates} />
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -4,7 +4,7 @@ import "./globals.css";
 
 import NavbarServer from "@/components/layout/NavbarServer";
 import Footer from "@/components/layout/Footer";
-import { FloatingButtons } from "@/components/ui/FloatingButtons";
+import FloatingButtonsLoader from "@/components/ui/FloatingButtonsLoader";
 import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "@/lib/language-context";
@@ -12,6 +12,12 @@ import AutoPopupEnquiry from "@/components/ui/AutoPopupEnquiry";
 
 // import GoogleTag from "@/components/analytics/GoogleTag";
 // import MetaPixel from "@/components/analytics/MetaPixel";
+
+// ✅ FIX (hydration mismatch + build error): `ssr: false` inside next/dynamic
+// is not allowed directly in a Server Component (layout.tsx has no "use
+// client"). So the dynamic()/ssr:false call now lives inside
+// components/ui/FloatingButtonsLoader.tsx (a Client Component), and this
+// file just imports that wrapper like any normal component.
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -139,7 +145,7 @@ export default function RootLayout({
 
             <main className="w-full">{children}</main>
 
-            <FloatingButtons />
+            <FloatingButtonsLoader />
             <AutoPopupEnquiry />
 
 

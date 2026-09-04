@@ -20,6 +20,7 @@ import {
   hotPropertiesQuery,
   launchSoonPropertiesQuery,
   latestBlogsQuery,
+  latestUpdatesQuery, // ✅ NEW — hero "Latest Update / Offer" panel data
 } from "@/lib/sanity.queries";
 
 import { HomepageData } from "@/types/homepage";
@@ -35,6 +36,7 @@ export default async function Home() {
       hotProperties,
       launchSoonProperties,
       blogs,
+      latestUpdates, // ✅ NEW
     ] = await Promise.all([
       sanityClient.fetch<HomepageData>(homepageHeroQuery),
       sanityClient.fetch(featuredDevelopersQuery),
@@ -43,6 +45,7 @@ export default async function Home() {
       sanityClient.fetch(hotPropertiesQuery),
       sanityClient.fetch(launchSoonPropertiesQuery),
       sanityClient.fetch(latestBlogsQuery),
+      sanityClient.fetch(latestUpdatesQuery), // ✅ NEW
     ]);
 
     // ✅ FIX: pehle sirf "slide.image.asset.url" check hota tha, jo video
@@ -78,6 +81,7 @@ export default async function Home() {
           ctaText_ar={homepage?.heroCTA_ar}
           ctaText_ru={homepage?.heroCTA_ru}
           communities={communities || []}
+          updates={latestUpdates || []} // ✅ NEW — hero offer/update panel
         />
 
         <About />

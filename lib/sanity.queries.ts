@@ -797,3 +797,43 @@ export const latestBlogsQuery = groq`
   }
 }
 `;
+
+
+// Add this block into lib/sanity.queries.ts (anywhere, e.g. right after announcementQuery)
+
+export const latestUpdatesQuery = groq`
+*[_type == "latestUpdate" && active == true
+  && (!defined(expiresAt) || expiresAt > now())]
+| order(order asc, _createdAt desc)[0...5]{
+  _id,
+  text,
+  text_hi, text_ar, text_ru,
+  url,
+  expiresAt,
+  supportedLanguages,
+  linkedProperty->{
+    "slug": slug.current
+  }
+}
+`;
+
+
+// Add this block into lib/sanity.queries.ts, right after latestUpdatesQuery
+
+export const allLatestUpdatesQuery = groq`
+*[_type == "latestUpdate" && active == true
+  && (!defined(expiresAt) || expiresAt > now())]
+| order(order asc, _createdAt desc){
+  _id,
+  text,
+  text_hi, text_ar, text_ru,
+  url,
+  expiresAt,
+  supportedLanguages,
+  linkedProperty->{
+    "slug": slug.current,
+    title,
+    "image": images[0].asset->url
+  }
+}
+`;

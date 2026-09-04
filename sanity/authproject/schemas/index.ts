@@ -7,6 +7,7 @@ import property from "./property";
 import media from "./media";
 import announcement from "./announcement";
 import teamMember from "./teamMember";
+import latestUpdate from "./latestUpdate";
 
 export const schemaTypes = [
   homepage,
@@ -18,4 +19,5 @@ export const schemaTypes = [
   media,
   announcement,
   teamMember,
+  latestUpdate,
 ];
