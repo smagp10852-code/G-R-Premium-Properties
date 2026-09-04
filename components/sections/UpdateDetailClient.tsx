@@ -111,17 +111,7 @@ export default function UpdateDetailClient({ update }: { update: UpdateData }) {
 
         {/* CTA buttons — internal/property link + WhatsApp, side by side */}
         <div className="flex flex-wrap gap-4">
-          {ctaHref && (
-            <Link
-              href={ctaHref}
-              className="inline-block font-body font-semibold text-black px-8 py-3 rounded-xl transition hover:opacity-90"
-              style={{ backgroundColor: goldenColor }}
-            >
-              {update.linkedProperty?.title
-                ? `View ${update.linkedProperty.title}`
-                : "Learn More"}
-            </Link>
-          )}
+          
 
           {/* ✅ Same WhatsApp pattern as the announcement detail page. */}
           <a
@@ -132,7 +122,7 @@ export default function UpdateDetailClient({ update }: { update: UpdateData }) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-body font-semibold bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl transition"
           >
-            📲 Book on WhatsApp
+            📲 Get Details on WhatsApp
           </a>
         </div>
       </div>
