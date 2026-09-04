@@ -799,27 +799,26 @@ export const latestBlogsQuery = groq`
 `;
 
 
-// Add this block into lib/sanity.queries.ts (anywhere, e.g. right after announcementQuery)
+// Add these three blocks into lib/sanity.queries.ts (anywhere, e.g. right
+// after announcementQuery / singleAnnouncementQuery). `groq` must already
+// be imported at the top of that file — same as your other queries use.
 
+// ---------------- 1) HERO WIDGET — fetch up to 4 (only 3 are shown; a
+// 4th coming back tells the frontend "more than 3 exist" -> show View All)
 export const latestUpdatesQuery = groq`
 *[_type == "latestUpdate" && active == true
   && (!defined(expiresAt) || expiresAt > now())]
-| order(order asc, _createdAt desc)[0...5]{
+| order(order asc, _createdAt desc)[0...4]{
   _id,
   text,
   text_hi, text_ar, text_ru,
-  url,
+  "slug": slug.current,
   expiresAt,
-  supportedLanguages,
-  linkedProperty->{
-    "slug": slug.current
-  }
+  supportedLanguages
 }
 `;
 
-
-// Add this block into lib/sanity.queries.ts, right after latestUpdatesQuery
-
+// ---------------- 2) /updates LISTING PAGE — all active ----------------
 export const allLatestUpdatesQuery = groq`
 *[_type == "latestUpdate" && active == true
   && (!defined(expiresAt) || expiresAt > now())]
@@ -827,13 +826,33 @@ export const allLatestUpdatesQuery = groq`
   _id,
   text,
   text_hi, text_ar, text_ru,
-  url,
+  "slug": slug.current,
   expiresAt,
   supportedLanguages,
+  "image": mainImage.asset->url
+}
+`;
+
+// ---------------- 3) /updates/[slug] DETAIL PAGE — single item ----------------
+export const singleLatestUpdateQuery = groq`
+*[_type == "latestUpdate" && slug.current == $slug][0]{
+  _id,
+  text,
+  text_hi, text_ar, text_ru,
+  description,
+  description_hi, description_ar, description_ru,
+  points,
+  location,
+  "slug": slug.current,
+  expiresAt,
+  supportedLanguages,
+  mainImage{
+    asset->{url}
+  },
+  url,
   linkedProperty->{
     "slug": slug.current,
-    title,
-    "image": images[0].asset->url
+    title
   }
 }
 `;

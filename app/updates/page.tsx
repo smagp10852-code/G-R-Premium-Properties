@@ -4,6 +4,7 @@ import { sanityClient } from "@/lib/sanity.client";
 import { allLatestUpdatesQuery } from "@/lib/sanity.queries";
 import Footer from "@/components/layout/Footer";
 import UpdatesListClient from "@/components/sections/UpdatesListClient";
+import CtaSection from "@/components/sections/CTA";
 
 const goldenColor = "#C9A227";
 
@@ -39,8 +40,8 @@ export default async function UpdatesPage() {
 
         <UpdatesListClient updates={updates} />
       </div>
-
-    
+      <CtaSection />
+    <Footer />
     </main>
   );
 }

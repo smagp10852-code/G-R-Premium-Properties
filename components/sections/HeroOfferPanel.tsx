@@ -12,9 +12,8 @@ interface UpdateItem {
   text_hi?: string;
   text_ar?: string;
   text_ru?: string;
-  url?: string;
+  slug?: string;
   expiresAt?: string;
-  linkedProperty?: { slug?: string } | null;
 }
 
 interface HeroOfferPanelProps {
@@ -60,13 +59,13 @@ function UpdateRow({ item, compact }: { item: UpdateItem; compact?: boolean }) {
   const countdown = useCountdownLabel(item.expiresAt);
 
   if (countdown === "Expired") return null;
+  if (!item.slug) return null; // no detail page to open — skip rendering
 
   const localizedText =
     lang === "en" ? item.text : (item as any)[`text_${lang}`] || item.text;
 
-  const href = item.linkedProperty?.slug
-    ? `/properties/${item.linkedProperty.slug}`
-    : item.url || "#";
+  // ✅ Every update now opens its own detail page, same as announcements.
+  const href = `/updates/${item.slug}`;
 
   return (
     <Link
@@ -116,6 +115,13 @@ function UpdateRow({ item, compact }: { item: UpdateItem; compact?: boolean }) {
 export default function HeroOfferPanel({ updates, compact = false }: HeroOfferPanelProps) {
   if (!updates || updates.length === 0) return null;
 
+  // Hero box only ever shows a max of 3 rows, no matter how many active
+  // updates exist in Sanity (2, 5, 10...). The parent query fetches up to
+  // 4 — if a 4th item came back, that's the signal there are more than 3
+  // total, so "View All" appears; otherwise it's hidden.
+  const visibleUpdates = updates.slice(0, 3);
+  const hasMore = updates.length > 3;
+
   return (
     <div
       className="w-full rounded-2xl overflow-hidden
@@ -134,22 +140,25 @@ export default function HeroOfferPanel({ updates, compact = false }: HeroOfferPa
       </div>
 
       <div className={compact ? "px-3" : "px-5"}>
-        {updates.map((item) => (
+        {visibleUpdates.map((item) => (
           <UpdateRow key={item._id} item={item} compact={compact} />
         ))}
       </div>
 
-      {/* ✅ Points to the /updates listing page (see app/updates/page.tsx). */}
-      <Link
-        href="/updates"
-        className={`block text-center font-body font-semibold uppercase tracking-wide
-                   text-black transition hover:opacity-90 ${
-                     compact ? "text-[10px] py-1.5" : "text-xs py-3"
-                   }`}
-        style={{ backgroundColor: goldenColor }}
-      >
-        View All
-      </Link>
+      {/* ✅ Only shown when there are more than 3 active updates total —
+          points to the /updates listing page (see app/updates/page.tsx). */}
+      {hasMore && (
+        <Link
+          href="/updates"
+          className={`block text-center font-body font-semibold uppercase tracking-wide
+                     text-black transition hover:opacity-90 ${
+                       compact ? "text-[10px] py-1.5" : "text-xs py-3"
+                     }`}
+          style={{ backgroundColor: goldenColor }}
+        >
+          View All
+        </Link>
+      )}
     </div>
   );
 }
