@@ -16,14 +16,15 @@ export async function generateMetadata({
 
   if (!property) {
     return {
-      title: "Property | G R Premium Properties",
+      title: {
+        absolute: "Property | G R Premium Properties",
+      },
       description:
         "Explore premium Dubai properties with G R Premium Properties.",
     };
   }
 
   const propertyTitle = property.title || "Dubai Property";
-
   const locationName = property.location?.name || "Dubai";
 
   const title = `${propertyTitle} | G R Premium Properties`;
@@ -33,7 +34,10 @@ export async function generateMetadata({
   const canonicalUrl = `https://www.grpremium.com/properties/${slug}`;
 
   return {
-    title,
+    title: {
+      absolute: title,
+    },
+
     description,
 
     alternates: {
