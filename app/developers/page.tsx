@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { sanityClient } from "@/lib/sanity.client";
 import { urlFor } from "@/lib/sanity.image";
 import Image from "next/image";
@@ -25,6 +26,16 @@ type Developer = {
   slug: string;
   logo?: any;
   [key: string]: any;
+};
+
+// ✅ SEO — Featured Plan (/developers) meta title & description (from SEO sheet, row 11)
+export const metadata: Metadata = {
+  title: "Exclusive Off-Plan Property Dubai: Exciting New Deals",
+  description:
+    "Explore exclusive off-plan properties in Dubai with G R Premium Properties. Find your dream home at an affordable prices. Act now!",
+  alternates: {
+    canonical: "https://www.grpremium.com/developers",
+  },
 };
 
 export default async function DevelopersPage() {

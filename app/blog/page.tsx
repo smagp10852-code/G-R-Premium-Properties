@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { sanityClient } from "@/lib/sanity.client";
 import { allBlogsQuery } from "@/lib/sanity.queries";
 import BlogCard from "@/components/cards/BlogCard";
@@ -6,6 +7,16 @@ import Footer from "@/components/layout/Footer";
 import T from "@/components/ui/T";
 
 export const revalidate = 60;
+
+// ✅ SEO — Blog page meta title & description (from SEO sheet, row 10)
+export const metadata: Metadata = {
+  title: "Dubai Real Estate News & Updates | G R Premium Properties",
+  description:
+    "Discover expert tips on how to buy property in Dubai with G R Premium Property. Make your dream investment simple, profitable & stress-free today!",
+  alternates: {
+    canonical: "https://www.grpremium.com/blog",
+  },
+};
 
 export default async function BlogPage() {
   const blogs = await sanityClient.fetch(allBlogsQuery);

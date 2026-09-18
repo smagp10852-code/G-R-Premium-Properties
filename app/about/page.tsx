@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/layout/NavbarServer";
 import Footer from "@/components/layout/Footer";
 import Image from "next/image";
@@ -12,6 +13,16 @@ import { urlFor } from "@/lib/sanity.image";
 const goldenColor = "#C9A227";
 
 export const revalidate = 0; // 🔥 IMPORTANT LINE
+
+// ✅ SEO — About page meta title & description (from SEO sheet, row 8)
+export const metadata: Metadata = {
+  title: "Best Dubai Real estate company | G R Premium Properties LLC",
+  description:
+    "Looking for your dream home in Dubai? G R Premium offers exclusive listings, expert guidance, and guaranteed satisfaction. Find your perfect property today!",
+  alternates: {
+    canonical: "https://www.grpremium.com/about",
+  },
+};
 
 /* ================= DATA ================= */
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { sanityClient } from "@/lib/sanity.client";
 import {
   communitiesQuery,
@@ -11,6 +12,19 @@ import Footer from "@/components/layout/Footer";
 import T from "@/components/ui/T";
 
 export const dynamic = "force-dynamic";
+
+// ✅ SEO — Properties page meta title & description (from SEO sheet, row 9)
+// Static on purpose: filters (community/price/bed etc.) change the LIST,
+// not what this page is *about*, so one fixed title/description is correct
+// for SEO even though the page itself is force-dynamic.
+export const metadata: Metadata = {
+  title: "Luxury Dubai Properties: Exclusive Villas & Apartments for Sale",
+  description:
+    "Explore the most exclusive properties for sale in Dubai UAE. Find luxury villas, apartments & more with G R Premium. Your dream home is just one click away!",
+  alternates: {
+    canonical: "https://www.grpremium.com/properties",
+  },
+};
 
 type SearchParams = {
   community?: string;
