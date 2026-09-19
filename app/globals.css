@@ -228,3 +228,33 @@ body {
 .blog-swiper .swiper-button-next:hover::after {
   transform: translateX(6px) scale(1.2);
 }
+
+
+/* globals.css */
+.prose a,
+.prose a strong,
+.prose a span {
+  color: #2563eb !important; /* blue-600 */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.prose a:hover,
+.prose a:hover strong,
+.prose a:hover span {
+  color: #1d4ed8 !important; /* blue-700 */
+}
+
+/* dark mode (agar tumhare project me `.dark` class use hoti hai) */
+.dark .prose a,
+.dark .prose a strong,
+.dark .prose a span {
+  color: #60a5fa !important; /* blue-400 */
+}
+
+.dark .prose a:hover,
+.dark .prose a:hover strong,
+.dark .prose a:hover span {
+  color: #93c5fd !important; /* blue-300 */
+}
