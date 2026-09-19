@@ -229,13 +229,13 @@ body {
   transform: translateX(6px) scale(1.2);
 }
 
-
 /* globals.css */
 .prose a,
 .prose a strong,
 .prose a span {
   color: #2563eb !important; /* blue-600 */
-  text-decoration: underline;
+  font-weight: 700 !important;
+  text-decoration: underline !important;
   text-underline-offset: 2px;
   transition: color 0.2s ease;
 }
@@ -246,7 +246,7 @@ body {
   color: #1d4ed8 !important; /* blue-700 */
 }
 
-/* dark mode (agar tumhare project me `.dark` class use hoti hai) */
+/* dark mode */
 .dark .prose a,
 .dark .prose a strong,
 .dark .prose a span {
