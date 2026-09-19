@@ -16,7 +16,7 @@ export const revalidate = 0; // 🔥 IMPORTANT LINE
 
 // ✅ SEO — About page meta title & description (from SEO sheet, row 8)
 export const metadata: Metadata = {
-  title: "Best Dubai Real estate company | G R Premium Properties LLC",
+  title: "Best Dubai Real estate company ",
   description:
     "Looking for your dream home in Dubai? G R Premium offers exclusive listings, expert guidance, and guaranteed satisfaction. Find your perfect property today!",
   alternates: {

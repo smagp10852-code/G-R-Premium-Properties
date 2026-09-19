@@ -28,14 +28,14 @@ import { HomepageData } from "@/types/homepage";
 
 // ✅ SEO — Home page meta title & description (from SEO sheet, row 7)
 export const metadata: Metadata = {
-  title: "Buy Luxury Property in Dubai – Best Deals | G R Premium",
+  title: "Buy Luxury Property in Dubai – Best Deals ",
   description:
     "Ready to buy property in Dubai? Explore exclusive luxury real estate deals and investment opportunities. Find your ideal property today!",
   alternates: {
     canonical: "https://www.grpremium.com/",
   },
   openGraph: {
-    title: "Buy Luxury Property in Dubai – Best Deals | G R Premium",
+    title: "Buy Luxury Property in Dubai – Best Deals",
     description:
       "Ready to buy property in Dubai? Explore exclusive luxury real estate deals and investment opportunities.",
     url: "https://www.grpremium.com/",
