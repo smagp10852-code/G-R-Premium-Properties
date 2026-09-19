@@ -8,7 +8,7 @@ import ContactForm from "./ContactForm";
 // Server Component (no "use client") purely to carry the metadata, and
 // just renders the real interactive form from ContactForm.tsx.
 export const metadata: Metadata = {
-  title: "Trusted Dubai Real Estate Agency | G R Premium Properties",
+  title: "Trusted Dubai Real Estate Agency ",
   description:
     "Contact G R Premium Properties for expert assistance with buying, selling and investing in Dubai real estate, including luxury and off-plan properties.",
   alternates: {

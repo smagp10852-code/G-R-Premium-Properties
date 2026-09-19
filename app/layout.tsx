@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 
   title: {
     default: "G R Premium Properties LLC",
-    template: "%s | G R Premium Properties LLC",
+    template: "%s ",
   },
 
   description:
