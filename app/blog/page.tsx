@@ -10,7 +10,7 @@ export const revalidate = 60;
 
 // ✅ SEO — Blog page meta title & description (from SEO sheet, row 10)
 export const metadata: Metadata = {
-  title: "Dubai Real Estate News & Updates",
+  title: "Dubai Real Estate News & Updates | G R Premium Properties",
   description:
     "Discover expert tips on how to buy property in Dubai with G R Premium Property. Make your dream investment simple, profitable & stress-free today!",
   alternates: {
