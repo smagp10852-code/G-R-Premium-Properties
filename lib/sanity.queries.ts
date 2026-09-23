@@ -711,12 +711,19 @@ export const getSingleBlogQuery = groq`
   subtitle_ar,
   subtitle_ru,
 
+  excerpt,
+  excerpt_hi,
+  excerpt_ar,
+  excerpt_ru,
+
   content,
   content_hi,
   content_ar,
   content_ru,
 
   supportedLanguages,
+
+  "slug": slug.current,
 
   mainImage{
     asset->{
