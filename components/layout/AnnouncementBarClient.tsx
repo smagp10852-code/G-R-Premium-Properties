@@ -61,7 +61,7 @@ export default function AnnouncementBarClient({
                 className="mx-8 inline-flex items-center gap-2"
               >
                 <span>
-                  🔥 Join {getLocalized(item, "title")}
+                   {getLocalized(item, "title")}
                   {(eventDate || venue) && ","}
                 </span>
                 {eventDate && (
