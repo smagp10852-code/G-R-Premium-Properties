@@ -109,9 +109,9 @@ export async function POST(req: Request) {
 
     <p style="margin:10px 0;font-size:15px;">
       📞 
-      <a href="tel:+971542423283" 
+      <a href="tel:+971 58 596 4689" 
          style="color:#C9A227;text-decoration:none;font-weight:bold;">
-         +971542423283
+         +971 58 596 4689
       </a>
     </p>
 

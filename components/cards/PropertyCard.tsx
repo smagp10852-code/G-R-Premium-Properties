@@ -11,7 +11,7 @@ const PLACEHOLDER = "/images/placeholder.jpg";
 // TODO: replace with the real agency contact details (or read them from
 // `property` if each listing has its own agent).
 const CONTACT_EMAIL = "info@grpremium.com";
-const CONTACT_PHONE = "+971542423283";
+const CONTACT_PHONE = "+971 58 596 4689";
 const CONTACT_WHATSAPP = "971585964689"; // digits only, no + — required by wa.me
 
 export default function PropertyCard({

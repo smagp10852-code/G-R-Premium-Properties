@@ -169,7 +169,7 @@ export default function RootLayout({
                     addressLocality: "Dubai",
                     addressCountry: "UAE",
                   },
-                  telephone: "+971542423283",
+                  telephone: "+971 58 596 4689",
                 }),
               }}
             />
