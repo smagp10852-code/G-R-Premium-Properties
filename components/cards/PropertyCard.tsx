@@ -12,7 +12,7 @@ const PLACEHOLDER = "/images/placeholder.jpg";
 // `property` if each listing has its own agent).
 const CONTACT_EMAIL = "info@grpremium.com";
 const CONTACT_PHONE = "+971542423283";
-const CONTACT_WHATSAPP = "971585964689"; // digits only, no + — required by wa.me
+const CONTACT_WHATSAPP = "971542423283"; // digits only, no + — required by wa.me
 
 export default function PropertyCard({
   property,

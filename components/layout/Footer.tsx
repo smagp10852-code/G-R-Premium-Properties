@@ -178,7 +178,7 @@ export default function Footer() {
 
                 <li className="flex items-start gap-3">
                   <div className="flex flex-col space-y-2">
-                    <a href="https://wa.me/971585964689" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-green-400 transition-colors duration-300">
+                    <a href="https://wa.me/971542423283" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-green-400 transition-colors duration-300">
                       <SiWhatsapp className="w-4 h-4 text-green-500" />
                       +971542423283
                     </a>

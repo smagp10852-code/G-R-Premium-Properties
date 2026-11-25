@@ -115,7 +115,7 @@ export default function UpdateDetailClient({ update }: { update: UpdateData }) {
 
           {/* ✅ Same WhatsApp pattern as the announcement detail page. */}
           <a
-            href={`https://wa.me/971585964689?text=${encodeURIComponent(
+            href={`https://wa.me/971542423283?text=${encodeURIComponent(
               `Hi, I'm interested in: ${title}`
             )}`}
             target="_blank"
