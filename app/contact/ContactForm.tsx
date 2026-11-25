@@ -147,7 +147,7 @@ export default function ContactForm() {
                   rel="noopener noreferrer"
                   className="font-body text-gray-700 dark:text-gray-300 text-sm hover:opacity-70 transition-colors duration-300"
                 >
-                  +971 585964689
+                  +971542423283
                 </a>
               </div>
             </div>
