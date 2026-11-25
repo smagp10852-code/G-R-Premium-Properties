@@ -70,7 +70,7 @@ export default function AnnouncementDetailClient({
               alt={title}
               className="max-h-[500px] w-auto object-contain"
             />
-          </div>
+          </div> 
         )}
 
         {/* Bullet Points */}
