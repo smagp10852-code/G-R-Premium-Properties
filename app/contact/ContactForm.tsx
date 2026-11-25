@@ -156,8 +156,8 @@ export default function ContactForm() {
             <Info
               icon={<Phone size={18} />}
               title="Call Us"
-              text="+971 58 596 4689"
-              href="tel:+971 58 596 4689"
+              text="+971542423283"
+              href="tel:+971542423283"
             />
 
             {/* Email */}
