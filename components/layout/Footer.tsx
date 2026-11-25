@@ -183,7 +183,7 @@ export default function Footer() {
                       +971 585964689
                     </a>
 
-                    <a href="tel:+919330230426" className="flex items-center gap-2 hover:text-white transition-colors duration-300">
+                    <a href="tel:+971542423283" className="flex items-center gap-2 hover:text-white transition-colors duration-300">
                       <Phone className="w-4 h-4 text-[#D4A843]" />
                       +91 9330230426
                     </a>

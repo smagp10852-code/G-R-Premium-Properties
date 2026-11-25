@@ -57,7 +57,7 @@ export default function AnnouncementBarClient({
 
             return (
               <span
-                key={index}
+                key={index}  
                 className="mx-8 inline-flex items-center gap-2"
               >
                 <span>
